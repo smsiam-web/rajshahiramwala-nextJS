@@ -1,0 +1,115 @@
+/* tailwind css directives*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* google font links "mulish" */
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap");
+
+html,
+body {
+  font-family: "Mulish", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3 {
+  @apply text-title;
+}
+h4,
+h5,
+h6 {
+  @apply text-mid;
+}
+
+p {
+  @apply text-sub-title;
+}
+
+/* tailwind components */
+@layer components {
+  .over-image {
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.473),
+        rgba(0, 0, 0, 0)
+      ),
+      url("/cover.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .mobile-image {
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.438),
+        rgba(0, 0, 0, 0)
+      ),
+      url("/cover_m.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .text-shadow {
+    text-shadow: 0.2px 1px 8px rgba(0, 0, 0, 0.445);
+  }
+  .text-shadow-white {
+    text-shadow: 0.2px 1px 8px rgb(236, 232, 232);
+  }
+  /* Wrapper container */
+  .container {
+    @apply !max-w-screen-2xl mx-auto px-4 sm:px-8;
+  }
+  /* footer widgets title  */
+  .footer-title {
+    @apply font-bold text-lg pb-8 capitalize;
+  }
+  /* Buttons */
+  .btn-white {
+    @apply bg-white text-title font-bold px-7 py-3 block w-fit rounded hover:shadow-md transition duration-300 ease-in-out;
+  }
+  /* Section title */
+  .section-title {
+    @apply md:text-4xl text-2xl font-bold text-center text-title;
+  }
+  /* card Shadow */
+  .card-shadow {
+    box-shadow: 0 30px 40px 0 rgb(131 132 135 / 15%);
+    -webkit-box-shadow: 0 30px 40px 0 rgb(131 132 135 / 15%);
+  }
+
+  /* animation duration  */
+  .animate-duration {
+    @apply transition-all duration-500;
+  }
+
+  .hover-primary {
+    @apply animate-duration hover:text-primary;
+  }
+  .hover-greens {
+    @apply animate-duration hover:text-green-500;
+  }
+
+  /* hide scrollbar  */
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Products */
+  /* product card */
+  .product-card {
+    @apply !w-[270px] flex flex-col justify-between items-start cursor-pointer p-5 rounded hover:card-shadow transition-all duration-500 relative border border-gray-100 hover:border-gray-200;
+  }
+}
