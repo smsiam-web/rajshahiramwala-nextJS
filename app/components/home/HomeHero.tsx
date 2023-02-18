@@ -40,7 +40,7 @@ const HomeHero = () => {
             className="w-full sm:w-1/3 md:px-12 md:py-20 bg-white px-8 py-12 rounded-lg"
             style={setBackgroundImage("/images/mango_1.jpg", {
               backgroundPosition: "bottom right",
-              backgroundSize: "90%",
+              backgroundSize: "100%",
             })}
           >
             <div className="flex flex-col justify-between h-full">

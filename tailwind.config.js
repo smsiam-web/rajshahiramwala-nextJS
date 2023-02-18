@@ -9,9 +9,9 @@ module.exports = {
     extend: {
       colors: {
         primary: "#f0b12b",
+        "sub-title": "#666666",
         title: "#222222",
         mid: "#555555",
-        "sub-title": "#666666",
         orange: "#FA582C",
         greens: "#669900",
       },

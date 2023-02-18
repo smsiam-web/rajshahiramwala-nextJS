@@ -6,9 +6,13 @@
 /* google font links "mulish" */
 @import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800&display=swap");
 
+/* google font links for bangla text "baloo da 2" */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Mulish:wght@200;300;400;500;600;700;800&display=swap");
+
 html,
 body {
   font-family: "Mulish", sans-serif;
+  /* font-family: "Baloo Da 2", cursive; */
 }
 
 * {
@@ -62,6 +66,11 @@ p {
   .text-shadow-white {
     text-shadow: 0.2px 1px 8px rgb(236, 232, 232);
   }
+  /* bangla font family  */
+  .ffb {
+    font-family: "Baloo Da 2", cursive;
+  }
+
   /* Wrapper container */
   .container {
     @apply !max-w-screen-2xl mx-auto px-4 sm:px-8;

@@ -24,7 +24,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/components/home/ProductCard.tsx",
-    "app/components/shared/Logo.js"
+    "app/components/shared/Logo.js",
+    "app/components/product/PorductDetails.js"
   ],
   "exclude": ["node_modules"]
 }

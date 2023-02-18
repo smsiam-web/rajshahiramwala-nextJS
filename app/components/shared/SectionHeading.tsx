@@ -11,7 +11,10 @@ const SectionHeading = ({ title = "", link = "" }) => {
           {title}
         </h1>
         <Link href={"/"} legacyBehavior>
-          <a href="/" className="text-sub-title flex items-center gap-2">
+          <a
+            href="/"
+            className="text-sub-title hover-primary flex items-center gap-2"
+          >
             <span>{link}</span> <AiOutlineRight size={16} />
           </a>
         </Link>

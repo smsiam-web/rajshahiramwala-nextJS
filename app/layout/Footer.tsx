@@ -38,13 +38,12 @@ const Footer = () => {
         <div className="flex flex-wrap pt-20 pb-12 border-b items-stretch justify-between transition-all">
           <div className="max-w-sm xl:max-w-md mb-12">
             <h4 className="footer-title">
-              Farmart – Your Online Foods & Grocery
+              রাজশাহীর আম ওয়ালা - একটি বিশ্বস্তার নাম{" "}
             </h4>
             <div className="flex flex-col gap-3">
               <p className="pb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                finibus viverra iaculis. Etiam vulputate et justo eget
-                scelerisque.
+                The famous mangoes of Rajshahi are sold on this page. After
+                ordering, the mangoes are
               </p>
               {/* contact  */}
               <a href="tel:+8801837666008" className="mb-4">
@@ -56,20 +55,20 @@ const Footer = () => {
                   />
                   <div>
                     <p>Hotline 24/7:</p>
-                    <span className="font-bold">(+965) 7492-4277</span>
+                    <span className="font-bold">(+880) 1313-147532</span>
                   </div>
                 </div>
               </a>
               {/* address  */}
               <div className="flex gap-3 items-center">
                 <img src="/icons/home.svg" alt="phone" className="w-4" />
-                <address>959 Homestead Street Eastlake, NYC</address>
+                <address>নওহাটা, পবা, রাজশাহী(6213), বাংলাদেশ</address>
               </div>
               {/* email  */}
-              <a href="mailto:smsiam696@gmail.com">
+              <a href="mailto:rajshahiraamwala@gmail.com">
                 <div className="flex gap-3 items-center">
                   <img src="/icons/envelop.svg" alt="phone" className="w-4" />
-                  <p>support@farmart.com</p>
+                  <p>rajshahiraamwala@gmail.com</p>
                 </div>
               </a>
             </div>
