@@ -20,7 +20,7 @@ const Header = () => {
 
           {/* Contact */}
           <div className="group xl:flex flex-col hidden">
-            <a className="text-2xl font-bold" href="tel:+8801837666008">
+            <a className="text-2xl font-bold" href="tel:+8801313147532">
               +880 1313-147532
             </a>
             <p className="self-end group-hover:text-primary animate-duration text-sub-title">

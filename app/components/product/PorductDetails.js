@@ -4,6 +4,8 @@ import { FaAngleDoubleRight, FaMinus } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 import Description from "./Description";
 import Link from "next/link";
+import ProductMoreInfo from "./ProductMoreInfo";
+import Button from "../shared/Button";
 // import Breadcrumb from "../shared/Breadcrumb";
 // import Quantity from "../shared/Quantity";
 
@@ -74,6 +76,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                       <option value="2">২৩ কেজি (বড় ক্যারেট)</option>
                     </select>
                   </div>
+                  {/* <Quantity /> */}
                   <div className="flex flex-col">
                     <span className="text-sm pb-2 block text-sub-title">
                       ক্যারেট সংখ্যাঃ
@@ -91,13 +94,14 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                     </div>
                   </div>
                 </div>
+                {/* product button  */}
                 <div className="flex gap-3">
-                  {/* <Quantity /> */}
-                  <button className="btn-white bg-primary">Add to cart</button>
+                  <Button btnName="Add to Cart" style={"bg-primary"} />
                   <Link href={"/checkout"}>
-                    <button className="btn-white bg-black text-white">
-                      Order Now
-                    </button>
+                    <Button
+                      btnName={"Order Now"}
+                      style={"bg-black text-white"}
+                    />
                   </Link>
                 </div>
               </div>
@@ -204,7 +208,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
           </div>
         </div>
 
-        <Description />
+        <ProductMoreInfo />
       </div>
     </div>
   );
