@@ -93,7 +93,7 @@ p {
     -webkit-box-shadow: 0 30px 40px 0 rgb(131 132 135 / 15%);
   }
 
-  /* animation duration  */
+  /* animation duration in tailwind way */
   .animate-duration {
     @apply transition-all duration-500;
   }
@@ -101,8 +101,22 @@ p {
   .hover-primary {
     @apply animate-duration hover:text-primary;
   }
+  .h-bg-primary {
+    @apply animate-duration hover:bg-primary text-white;
+  }
+
   .hover-greens {
     @apply animate-duration hover:text-green-500;
+  }
+  .h-bg-greens {
+    @apply animate-duration hover:bg-green-500 text-white;
+  }
+
+  .hover-red {
+    @apply animate-duration hover:text-red-500;
+  }
+  .h-bg-red {
+    @apply animate-duration hover:bg-red-500 text-white;
   }
 
   /* hide scrollbar  */
