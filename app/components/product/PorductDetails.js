@@ -6,6 +6,7 @@ import Description from "./Description";
 import Link from "next/link";
 import ProductMoreInfo from "./ProductMoreInfo";
 import Button from "../shared/Button";
+import Breadcrumb from "../shared/Breadcrumb";
 // import Breadcrumb from "../shared/Breadcrumb";
 // import Quantity from "../shared/Quantity";
 
@@ -25,6 +26,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
             </div>
             <div className="lg:w-2/5 w-full lg:px-10 pl-0">
               {/* <Breadcrumb /> */}
+              <Breadcrumb />
               <h4 className="md:text-xl text-base font-bold mb-2 mt-5 text-orange">
                 আম
               </h4>
