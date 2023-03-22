@@ -16,7 +16,7 @@ const Logo = () => {
               src="/raj_aam_wala.jpg"
               width="60"
               height="60"
-              objectFit="contain"
+              // objectFit="contain"
               alt="Raj_ammWala_logo"
             />
           </motion.div>

@@ -58,10 +58,10 @@ const Reviews = () => {
             />
           </div>
           {/* submit button  */}
-          <Button btnName="Submit" style={"bg-primary"} />
+          <Button title="Submit" className={"bg-primary"} />
         </div>
       </div>
-      <div>c</div>
+      <div></div>
     </div>
   );
 };

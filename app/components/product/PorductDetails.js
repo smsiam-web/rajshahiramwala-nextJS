@@ -2,7 +2,6 @@ import FooterCard from "../FooterCard";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FaAngleDoubleRight, FaMinus } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
-import Description from "./Description";
 import Link from "next/link";
 import ProductMoreInfo from "./ProductMoreInfo";
 import Button from "../shared/Button";
@@ -98,11 +97,11 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                 </div>
                 {/* product button  */}
                 <div className="flex gap-3">
-                  <Button btnName="Add to Cart" style={"bg-primary"} />
+                  <Button title="Add to Cart" className={"bg-primary"} />
                   <Link href={"/checkout"}>
                     <Button
-                      btnName={"Order Now"}
-                      style={"bg-black text-white"}
+                      title={"Order Now"}
+                      className={"bg-black text-white"}
                     />
                   </Link>
                 </div>

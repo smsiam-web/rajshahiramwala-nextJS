@@ -19,7 +19,7 @@ const CartActions = () => {
             </div>
             <Button
               title="Apply"
-              style="self-stretch bg-primary rounded-tr-md rounded-br-md w-[30%]"
+              className="self-stretch bg-primary rounded-tr-md rounded-br-md w-[30%]"
             />
           </div>
         </div>
@@ -52,7 +52,7 @@ const CartActions = () => {
             </h2>
           </div>
           <Link href="/checkout">
-            <Button title="Checkout" style="w-full py-3 bg-primary" />
+            <Button title="Checkout" className="w-full py-3 bg-primary" />
           </Link>
         </div>
       </div>
