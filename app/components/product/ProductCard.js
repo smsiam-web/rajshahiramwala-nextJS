@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
       {/* stock out  */}
       {!stock && (
         <span className="absolute top-8 left-0 bg-red-500 px-3 mb-2 py-1 text-base font-bold text-slate-100 rounded-md -rotate-45">
-          Stock Out
+          Stock Out.!
         </span>
       )}
 

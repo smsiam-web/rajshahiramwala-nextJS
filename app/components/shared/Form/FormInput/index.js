@@ -26,7 +26,9 @@ function FormInput({
           value={values[name]}
           type={inputType}
           {...otherProps}
-          className={`outline-none border-[1px] py-3 px-5 rounded w-full ${!editProfile ? "app_input" : "edit_input"}`}
+          className={`outline-none border-[1px] py-3 px-5 rounded w-full ${
+            !editProfile ? "app_input" : "edit_input"
+          }`}
         />
         {!!tooltip && (
           <div className="ml-2">
