@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
           src={`/images/products/${image}`}
           width={270}
           height={270}
-          objectFit="contain"
+          // objectFit="contain"
         />
       </div>
       {/* card text  */}

@@ -36,7 +36,7 @@ const Breadcrumb = () => {
   }, [router]);
 
   return (
-    <div className="text-color">
+    <div className="text-title">
       {items.map((item, index) => (
         <span className="capitalize" key={index}>
           {items.length - 1 !== index ? (

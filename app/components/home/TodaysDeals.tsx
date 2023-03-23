@@ -33,7 +33,7 @@ const PRODUCT = [
     stock: false,
   },
   {
-    id: 1001,
+    id: 1004,
     name: "গোপালভোগ আম",
     rating: "4.7",
     image: "gopalvhog_1.jpeg",
@@ -43,7 +43,7 @@ const PRODUCT = [
     stock: true,
   },
   {
-    id: 1002,
+    id: 1005,
     name: "হিমসাগর আম",
     rating: "4.7",
     image: "himsagor_1.jpeg",
@@ -52,7 +52,7 @@ const PRODUCT = [
     stock: true,
   },
   {
-    id: 1003,
+    id: 1006,
     name: "আম্রপালি আম",
     rating: "4.7",
     image: "amropali_1.jpg",
