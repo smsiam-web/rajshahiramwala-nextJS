@@ -1,7 +1,9 @@
+import { auth } from "@/app/utils/firebase";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import DASHBOARD_NAV from "../../configs/dashboard_nav";
+import Button from "../shared/Button";
 
 const DashboardNavigation = () => {
   const router = useRouter();
@@ -28,9 +30,14 @@ const DashboardNavigation = () => {
           );
         })}
       </div>
-      {/* <button onClick={() => auth.signOut()} className="py-4 ">
-        💔 Logout
-      </button> */}
+      <div className="p-4">
+        <Button
+          onClick={() => auth.signOut()}
+          // icon={<FcGoogle size={25} />}
+          title="Log Out"
+          className={"bg-slate-800 text-white w-full text-lg"}
+        />
+      </div>
     </>
   );
 };

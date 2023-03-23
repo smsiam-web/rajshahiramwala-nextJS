@@ -4,11 +4,13 @@ import * as Yup from "yup";
 import Button from "../shared/Button";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
+import { auth } from "@/app/utils/firebase";
+import Firebase from "firebase";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required().label("Email"),
   password: Yup.string().required().label("Password"),
-  checkbox: Yup.string().required().label("Remember me"),
+  checkbox: Yup.string().label("Remember me"),
 });
 
 const Auth = () => {
@@ -20,12 +22,36 @@ const Auth = () => {
     return !isChecked ? setIsChecked(true) : setIsChecked(false);
   };
 
-  const placeOrder = (values) => {
+  const handelLoginSignUP = (values) => {
     setLoading(true);
-    console.log(values);
-    setTimeout(function () {
+    setTimeout(() => {
+      if (isLogin) {
+        logIn(values.email, values.password);
+      } else {
+        signUp(values.email, values.password);
+      }
       setLoading(false);
-    }, 1000);
+    }, 500);
+  };
+
+  // login with goole
+  const loginWithGoogle = () => {
+    const provider = new Firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  };
+
+  // login with email and password
+  const logIn = (email, password) => {
+    auth.signInWithEmailAndPassword(email, password).catch((error) => {
+      alert(error.message);
+      console.log(error);
+    });
+  };
+  const signUp = (email, password) => {
+    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
+      alert(error.message);
+      console.log(error);
+    });
   };
 
   return (
@@ -60,7 +86,7 @@ const Auth = () => {
               password: "",
               checkbox: "",
             }}
-            onSubmit={placeOrder}
+            onSubmit={handelLoginSignUP}
             validationSchema={validationSchema}
           >
             <FormInput name="email" placeholder="Email" type="email" />
@@ -79,7 +105,7 @@ const Auth = () => {
             </div>
             <FormBtn
               title={isLogin ? "LOGIN" : "SIGN UP"}
-              onClick={placeOrder}
+              onClick={handelLoginSignUP}
               loading={loading}
             />
           </AppForm>
@@ -117,15 +143,16 @@ const Auth = () => {
               <span className="text-primary pl-2">Continue with</span>
             </p>
             <Button
+              onClick={loginWithGoogle}
               icon={<FcGoogle size={25} />}
               title="Google"
               className={"bg-slate-800 text-white w-full text-lg"}
-            ></Button>
+            />
             <Button
               icon={<FaFacebookSquare size={20} />}
               title="Facebook"
               className={"bg-blue-500 text-white w-full text-lg"}
-            ></Button>
+            />
           </div>
         </div>
       </div>
