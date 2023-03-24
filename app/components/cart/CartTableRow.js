@@ -2,14 +2,32 @@ import React from "react";
 import Quantity from "../shared/Quantity";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import {
+  decreaseItemQuantity,
+  increaseItemQuantity,
+  removeItem,
+} from "@/app/redux/slices/basketSlice";
 
-const CartTableRow = () => {
+const CartTableRow = ({ id, name, image, price, quantity }) => {
+  // redux setup
+  const dispatch = useDispatch();
+
+  // inCrease item quantity
+  const increaseQuantity = () => {
+    dispatch(increaseItemQuantity(id));
+  };
+  // deCrease item quantity
+  const decreaseQuantity = () => {
+    dispatch(decreaseItemQuantity(id));
+  };
+
   return (
     <>
       <tr className="border-b md:border-r md:border-l table_row">
         <td className="py-5 pl-3">
           <img
-            src="http://localhost:3000/_next/image?url=%2Fimages%2Fproducts%2Fgopalvhog_1.jpeg&w=384&q=75"
+            src={`/images/products/${image}`}
             loading="lazy"
             alt=""
             className="w-20 h-20 object-cover rounded-md"
@@ -17,29 +35,36 @@ const CartTableRow = () => {
         </td>
         <td className="py-5 max-w-[250px]">
           <div className="">
-            <h1 className="text-lg font-bold text-title">গোপালভোগ আম</h1>
+            <h1 className="text-lg font-bold text-title">{name}</h1>
             <p className="text-sm text-gray-500">Weight: 12kg</p>
           </div>
         </td>
         <td className="py-5">
           <span className="flex items-center text-center">
             <TbCurrencyTaka />
-            100
+            {price}
           </span>
         </td>
         <td className="py-5">
           <div className="w-32">
-            <Quantity />
+            <Quantity
+              quantity={quantity}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+            />
           </div>
         </td>
         <td className="py-5 ">
           <span className="flex items-center text-center">
             <TbCurrencyTaka />
-            100
+            {(quantity * price).toFixed(2)}
           </span>
         </td>
         <td className="py-5">
-          <MdDelete className="text-2xl cursor-pointer hover-red" />
+          <MdDelete
+            onClick={() => dispatch(removeItem(id))}
+            className="text-2xl cursor-pointer hover-red"
+          />
         </td>
       </tr>
     </>

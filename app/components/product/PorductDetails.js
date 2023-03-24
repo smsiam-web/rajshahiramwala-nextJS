@@ -6,8 +6,6 @@ import Link from "next/link";
 import ProductMoreInfo from "./ProductMoreInfo";
 import Button from "../shared/Button";
 import Breadcrumb from "../shared/Breadcrumb";
-// import Breadcrumb from "../shared/Breadcrumb";
-// import Quantity from "../shared/Quantity";
 
 const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
   return (
@@ -98,6 +96,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                 {/* product button  */}
                 <div className="flex gap-3">
                   <Button title="Add to Cart" className={"bg-primary"} />
+
                   <Link href={"/checkout"}>
                     <Button
                       title={"Order Now"}

@@ -5,8 +5,12 @@ import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSupport } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 import Logo from "../components/shared/Logo";
+import { useSelector } from "react-redux";
+import { selectTotalCartItems } from "../redux/slices/basketSlice";
 
 const Header = () => {
+  const cartItems = useSelector(selectTotalCartItems);
+
   return (
     <header className="bg-white py-5 sm:py-7 border-b">
       <div className="container">
@@ -48,7 +52,7 @@ const Header = () => {
                 <div className="relative">
                   <AiOutlineShoppingCart className="text-3xl text-title hover-primary" />
                   <span className="bg-primary rounded text-center absolute px-2 text-sm -right-3 -top-2 font-semibold">
-                    0
+                    {cartItems || 0}
                   </span>
                 </div>
                 <div className="hidden lg:block">

@@ -1,11 +1,11 @@
 import React from "react";
 import CartTableRow from "./CartTableRow";
 import CartTableMobile from "./CartTableMobile";
-// import { selectItems } from "../../redux/slices/basketSlice";
-// import { useSelector } from "react-redux";
+import { selectItems } from "../../redux/slices/basketSlice";
+import { useSelector } from "react-redux";
 
 const CartTable = () => {
-  //   const cartItems = useSelector(selectItems);
+  const cartItems = useSelector(selectItems);
 
   return (
     <div className="my-5">
@@ -21,13 +21,14 @@ const CartTable = () => {
           </tr>
         </thead>
         <tbody>
-          <CartTableRow />
-          <CartTableRow />
+          {cartItems?.map((item, i) => (
+            <CartTableRow key={i} {...item} />
+          ))}
         </tbody>
       </table>
-
-      <CartTableMobile />
-      <CartTableMobile />
+      {cartItems?.map((item, i) => (
+        <CartTableMobile key={i} {...item} />
+      ))}
     </div>
   );
 };

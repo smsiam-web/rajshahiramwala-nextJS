@@ -1,8 +1,42 @@
+import { selectItems } from "@/app/redux/slices/basketSlice";
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { FormBtn } from "../shared/Form";
+import OrderItems from "./OrderItems";
+import PaymentMethod from "./PaymentMethod";
+
+const PAYMENT = [
+  {
+    id: "cod",
+    title: "Cash on Delivery",
+    image: "payment_cod.png",
+  },
+  {
+    id: "dr_cr",
+    title: "Credit/Debit Card",
+    image: "payment_dr_cr.png",
+  },
+  {
+    id: "bkash",
+    title: "bkash",
+    image: "payment_bkash.png",
+  },
+  {
+    id: "nagod",
+    title: "nagod",
+    image: "payment_nagod.png",
+  },
+  {
+    id: "rocket",
+    title: "rocket",
+    image: "payment_rocket.png",
+  },
+];
 
 const YourOrder = ({ placeOrder, loading }) => {
+  const orderItem = useSelector(selectItems);
+
   return (
     <div>
       <h3 className="text-2xl mb-4 text-sub-title">Your order</h3>
@@ -12,24 +46,16 @@ const YourOrder = ({ placeOrder, loading }) => {
           <h2 className="text-base font-bold">TOTAL</h2>
         </div>
         <div className=" bg-white">
-          <div className="flex justify-between py-5 px-5 border-b">
-            <h2 className="text-base font-medium">
-              <span className="text-gray-400">গোপালভোগ আম (12kg)</span>
-              <span className="text-gray-400 pl-2">x2</span>
-            </h2>
-            <h2 className="text-base font-bold ml-2">$100</h2>
-          </div>
-          <div className="flex justify-between p-5  border-b">
-            <h2 className="text-base font-medium">
-              <span className="text-gray-400">গোপালভোগ আম (12kg)</span>
-              <span className="text-gray-400 pl-2">x2</span>
-            </h2>
-            <h2 className="text-base font-bold ml-2">$100</h2>
-          </div>
+          {orderItem?.map((item, i) => (
+            <OrderItems key={i} {...item} />
+          ))}
         </div>
         <div className="flex justify-between py-5 border-b">
           <h2 className="text-base font-bold">Subtotal</h2>
-          <h2 className="text-base font-bold text-green">$200</h2>
+          <h2 className="text-lg font-bold flex items-center w-2/12">
+            <TbCurrencyTaka size={20} />
+            <span>200</span>
+          </h2>
         </div>
         <div className="py-5 border-b space-y-3">
           <span className="text-title">Shipping</span>
@@ -39,11 +65,18 @@ const YourOrder = ({ placeOrder, loading }) => {
         </div>
         <div className="flex justify-between py-5 border-b">
           <h2 className="text-lg font-bold">Total</h2>
-          <h2 className="text-lg font-bold text-green">$200</h2>
+          <h2 className="text-lg font-bold text-green flex items-center w-2/12">
+            <TbCurrencyTaka size={20} />
+            <span className="text-greens">200</span>
+          </h2>
         </div>
         <div className="pt-5">
           <h2 className="text-lg font-bold">Payment method</h2>
-          <p className="text-gray-500 mt-3"> - Pay with a Credit/Debit Card</p>
+          <div className="flex flex-1 flex-wrap items-center gap-4 p-3">
+            {PAYMENT?.map((item) => (
+              <PaymentMethod key={item.id} {...item} />
+            ))}
+          </div>
         </div>
       </div>
       <FormBtn title="Place Order" onClick={placeOrder} loading={loading} />
