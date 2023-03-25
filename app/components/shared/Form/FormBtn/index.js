@@ -6,7 +6,7 @@ function FormBtn({ title, loading = false }) {
 
   return (
     <Button
-      className="w-full py-3 mt-5 bg-primary"
+      className="w-full py-3 bg-primary"
       title={title}
       loading={loading}
       onClick={handleSubmit}

@@ -10,7 +10,7 @@ const OrderItems = ({ name, quantity, price }) => {
       </h2>
       <h2 className="text-base font-bold ml-2 flex items-center w-3/12">
         <TbCurrencyTaka size={18} />
-        <span>{price.toFixed(2)}</span>
+        <span>{quantity * price.toFixed(2)}</span>
       </h2>
     </div>
   );

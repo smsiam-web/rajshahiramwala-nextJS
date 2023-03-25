@@ -6,8 +6,21 @@ import Link from "next/link";
 import ProductMoreInfo from "./ProductMoreInfo";
 import Button from "../shared/Button";
 import Breadcrumb from "../shared/Breadcrumb";
+import * as Yup from "yup";
+import { AppForm, FormBtn } from "../shared/Form";
+import QuantityFrom from "./QuantityFrom";
+
+const validationSchema = Yup.object().shape({
+  first_name: Yup.string().max(25).required().label("First name"),
+
+  quantity: Yup.string().required().label("পরিমান নির্বাচন করুন"),
+});
 
 const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
+  const placeOrder = (values) => {
+    console.log(values);
+  };
+
   return (
     <div className="py-6 sm:py-12 bg-[#F5F5F5]">
       <div className="container">
@@ -59,52 +72,56 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                 <span className="text-green ml-1 font-bold">In stock</span>
               </div>
               <div className="border-t"></div>
-              <div className="my-5 flex flex-col gap-5">
-                <div className="flex xl:flex-row flex-col w-full justify-between gap-5">
-                  <div className="flex flex-col">
-                    <span className="text-sm pb-2 block text-sub-title">
-                      আমের পরিমানঃ
-                    </span>
-                    <select
-                      name="product_quantity"
-                      id="ss"
-                      className="px-6 py-3 text-base text-sub-title bg-[#f5f5f5] rounded-md w-full items-center "
-                    >
-                      <option value="0">পরিমান নির্বাচন করুন</option>
-                      <option value="1">১২ কেজি (ছোট ক্যারেট)</option>
-                      <option value="2">২৩ কেজি (বড় ক্যারেট)</option>
-                    </select>
-                  </div>
-                  {/* <Quantity /> */}
-                  <div className="flex flex-col">
-                    <span className="text-sm pb-2 block text-sub-title">
-                      ক্যারেট সংখ্যাঃ
-                    </span>
-                    <div className="flex justify-between border rounded-md">
-                      <button className="bg-[#f5f5f5] font-bold px-3 py-3 hover-primary text-sub-title">
-                        <FaMinus />
-                      </button>
-                      <div className="px-5 flex-grow flex items-center justify-center">
-                        {1}
+              <AppForm
+                initialValues={{
+                  quantity: "",
+                  first_name: "গোপালভোগ আম",
+                }}
+                onSubmit={placeOrder}
+                validationSchema={validationSchema}
+              >
+                <div className="my-5 flex flex-col gap-5">
+                  <div className="flex flex-col w-full justify-between gap-5">
+                    <div className="flex flex-col">
+                      <span className="text-sm pb-2 block text-sub-title">
+                        আমের পরিমানঃ
+                      </span>
+                      <div className="-my-4">
+                        <QuantityFrom />
                       </div>
-                      <button className="bg-[#f5f5f5] px-3 py-3 font-bold hover-primary text-sub-title">
-                        <BsPlusLg />
-                      </button>
+                    </div>
+                    {/* <Quantity /> */}
+                    <div className="flex flex-col">
+                      <span className="text-sm pb-2 block text-sub-title">
+                        ক্যারেট সংখ্যাঃ
+                      </span>
+                      <div className="flex justify-between border rounded-md">
+                        <button className="bg-[#f5f5f5] font-bold px-3 py-3 hover-primary text-sub-title">
+                          <FaMinus />
+                        </button>
+                        <div className="px-5 flex-grow flex items-center justify-center">
+                          {1}
+                        </div>
+                        <button className="bg-[#f5f5f5] px-3 py-3 font-bold hover-primary text-sub-title">
+                          <BsPlusLg />
+                        </button>
+                      </div>
                     </div>
                   </div>
+                  {/* product button  */}
+                  <div className="flex gap-3">
+                    <div>
+                      <FormBtn title="Add to Cart" onClick={placeOrder} />
+                    </div>
+                    <Link href={"/checkout"}>
+                      <Button
+                        title={"Order Now"}
+                        className={"bg-black text-white"}
+                      />
+                    </Link>
+                  </div>
                 </div>
-                {/* product button  */}
-                <div className="flex gap-3">
-                  <Button title="Add to Cart" className={"bg-primary"} />
-
-                  <Link href={"/checkout"}>
-                    <Button
-                      title={"Order Now"}
-                      className={"bg-black text-white"}
-                    />
-                  </Link>
-                </div>
-              </div>
+              </AppForm>
               <div className="border-t my-7"></div>
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-1">

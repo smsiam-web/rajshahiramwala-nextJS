@@ -1,8 +1,4 @@
-import Link from "next/link";
 import React, { useState } from "react";
-import { TbCurrencyTaka } from "react-icons/tb";
-import CartTableMobile from "../cart/CartTableMobile";
-import Button from "../shared/Button";
 import BillingInfo from "./BillingInfo";
 import YourOrder from "./YourOrder";
 import * as Yup from "yup";

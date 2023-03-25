@@ -6,10 +6,15 @@ import { BiSupport } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 import Logo from "../components/shared/Logo";
 import { useSelector } from "react-redux";
-import { selectTotalCartItems } from "../redux/slices/basketSlice";
+import {
+  selectTotalCartItems,
+  selectTotalPrice,
+} from "../redux/slices/basketSlice";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const Header = () => {
   const cartItems = useSelector(selectTotalCartItems);
+  const cartTotalPrice = useSelector(selectTotalPrice);
 
   return (
     <header className="bg-white py-5 sm:py-7 border-b">
@@ -57,8 +62,11 @@ const Header = () => {
                 </div>
                 <div className="hidden lg:block">
                   <span className="text-sub-title text-sm">Your Cart</span>
-                  <p className="text-title font-bold text-lg">
-                    $ <span className="text-primary font-semibold">0.00</span>
+                  <p className="text-title flex items-center font-bold text-xl">
+                    <TbCurrencyTaka size={24} />
+                    <span className="flex items-center text-primary text-center">
+                      {cartTotalPrice}
+                    </span>
                   </p>
                 </div>
               </a>

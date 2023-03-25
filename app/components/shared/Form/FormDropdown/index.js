@@ -25,7 +25,7 @@ function FormDropdown({
 
   return (
     <>
-      <div className={`${styles.formDropdown} mt-4 mb-4`}>
+      <div className={`${styles.formDropdown} mt-4 mb-4 `}>
         <div className={styles.dropdown}>
           <div className={styles.dropdown_header} onClick={toggleDropdown}>
             {selectedItem

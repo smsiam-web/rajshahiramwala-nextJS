@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Quantity from "../shared/Quantity";
 import { MdDelete } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
@@ -6,10 +6,17 @@ import { useDispatch } from "react-redux";
 import {
   decreaseItemQuantity,
   increaseItemQuantity,
+  itemPriceCalc,
   removeItem,
 } from "@/app/redux/slices/basketSlice";
 
-const CartTableRow = ({ id, name, image, price, quantity }) => {
+const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
+  const [checked, setChecked] = useState(true);
+  const [w, setW] = useState(12);
+
+  //priceCalc
+  const priceCalc = weight * price;
+
   // redux setup
   const dispatch = useDispatch();
 
@@ -20,6 +27,18 @@ const CartTableRow = ({ id, name, image, price, quantity }) => {
   // deCrease item quantity
   const decreaseQuantity = () => {
     dispatch(decreaseItemQuantity(id));
+  };
+
+  //priceCalc update on redux
+  const setPriceCalc = (e) => {
+    dispatch(itemPriceCalc(e));
+  };
+
+  const handleChange = (e) => {
+    setW(e);
+    if (checked) {
+      setChecked(false);
+    } else setChecked(true);
   };
 
   return (
@@ -36,13 +55,40 @@ const CartTableRow = ({ id, name, image, price, quantity }) => {
         <td className="py-5 max-w-[250px]">
           <div className="">
             <h1 className="text-lg font-bold text-title">{name}</h1>
-            <p className="text-sm text-gray-500">Weight: 12kg</p>
+            <div className="flex items-start gap-2 text-sm text-gray-500">
+              <span>Weight:</span>
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-1">
+                  <input
+                    type="radio"
+                    id="12"
+                    name={id}
+                    checked={checked}
+                    onChange={() => {
+                      handleChange(23), setPriceCalc({ id: id, weight: 12 });
+                    }}
+                  />
+                  <label htmlFor="12kg">12kg</label>
+                  <div className="flex items-center gap-1"></div>
+                  <input
+                    type="radio"
+                    id="23"
+                    name={id}
+                    checked={!checked}
+                    onChange={() => {
+                      handleChange(23), setPriceCalc({ id: id, weight: 23 });
+                    }}
+                  />
+                  <label htmlFor="23kg">23kg</label>
+                </div>
+              </div>
+            </div>
           </div>
         </td>
         <td className="py-5">
           <span className="flex items-center text-center">
             <TbCurrencyTaka />
-            {price}
+            {priceCalc}
           </span>
         </td>
         <td className="py-5">
@@ -57,7 +103,7 @@ const CartTableRow = ({ id, name, image, price, quantity }) => {
         <td className="py-5 ">
           <span className="flex items-center text-center">
             <TbCurrencyTaka />
-            {(quantity * price).toFixed(2)}
+            {(quantity * priceCalc).toFixed(2)}
           </span>
         </td>
         <td className="py-5">

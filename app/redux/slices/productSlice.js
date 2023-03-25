@@ -11,6 +11,7 @@ const initialState = {
       price: 85,
       oldPrice: 115,
       stock: true,
+      weight: 12,
     },
     {
       id: 1002,
@@ -20,6 +21,7 @@ const initialState = {
       category: "আম",
       price: 90,
       stock: true,
+      weight: 12,
     },
     {
       id: 1003,
@@ -30,6 +32,7 @@ const initialState = {
       oldPrice: 120,
       price: 115,
       stock: false,
+      weight: 12,
     },
     {
       id: 1004,
@@ -40,6 +43,7 @@ const initialState = {
       price: 85,
       oldPrice: 115,
       stock: true,
+      weight: 12,
     },
     {
       id: 1005,
@@ -49,6 +53,7 @@ const initialState = {
       category: "আম",
       price: 90,
       stock: true,
+      weight: 12,
     },
     {
       id: 1006,
@@ -59,6 +64,7 @@ const initialState = {
       oldPrice: 120,
       price: 115,
       stock: false,
+      weight: 12,
     },
   ],
 };

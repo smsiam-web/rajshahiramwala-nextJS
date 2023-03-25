@@ -2,8 +2,14 @@ import React from "react";
 import Button from "../shared/Button";
 import Link from "next/link";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { useSelector } from "react-redux";
+import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
 
 const CartActions = () => {
+  const cartTotalPrice = useSelector(selectTotalPrice);
+  const cartItems = useSelector(selectItems);
+  console.log(cartItems);
+
   return (
     <div className="ms:py-8 py-4 md:border-t">
       <div className="flex justify-between gap-5 flex-wrap">
@@ -29,25 +35,33 @@ const CartActions = () => {
             <h2 className="text-lg font-bold">
               <span className="flex items-center text-center">
                 <TbCurrencyTaka size={20} />
-                100
+                {cartTotalPrice}
               </span>
             </h2>
           </div>
           <div className="py-5 border-b space-y-3">
-            <span className="text-title">Shipping</span>
-            <ul className="">
-              <li className="">- Flat rate</li>
-            </ul>
-            <p>
-              Shipping to <strong>BD</strong>.
-            </p>
+            <span className="text-title font-semibold">Shipping</span>
+            <div className="flex items-center justify-between space-y-3">
+              <span className="text-sub-title">Courier Service point</span>
+              <span className="flex items-center text-center">
+                <TbCurrencyTaka size={20} />
+                {100.0}
+              </span>
+            </div>
+            <div className="flex items-center justify-between space-y-3">
+              <span className="text-sub-title">Home Delivary</span>
+              <span className="flex items-center text-center">
+                <TbCurrencyTaka size={20} />
+                {100.0}
+              </span>
+            </div>
           </div>
           <div className="flex justify-between py-5">
             <h2 className="text-xl font-bold">Subtotal</h2>
             <h2 className="text-xl font-bold text-green">
-              <span className="flex items-center text-center">
+              <span className="flex items-center text-center text-primary">
                 <TbCurrencyTaka />
-                100
+                {cartTotalPrice}
               </span>
             </h2>
           </div>

@@ -1,4 +1,4 @@
-import { selectItems } from "@/app/redux/slices/basketSlice";
+import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 import { TbCurrencyTaka } from "react-icons/tb";
@@ -36,6 +36,7 @@ const PAYMENT = [
 
 const YourOrder = ({ placeOrder, loading }) => {
   const orderItem = useSelector(selectItems);
+  const totalPrice = useSelector(selectTotalPrice);
 
   return (
     <div>
@@ -52,9 +53,9 @@ const YourOrder = ({ placeOrder, loading }) => {
         </div>
         <div className="flex justify-between py-5 border-b">
           <h2 className="text-base font-bold">Subtotal</h2>
-          <h2 className="text-lg font-bold flex items-center w-2/12">
+          <h2 className="text-lg font-bold flex items-center w-3/12">
             <TbCurrencyTaka size={20} />
-            <span>200</span>
+            <span>{totalPrice}</span>
           </h2>
         </div>
         <div className="py-5 border-b space-y-3">
@@ -65,9 +66,9 @@ const YourOrder = ({ placeOrder, loading }) => {
         </div>
         <div className="flex justify-between py-5 border-b">
           <h2 className="text-lg font-bold">Total</h2>
-          <h2 className="text-lg font-bold text-green flex items-center w-2/12">
+          <h2 className="text-lg font-bold text-green flex items-center w-3/12">
             <TbCurrencyTaka size={20} />
-            <span className="text-greens">200</span>
+            <span className="text-greens">{totalPrice}</span>
           </h2>
         </div>
         <div className="pt-5">
