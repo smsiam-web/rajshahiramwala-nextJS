@@ -2,13 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    FIREBASE_API_KEY: "AIzaSyADxfp-4wTvahhs6JF3VCgyQ9QU43uRmmY",
-    FIREBASE_AUTH_DOMAIN: "aamwala-e7852.firebaseapp.com",
-    FIREBASE_PROJECT_ID: "aamwala-e7852",
-    FIREBASE_STORAGE_BUCKET: "aamwala-e7852.appspot.com",
-    FIREBASE_MESSAGING_SENDER_ID: "310123980804",
-    FIREBASE_APP_ID: "1:310123980804:web:8bd657b55aff37f9d4ed51",
-    FIREBASE_MEASUREMENT_ID: "G-DN2JR2HEY4",
+    FIREBASE_API_KEY: "AIzaSyCwlmCftGAJuPHWJosjrHRhU84iSiudjfM",
+    FIREBASE_AUTH_DOMAIN: "rajshahiraamwala-8b7bf.firebaseapp.com",
+    FIREBASE_PROJECT_ID: "rajshahiraamwala-8b7bf",
+    FIREBASE_STORAGE_BUCKET: "rajshahiraamwala-8b7bf.appspot.com",
+    FIREBASE_MESSAGING_SENDER_ID: "38548299757",
+    FIREBASE_APP_ID: "1:38548299757:web:ea6e60638def1036a511e4",
+    FIREBASE_MEASUREMENT_ID: "G-2BZJP3PX28",
   },
 };
 

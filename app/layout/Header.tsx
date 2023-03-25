@@ -61,10 +61,10 @@ const Header = () => {
                   </span>
                 </div>
                 <div className="hidden lg:block">
-                  <span className="text-sub-title text-sm">Your Cart</span>
+                  <span className="text-sub-title text-base">Your Cart</span>
                   <p className="text-title flex items-center font-bold text-xl">
-                    <TbCurrencyTaka size={24} />
-                    <span className="flex items-center text-primary text-center">
+                    <TbCurrencyTaka size={22} />
+                    <span className="flex items-center font-bold text-lg text-primary text-center">
                       {cartTotalPrice}
                     </span>
                   </p>

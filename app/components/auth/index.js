@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import Button from "../shared/Button";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookSquare } from "react-icons/fa";
-import { auth } from "@/app/utils/firebase";
+import { auth, db } from "@/app/utils/firebase";
 import Firebase from "firebase";
 
 const validationSchema = Yup.object().shape({
@@ -37,7 +37,15 @@ const Auth = () => {
   // login with goole
   const loginWithGoogle = () => {
     const provider = new Firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
+    auth
+      .signInWithPopup(provider)
+      .then((userCredential) => {
+        addUserToDatabase(userCredential.user);
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
   };
 
   // login with email and password
@@ -48,10 +56,28 @@ const Auth = () => {
     });
   };
   const signUp = (email, password) => {
-    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
-      alert(error.message);
-      console.log(error);
-    });
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        addUserToDatabase(userCredential.user);
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
+  };
+
+  const addUserToDatabase = async (user) => {
+    const { uid, displayName, email, photoURL } = user;
+    const userRef = await db.collection("users").doc(uid).get();
+    if (!userRef.exists) {
+      db.collection("users").doc(uid).set({
+        uid,
+        name: displayName,
+        email,
+        image: photoURL,
+      });
+    }
   };
 
   return (

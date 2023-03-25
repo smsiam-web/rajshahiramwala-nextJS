@@ -12,7 +12,6 @@ import {
 
 const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
   const [checked, setChecked] = useState(true);
-  const [w, setW] = useState(12);
 
   //priceCalc
   const priceCalc = weight * price;
@@ -34,12 +33,11 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
     dispatch(itemPriceCalc(e));
   };
 
-  const handleChange = (e) => {
-    setW(e);
-    if (checked) {
-      setChecked(false);
-    } else setChecked(true);
-  };
+  useEffect(() => {
+    if (weight === 12) {
+      setChecked(true);
+    } else setChecked(false);
+  }, [weight]);
 
   return (
     <>
@@ -62,10 +60,10 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
                   <input
                     type="radio"
                     id="12"
-                    name={id}
+                    name={"pc12"}
                     checked={checked}
                     onChange={() => {
-                      handleChange(23), setPriceCalc({ id: id, weight: 12 });
+                      setPriceCalc({ id: id, weight: 12 });
                     }}
                   />
                   <label htmlFor="12kg">12kg</label>
@@ -73,10 +71,10 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
                   <input
                     type="radio"
                     id="23"
-                    name={id}
+                    name={"pc23"}
                     checked={!checked}
                     onChange={() => {
-                      handleChange(23), setPriceCalc({ id: id, weight: 23 });
+                      setPriceCalc({ id: id, weight: 23 });
                     }}
                   />
                   <label htmlFor="23kg">23kg</label>

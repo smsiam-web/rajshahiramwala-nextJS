@@ -3,6 +3,11 @@ import BillingInfo from "./BillingInfo";
 import YourOrder from "./YourOrder";
 import * as Yup from "yup";
 import { AppForm } from "../shared/Form";
+import { db, timestamp } from "@/app/utils/firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/app/redux/slices/authSlice";
+import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
+import { uuid } from "@/app/utils/helpers";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First name"),
@@ -19,14 +24,40 @@ const validationSchema = Yup.object().shape({
 });
 
 const CheckoutContent = () => {
+  const user = useSelector(selectUser);
+  const cartItems = useSelector(selectItems);
+  const cartTotal = useSelector(selectTotalPrice);
   const [loading, setLoading] = useState(false);
 
-  const placeOrder = (values) => {
+  const placeOrder = async (values) => {
     setLoading(true);
-    console.log(values);
-    setTimeout(function () {
-      setLoading(false);
-    }, 2000);
+    await saveBillingDetails(values);
+    await placeOrderHandler(values);
+    setLoading(false);
+  };
+
+  const saveBillingDetails = async (values) => {
+    const ref = db.collection("users").doc(user.uid);
+    return ref.set(
+      {
+        billing_details: values,
+      },
+      { merge: true }
+    );
+  };
+
+  const placeOrderHandler = async (values) => {
+    const order_id = uuid();
+    const orderData = {
+      order_id,
+      user_details: { ...user },
+      payment_sucess: true,
+      billing_details: values,
+      items: cartItems,
+      total: cartTotal,
+      created_at: timestamp,
+    };
+    await db.collection("orders").doc(order_id).set(orderData);
   };
 
   return (
@@ -34,16 +65,16 @@ const CheckoutContent = () => {
       <div className="flex flex-wrap md:flex-nowrap gap-5">
         <AppForm
           initialValues={{
-            first_name: "",
-            last_name: "",
-            company: "",
-            country: "",
-            address: "",
-            city: "",
-            state: "",
-            zip: "",
-            phone: "",
-            email: "",
+            first_name: user?.billing_details?.first_name || "",
+            last_name: user?.billing_details?.last_name || "",
+            company: user?.billing_details?.company || "",
+            country: user?.billing_details?.country || "",
+            address: user?.billing_details?.address || "",
+            city: user?.billing_details?.city || "",
+            state: user?.billing_details?.state || "",
+            zip: user?.billing_details?.zip || "",
+            phone: user?.billing_details?.phone || "",
+            email: user?.billing_details?.email || "",
             notes: "",
           }}
           onSubmit={placeOrder}
