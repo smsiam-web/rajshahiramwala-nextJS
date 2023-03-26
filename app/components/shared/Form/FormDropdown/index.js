@@ -6,8 +6,8 @@ function FormDropdown({
   items,
   name,
   placeholder,
-  key = "title",
-  label = "title",
+  key = "id",
+  label = "bn_name",
 }) {
   const { setFieldTouched, setFieldValue, errors, touched, values } =
     useFormikContext();
@@ -15,8 +15,9 @@ function FormDropdown({
   const [selectedItem, setSelectedItem] = useState(values[name]);
 
   const toggleDropdown = () => setOpen(!isOpen);
-
+  // console.log(items);
   const handleItemClick = (id) => {
+    // console.log(name, "index");
     setFieldTouched(name);
     selectedItem === id ? setSelectedItem(null) : setSelectedItem(id);
     toggleDropdown();

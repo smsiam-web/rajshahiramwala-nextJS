@@ -1,5 +1,9 @@
 import React from "react";
 import { AppTextArea, FormDropdown, FormInput } from "../shared/Form";
+import Division from "../../data/Divisions/divisions.json";
+import State from "../../data/State/districts.json";
+import Upazilas from "../../data/Upazilas/upazilas.json";
+import Unions from "../../data/Unions/unions.json";
 
 const COUNTRIES = [
   { title: "United States" },
@@ -38,19 +42,20 @@ const COUNTRIES = [
 ];
 
 const BillingDetailsForm = () => {
+  const DIVISION = Division[2].data;
+  const CITY = State[2].data;
+  const UPAZILAS = Upazilas[2].data;
+  const UNIONS = Unions[2].data;
+
   return (
     <div>
       <FormInput name="first_name" placeholder="First name" />
       <FormInput name="last_name" placeholder="Last name" />
-      <FormInput name="company" placeholder="Company name (optional)" />
-      <FormDropdown
-        name="country"
-        placeholder="Country / Region"
-        items={COUNTRIES}
-      />
-      <FormInput name="address" placeholder="Street address" />
-      <FormInput name="city" placeholder="Town / City" />
-      <FormInput name="state" placeholder="State / Province" />
+      <FormDropdown name="state" placeholder="বিভাগ" items={DIVISION} />
+      <FormDropdown name="city" placeholder="জেলা" items={CITY} />
+      <FormDropdown name="upazila" placeholder="উপজেলা" items={UPAZILAS} />
+      <FormDropdown name="union" placeholder="ইউনিয়ন" items={UNIONS} />
+      <FormInput name="street_address" placeholder="Street address" />
       <FormInput name="zip" placeholder="ZIP / Postal code" />
       <FormInput name="phone" placeholder="Phone" />
       <FormInput name="email" placeholder="Email address" type="email" />

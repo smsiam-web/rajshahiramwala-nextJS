@@ -8,15 +8,16 @@ import { useSelector } from "react-redux";
 import { selectUser } from "@/app/redux/slices/authSlice";
 import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
 import { uuid } from "@/app/utils/helpers";
+import { useRouter } from "next/router";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First name"),
   last_name: Yup.string().max(25).required().label("Last name"),
-  company: Yup.string().label("Company name"),
-  country: Yup.string().required().label("Country / Region"),
-  address: Yup.string().required().label("Address"),
-  city: Yup.string().required().label("City"),
-  state: Yup.string().required().label("State / Province"),
+  state: Yup.string().label("বিভাগ"),
+  city: Yup.string().required().label("জেলা"),
+  upazila: Yup.string().required().label("উপজেলা"),
+  union: Yup.string().required().label("ইউনিয়ন"),
+  street_address: Yup.string().required().label("State / Province"),
   zip: Yup.string().required().label("ZIP / Postal code"),
   phone: Yup.string().required().label("Phone"),
   email: Yup.string().email().required().label("Email"),
@@ -28,14 +29,19 @@ const CheckoutContent = () => {
   const cartItems = useSelector(selectItems);
   const cartTotal = useSelector(selectTotalPrice);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
+  // place order handler on submit
   const placeOrder = async (values) => {
     setLoading(true);
+    const order_id = uuid();
     await saveBillingDetails(values);
-    await placeOrderHandler(values);
+    router.push("/sucess?order_id=" + order_id);
+    await placeOrderHandler(values, order_id);
     setLoading(false);
   };
 
+  // save billing details in user collection
   const saveBillingDetails = async (values) => {
     const ref = db.collection("users").doc(user.uid);
     return ref.set(
@@ -46,8 +52,8 @@ const CheckoutContent = () => {
     );
   };
 
-  const placeOrderHandler = async (values) => {
-    const order_id = uuid();
+  // save order details on firebase database
+  const placeOrderHandler = async (values, order_id) => {
     const orderData = {
       order_id,
       user_details: { ...user },
@@ -67,11 +73,11 @@ const CheckoutContent = () => {
           initialValues={{
             first_name: user?.billing_details?.first_name || "",
             last_name: user?.billing_details?.last_name || "",
-            company: user?.billing_details?.company || "",
-            country: user?.billing_details?.country || "",
-            address: user?.billing_details?.address || "",
-            city: user?.billing_details?.city || "",
             state: user?.billing_details?.state || "",
+            city: user?.billing_details?.city || "",
+            upazila: user?.billing_details?.upazila || "",
+            union: user?.billing_details?.union || "",
+            street_address: user?.billing_details?.street_address || "",
             zip: user?.billing_details?.zip || "",
             phone: user?.billing_details?.phone || "",
             email: user?.billing_details?.email || "",

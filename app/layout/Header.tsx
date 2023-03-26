@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Search from "../components/Search";
-import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FiUserMinus, FiUserCheck, FiUserPlus } from "react-icons/fi";
 import { BiSupport } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 import Logo from "../components/shared/Logo";
@@ -11,8 +12,10 @@ import {
   selectTotalPrice,
 } from "../redux/slices/basketSlice";
 import { TbCurrencyTaka } from "react-icons/tb";
+import { selectUser } from "../redux/slices/authSlice";
 
 const Header = () => {
+  const user = useSelector(selectUser);
   const cartItems = useSelector(selectTotalCartItems);
   const cartTotalPrice = useSelector(selectTotalPrice);
 
@@ -38,18 +41,22 @@ const Header = () => {
           </div>
 
           {/* Icons */}
-          <div className="flex items-center gap-2 sm:gap-3 ">
+          <div className="flex items-center gap-3 sm:gap-4 ">
             <a href="tel:+8801837666008" className="xl:hidden">
-              <div className="relative">
+              <div className="relative pr-1">
                 <BiSupport className="text-3xl text-title hover-greens" />
-                <span className="bg-green-500 rounded-full text-center absolute  text-sm p-[1px] -right-1 -top-1 font-semibold">
+                <span className="bg-green-500 rounded-full text-center absolute  text-sm p-[1px] -right-[1px] -top-1 font-semibold">
                   <TiTick className="text-white" />
                 </span>
               </div>
             </a>
             <Link href="/my-account" legacyBehavior>
               <a href="/my-account" className="">
-                <AiOutlineUser className="text-3xl text-title hover-primary" />
+                {!user ? (
+                  <FiUserMinus className="text-3xl text-title hover-primary" />
+                ) : (
+                  <FiUserCheck className="text-3xl text-title hover-primary" />
+                )}
               </a>
             </Link>
             <Link href="/cart" legacyBehavior>
