@@ -33,6 +33,30 @@ const Auth = () => {
       setLoading(false);
     }, 500);
   };
+  // login whith facebook
+  const loginWithFacebook = () => {
+    const provider = new Firebase.auth.FacebookAuthProvider();
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        // /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+        // ...
+
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        var accessToken = credential.accessToken;
+
+        // ...
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
+  };
 
   // login with goole
   const loginWithGoogle = () => {
@@ -175,6 +199,7 @@ const Auth = () => {
               className={"bg-slate-800 text-white w-full text-lg"}
             />
             <Button
+              onClick={loginWithFacebook}
               icon={<FaFacebookSquare size={20} />}
               title="Facebook"
               className={"bg-blue-500 text-white w-full text-lg"}

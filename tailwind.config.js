@@ -12,7 +12,7 @@ module.exports = {
         "sub-title": "#666666",
         title: "#222222",
         mid: "#555555",
-        orange: "#FA582C",
+        oranges: "#FA582C",
         greens: "#669900",
       },
     },

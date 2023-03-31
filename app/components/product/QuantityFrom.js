@@ -1,8 +1,8 @@
 import React from "react";
 import { FormDropdown, FormInput } from "../shared/Form";
 const TYPE = [
-  { title: "১২ কেজি (ছোট ক্যারেট)", values: 12 },
-  { title: "২৩ কেজি (বড় ক্যারেট)", values: 23 },
+  { name: "১২ কেজি (ছোট ক্যারেট)" },
+  { name: "২৩ কেজি (বড় ক্যারেট)" },
 ];
 const QuantityFrom = ({ value }) => {
   return (

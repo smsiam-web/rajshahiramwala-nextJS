@@ -1,13 +1,15 @@
+import { updateAddId } from "@/app/redux/slices/filterId";
 import { useFormikContext } from "formik";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./FormDropdown.module.css";
 
 function FormDropdown({
   items,
   name,
   placeholder,
-  key = "id",
-  label = "bn_name",
+  key = "name",
+  label = "name",
 }) {
   const { setFieldTouched, setFieldValue, errors, touched, values } =
     useFormikContext();
@@ -15,9 +17,21 @@ function FormDropdown({
   const [selectedItem, setSelectedItem] = useState(values[name]);
 
   const toggleDropdown = () => setOpen(!isOpen);
-  // console.log(items);
+  const dispatch = useDispatch();
   const handleItemClick = (id) => {
-    // console.log(name, "index");
+    switch (name) {
+      case "state":
+        dispatch(updateAddId({ name: "division", id: id }));
+        break;
+      case "city":
+        dispatch(updateAddId({ name: "city", id: id }));
+        break;
+      case "upazila":
+        dispatch(updateAddId({ name: "upazila", id: id }));
+        break;
+      default:
+        dispatch(updateAddId([]));
+    }
     setFieldTouched(name);
     selectedItem === id ? setSelectedItem(null) : setSelectedItem(id);
     toggleDropdown();
@@ -30,7 +44,7 @@ function FormDropdown({
         <div className={styles.dropdown}>
           <div className={styles.dropdown_header} onClick={toggleDropdown}>
             {selectedItem
-              ? items.find((item) => item[key] === selectedItem)?.[label]
+              ? items.find((item) => item.id === selectedItem)?.[label]
               : placeholder}
             <img
               className={`${styles.icon} ${isOpen && styles.open}`}
@@ -42,9 +56,9 @@ function FormDropdown({
           <div className={`${styles.dropdown_body} ${isOpen && styles.open}`}>
             {items.map((item) => (
               <div
-                key={item[key]}
+                key={item.id}
                 className={styles.dropdown_item}
-                onClick={(e) => handleItemClick(item[key], item?.value)}
+                onClick={(e) => handleItemClick(item.id, item?.value)}
                 id={item[key]}
               >
                 <span

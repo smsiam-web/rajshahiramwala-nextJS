@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Search from "../components/Search";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { FiUserMinus, FiUserCheck, FiUserPlus } from "react-icons/fi";
+import { FiUserMinus, FiUserCheck } from "react-icons/fi";
 import { BiSupport } from "react-icons/bi";
 import { TiTick } from "react-icons/ti";
 import Logo from "../components/shared/Logo";

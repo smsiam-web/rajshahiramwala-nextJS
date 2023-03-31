@@ -4,15 +4,18 @@ import YourOrder from "./YourOrder";
 import * as Yup from "yup";
 import { AppForm } from "../shared/Form";
 import { db, timestamp } from "@/app/utils/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "@/app/redux/slices/authSlice";
-import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
+import {
+  selectItems,
+  selectTotalPrice,
+  updateBasket,
+} from "@/app/redux/slices/basketSlice";
 import { uuid } from "@/app/utils/helpers";
 import { useRouter } from "next/router";
 
 const validationSchema = Yup.object().shape({
-  first_name: Yup.string().max(25).required().label("First name"),
-  last_name: Yup.string().max(25).required().label("Last name"),
+  full_name: Yup.string().max(25).required().label("Full name"),
   state: Yup.string().label("বিভাগ"),
   city: Yup.string().required().label("জেলা"),
   upazila: Yup.string().required().label("উপজেলা"),
@@ -30,14 +33,16 @@ const CheckoutContent = () => {
   const cartTotal = useSelector(selectTotalPrice);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   // place order handler on submit
   const placeOrder = async (values) => {
     setLoading(true);
-    const order_id = uuid();
     await saveBillingDetails(values);
+    const order_id = uuid();
     router.push("/sucess?order_id=" + order_id);
     await placeOrderHandler(values, order_id);
+    dispatch(updateBasket([]));
     setLoading(false);
   };
 
@@ -57,7 +62,7 @@ const CheckoutContent = () => {
     const orderData = {
       order_id,
       user_details: { ...user },
-      payment_sucess: true,
+      payment_success: true,
       billing_details: values,
       items: cartItems,
       total: cartTotal,
@@ -71,8 +76,7 @@ const CheckoutContent = () => {
       <div className="flex flex-wrap md:flex-nowrap gap-5">
         <AppForm
           initialValues={{
-            first_name: user?.billing_details?.first_name || "",
-            last_name: user?.billing_details?.last_name || "",
+            full_name: user?.billing_details?.full_name || "",
             state: user?.billing_details?.state || "",
             city: user?.billing_details?.city || "",
             upazila: user?.billing_details?.upazila || "",

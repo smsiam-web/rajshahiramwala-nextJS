@@ -1,7 +1,8 @@
-import { BiUser } from "react-icons/bi";
+import { AiOutlineSetting } from "react-icons/ai";
 import { FiSliders } from "react-icons/fi";
 import { BsCart } from "react-icons/bs";
 import { TbAddressBook } from "react-icons/tb";
+import { MdPassword } from "react-icons/md";
 
 export const DASHBOARD_NAV = [
   {
@@ -15,19 +16,20 @@ export const DASHBOARD_NAV = [
     icon: <BsCart />,
   },
   {
-    title: "User Profile",
+    title: "Update Profile",
     href: "/my-account/edit-account",
-    icon: <BiUser />,
+    icon: <AiOutlineSetting />,
   },
   {
     title: "Addresses",
     href: "/my-account/addresses",
     icon: <TbAddressBook />,
   },
+
   // {
-  //     title: "Reviews",
-  //     href: '/my-account/reviews',
-  //     icon: <MdOutlineReviews />,
+  //   title: "Change Password",
+  //   href: "/my-account/reset-password",
+  //   icon: <MdPassword />,
   // },
 ];
 export default DASHBOARD_NAV;

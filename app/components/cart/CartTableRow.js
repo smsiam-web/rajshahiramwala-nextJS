@@ -34,9 +34,9 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
   };
 
   useEffect(() => {
-    if (weight === 12) {
-      setChecked(true);
-    } else setChecked(false);
+    {
+      weight === 12 ? setChecked(true) : setChecked(false);
+    }
   }, [weight]);
 
   return (
@@ -60,7 +60,7 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
                   <input
                     type="radio"
                     id="12"
-                    name={"pc12"}
+                    name={id + 12}
                     checked={checked}
                     onChange={() => {
                       setPriceCalc({ id: id, weight: 12 });
@@ -71,7 +71,7 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
                   <input
                     type="radio"
                     id="23"
-                    name={"pc23"}
+                    name={id + 23}
                     checked={!checked}
                     onChange={() => {
                       setPriceCalc({ id: id, weight: 23 });

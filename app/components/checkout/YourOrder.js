@@ -11,26 +11,31 @@ const PAYMENT = [
     id: "cod",
     title: "Cash on Delivery",
     image: "payment_cod.png",
+    available: true,
   },
   {
     id: "dr_cr",
     title: "Credit/Debit Card",
     image: "payment_dr_cr.png",
+    available: false,
   },
   {
     id: "bkash",
     title: "bkash",
     image: "payment_bkash.png",
+    available: true,
   },
   {
     id: "nagod",
     title: "nagod",
     image: "payment_nagod.png",
+    available: false,
   },
   {
     id: "rocket",
     title: "rocket",
     image: "payment_rocket.png",
+    available: false,
   },
 ];
 

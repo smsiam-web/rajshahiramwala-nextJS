@@ -51,7 +51,7 @@ const SuccessContent = () => {
               router.push(`/my-account/orders?order_id=${order_id}`)
             }
             title="View Orders"
-            className="md:w-1/2 bg-black text-white w-full mx-auto py-3 mt-5 block"
+            className="md:w-1/2 w-full mx-auto py-3 mt-5 block bg-black text-white uppercase"
           ></Button>
         </>
       )}

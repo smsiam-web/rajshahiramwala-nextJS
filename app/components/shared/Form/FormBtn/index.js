@@ -6,7 +6,7 @@ function FormBtn({ title, loading = false }) {
 
   return (
     <Button
-      className="w-full py-3 bg-primary"
+      className="w-full py-3 bg-primary hover:bg-yellow-500"
       title={title}
       loading={loading}
       onClick={handleSubmit}

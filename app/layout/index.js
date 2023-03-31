@@ -26,12 +26,14 @@ const Layout = ({ children }) => {
         dispatch(removeUser());
       }
     });
+
     // get cart items from local storage
     const local_items = localStorage.getItem("@CART_ITEMS")
       ? JSON.parse(localStorage.getItem("@CART_ITEMS"))
       : [];
 
     dispatch(updateBasket(local_items));
+
     return unsubscribe;
   }, []);
 
