@@ -60,7 +60,9 @@ const Adresses = () => {
         validationSchema={validationSchema}
       >
         <div className="md:px-8 md:py-4">
-          <UpdateAddress />
+          <div className="mb-4 md:mb-6">
+            <UpdateAddress />
+          </div>
           <FormBtn
             title={"Update Address"}
             onClick={updateAddress}

@@ -54,7 +54,7 @@ const UpdateAddress = () => {
       </center>
       <div className="w-full mt-10">
         <div className="grid grid-cols-6 gap-6">
-          <div class="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-3">
             <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
               Division
             </label>

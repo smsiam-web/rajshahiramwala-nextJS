@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormInput } from "../shared/Form";
+import FileUpload from "../shared/FileUpload";
 
 const UpdateProfile = () => {
+  const formInitial = {
+    thumbImage: "",
+  };
+  const [formData, setFormData] = useState(formInitial);
+  const dataChangerThumbnail = (value) => {
+    setFormData({ ...formData, thumbImage: value });
+  };
   return (
     <main>
       <center className="border-b md:border-none mb-4">
@@ -12,56 +20,18 @@ const UpdateProfile = () => {
         <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
           Photo
         </label>
-        <div className="mt-1 flex items-center">
-          <div className="w-full text-center">
-            <div
-              className="px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer"
-              role="button"
-              tabIndex="0"
-            >
-              <input
-                id="upfile"
-                accept="image/*"
-                type="file"
-                autoComplete="off"
-                tabIndex="-1"
-                className="hidden"
-                onchange={() => sub(this)}
-              />
-              <span className="mx-auto flex justify-center">
-                <svg
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-3xl text-primary"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <polyline points="16 16 12 12 8 16"></polyline>
-                  <line x1="12" y1="12" x2="12" y2="21"></line>
-                  <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-                  <polyline points="16 16 12 12 8 16"></polyline>
-                </svg>
-              </span>
-              <p className="text-sm mt-2">Drag your image here</p>
-              <em className="text-xs text-gray-400">
-                (Only *.jpeg, jpg and *.png images will be accepted)
-              </em>
-            </div>
-            <aside className="flex flex-row flex-wrap mt-4"></aside>
-          </div>
-        </div>
-        {/* <div className="border border-dashed h-28">
-            <input type="file" className="hidden" />
-          </div> */}
+        <FileUpload
+          name="thumbImage"
+          dataChanger={(value) => dataChangerThumbnail(value)}
+          type="image"
+          prev_src={"localhost:8001/" + formData?.thumbImage}
+          required
+          allowed_extensions={["jpg", "jpeg", "png", "gif"]}
+        />
       </div>
       <div className="w-full mt-10">
         <div className="grid grid-cols-6 gap-6">
-          <div class="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-3">
             <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
               Full Name
             </label>

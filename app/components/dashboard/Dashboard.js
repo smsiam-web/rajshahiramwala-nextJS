@@ -33,7 +33,7 @@ const Dashboard = () => {
         });
         setOrders(filterOrder);
       });
-  }, []);
+  }, [user]);
 
   return (
     <div className="md:px-8 md:py-4 bg-gray-50 rounded-md">
@@ -45,11 +45,11 @@ const Dashboard = () => {
             className="h-[200px] w-full object-cover rounded-md"
           />
         </div>
-        <div className="flex gap-3 py-6 border-b bg-white">
+        <div className="flex gap-3 py-6 border-b bg-white px-6">
           <img
             src={user.image}
             alt="user_img"
-            className="rounded-full w-[120px]"
+            className="rounded-full w-[120px] h-[120px] object-cover object-center"
           />
           <div className="flex flex-col py-2 gap-1">
             <h1 className="text-2xl font-bold text-title ">{user.name}</h1>
