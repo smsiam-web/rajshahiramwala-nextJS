@@ -107,8 +107,6 @@ const FileUpload = (props) => {
     fileReader.readAsDataURL(files[0]);
   };
 
-  console.log(url, progress);
-
   const getFileSize = (file_size) => {
     if (file_size / 1024 >= 1024) {
       file_size = parseInt(file_size / 1024 / 1024) + " MB";
@@ -194,6 +192,7 @@ const FileUpload = (props) => {
                 <em className="text-xs text-gray-400">
                   (Only *.jpeg, jpg, gif and *.png images will be accepted)
                 </em>
+                <h6 className="text-xs text-gray-400">{props.recommended}</h6>
               </div>
             )}
           </div>

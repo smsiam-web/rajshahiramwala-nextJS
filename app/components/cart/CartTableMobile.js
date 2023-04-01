@@ -9,8 +9,6 @@ import {
   itemPriceCalc,
   removeItem,
 } from "@/app/redux/slices/basketSlice";
-import { Radio } from "@mantine/core";
-import { Group } from "@mantine/core";
 
 const CartTableMobile = ({ id, name, image, price, quantity, weight }) => {
   const [checked, setChecked] = useState(true);

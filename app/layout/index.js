@@ -5,8 +5,10 @@ import { selectItems, updateBasket } from "../redux/slices/basketSlice";
 import { auth, db } from "../utils/firebase";
 import Footer from "./Footer";
 import Header from "./Header";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItems);
 
@@ -35,7 +37,7 @@ const Layout = ({ children }) => {
     dispatch(updateBasket(local_items));
 
     return unsubscribe;
-  }, []);
+  }, [router.asPath]);
 
   useEffect(() => {
     if (!cartItems.length) return;

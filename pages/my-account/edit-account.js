@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import updateProfile from "@/app/redux/slices/updateProfile";
 
 const validationSchema = Yup.object().shape({
-  full_name: Yup.string().max(25).required().label("Full name"),
+  name: Yup.string().max(25).required().label("Full name"),
   // image: Yup.object().label("Upload your imgae"),
   street_address: Yup.string().required().label("State / Province"),
   phone: Yup.string().required().label("Phone"),
@@ -38,9 +38,9 @@ const EditAccount = () => {
     const ref = db.collection("users").doc(user.uid);
     return ref.set(
       {
-        name: values.full_name,
+        name: values.name,
         billing_details: {
-          full_name: values.full_name,
+          full_name: values.name,
           street_address: values.street_address,
           phone: values.phone,
         },
@@ -54,7 +54,7 @@ const EditAccount = () => {
       <AppForm
         initialValues={{
           // image: [],
-          full_name: user?.billing_details?.full_name || "",
+          name: user?.name || "",
           street_address: user?.billing_details?.street_address || "",
           phone: user?.billing_details?.phone || "",
           email: user?.email || "",

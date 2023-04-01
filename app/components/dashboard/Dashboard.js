@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FiShoppingCart, FiTruck } from "react-icons/fi";
 import { MdOutlineDownloadDone, MdOutlinePendingActions } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
   const user = useSelector(selectUser);
+  const router = useRouter();
 
   const [orders, setOrders] = useState([]);
 
@@ -33,7 +35,7 @@ const Dashboard = () => {
         });
         setOrders(filterOrder);
       });
-  }, [user]);
+  }, []);
 
   return (
     <div className="md:px-8 md:py-4 bg-gray-50 rounded-md">
@@ -104,9 +106,7 @@ const Dashboard = () => {
               </span>
               <h1 className="text-base flex flex-col font-semibold text-sub-title">
                 Complete Order{" "}
-                <span className="text-2xl font-bold text-title">
-                  0{orders.length}
-                </span>
+                <span className="text-2xl font-bold text-title">00</span>
               </h1>
             </div>
           </div>

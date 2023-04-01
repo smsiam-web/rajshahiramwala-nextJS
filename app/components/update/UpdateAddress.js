@@ -44,7 +44,6 @@ const UpdateAddress = () => {
         });
         break;
       default:
-        console.log("Sorry, we are out of .");
     }
   }, [filterID.id]);
   return (

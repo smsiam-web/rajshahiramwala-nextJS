@@ -8,7 +8,6 @@ import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
 const CartActions = () => {
   const cartTotalPrice = useSelector(selectTotalPrice);
   const cartItems = useSelector(selectItems);
-  console.log(cartItems);
 
   return (
     <div className="ms:py-8 py-4 md:border-t">

@@ -27,6 +27,7 @@ const UpdateProfile = () => {
           prev_src={"localhost:8001/" + formData?.thumbImage}
           required
           allowed_extensions={["jpg", "jpeg", "png", "gif"]}
+          recommended="Recommenden size: Square / 🔳"
         />
       </div>
       <div className="w-full mt-10">
@@ -36,7 +37,7 @@ const UpdateProfile = () => {
               Full Name
             </label>
             <div className="relative">
-              <FormInput name="full_name" placeholder="Full name" />
+              <FormInput name="name" placeholder="Full name" />
             </div>
           </div>
           <div className="col-span-6 sm:col-span-3">
