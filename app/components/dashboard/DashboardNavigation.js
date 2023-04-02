@@ -2,9 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import DASHBOARD_NAV from "../../configs/dashboard_nav";
-import Button from "../shared/Button";
-import { auth } from "@/app/utils/firebase";
-import { FiLogOut } from "react-icons/fi";
 
 const DashboardNavigation = () => {
   const router = useRouter();
@@ -30,16 +27,8 @@ const DashboardNavigation = () => {
             </Link>
           );
         })}
-        <div className="p-4">
-          <Button
-            onClick={() => auth.signOut()}
-            icon={<FiLogOut size={20} />}
-            title="Log Out"
-            className={
-              "bg-slate-800 opacity-90 hover:opacity-100 text-white w-full text-sm"
-            }
-          />
-        </div>
+        {/* <div className="p-4">
+        </div> */}
       </div>
     </>
   );

@@ -43,8 +43,8 @@ const OrderTable = () => {
       <LoadingOverlay visible={loading} />
       {orders.length ? (
         <div>
-          <div className="mx-auto max-w-5xl">
-            <h1 className="text-2xl md:text-3xl xl:text-4xl text-center font-bold pb-6 capitalize">
+          <div className="mx-auto mb-3 border-b md:border-none max-w-5xl">
+            <h1 className="text-2xl md:text-3xl xl:text-4xl text-center font-bold py-4 capitalize">
               Your Order
             </h1>
           </div>

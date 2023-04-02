@@ -9,6 +9,7 @@ import {
   itemPriceCalc,
   removeItem,
 } from "@/app/redux/slices/basketSlice";
+import { notifications } from "@mantine/notifications";
 
 const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
   const [checked, setChecked] = useState(true);
@@ -33,6 +34,17 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
     dispatch(itemPriceCalc(e));
   };
 
+  // remove item from cart
+  const RemoveItem = (id) => {
+    dispatch(removeItem(id));
+    notifications.show({
+      title: "Removed successfully!",
+      message: `${name}, Weight: ${weight}kg`,
+      color: "red",
+    });
+  };
+
+  //set weight
   useEffect(() => {
     {
       weight === 12 ? setChecked(true) : setChecked(false);
@@ -106,7 +118,9 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
         </td>
         <td className="py-5">
           <MdDelete
-            onClick={() => dispatch(removeItem(id))}
+            onClick={() => {
+              RemoveItem(id);
+            }}
             className="text-2xl cursor-pointer hover-red"
           />
         </td>

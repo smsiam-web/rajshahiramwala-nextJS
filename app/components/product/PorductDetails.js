@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 
 const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
   const placeOrder = (values) => {
-    console.log(values);
+    // console.log(values);
   };
 
   return (

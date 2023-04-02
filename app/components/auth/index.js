@@ -54,7 +54,6 @@ const Auth = () => {
       })
       .catch((error) => {
         alert(error.message);
-        console.log(error);
       });
   };
 
@@ -112,7 +111,7 @@ const Auth = () => {
             <h1
               className={`${
                 isLogin ? "text-slate-700" : "text-slate-400"
-              } cursor-pointer`}
+              } cursor-pointer text-3xl md:text-4xl`}
               onClick={() => setIsLogin(true)}
             >
               login
@@ -120,7 +119,7 @@ const Auth = () => {
             <h1
               className={`${
                 !isLogin ? "text-slate-700" : "text-slate-400"
-              } cursor-pointer`}
+              } cursor-pointer text-3xl md:text-4xl`}
               onClick={() => setIsLogin(false)}
             >
               register

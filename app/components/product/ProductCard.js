@@ -10,15 +10,15 @@ import {
   removeItem,
   selectItems,
 } from "@/app/redux/slices/basketSlice";
+import { notifications } from "@mantine/notifications";
 
 const ProductCard = ({ product }) => {
-  const { id, name, image, price, oldPrice, rating, category, stock } = product;
+  const { id, name, image, price, oldPrice, rating, category, stock, weight } =
+    product;
 
   // redux setup
   const cartItems = useSelector(selectItems);
   const dispatch = useDispatch();
-
-  console.log(cartItems.length);
 
   // check item exists
   const checkItemExists = (id) => {
@@ -34,11 +34,20 @@ const ProductCard = ({ product }) => {
         quantity: 1,
       })
     );
+    notifications.show({
+      title: "Add to cart successfully",
+      message: `${name}, Weight: ${weight}kg`,
+    });
   };
 
   // remove from basket
   const removeItems = (id) => {
     dispatch(removeItem(id));
+    notifications.show({
+      title: "Removed successfully!",
+      message: `${name}, Weight: ${weight}kg`,
+      color: "red",
+    });
   };
 
   const offcalc = () => {
@@ -57,7 +66,7 @@ const ProductCard = ({ product }) => {
 
       {/* disscunt %  */}
       {oldPrice && !!stock && (
-        <span className="absolute top-2 left-2 bg-orange px-2 mb-2 py-1 text-sm font-bold text-slate-100 rounded-md">
+        <span className="absolute top-2 left-2 bg-orange px-2 mb-2 py-1 text-sm font-bold text-slate-100 rounded-md bg-primary">
           {offcalc()}% Off
         </span>
       )}

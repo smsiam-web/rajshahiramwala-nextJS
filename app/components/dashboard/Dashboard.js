@@ -1,14 +1,15 @@
 import { selectUser } from "@/app/redux/slices/authSlice";
-import { db } from "@/app/utils/firebase";
+import { auth, db } from "@/app/utils/firebase";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { FiShoppingCart, FiTruck } from "react-icons/fi";
-import { MdOutlineDownloadDone, MdOutlinePendingActions } from "react-icons/md";
-import { useRouter } from "next/router";
+import { FiLogOut, FiSettings } from "react-icons/fi";
+import AccountProfile from "./accountInfo/AccountProfile";
+import AccountStatus from "./accountInfo/AccountStatus";
+import AccountAddress from "./accountInfo/AccountAddress";
+import Button from "../shared/Button";
 
 const Dashboard = () => {
   const user = useSelector(selectUser);
-  const router = useRouter();
 
   const [orders, setOrders] = useState([]);
 
@@ -38,77 +39,40 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="md:px-8 md:py-4 bg-gray-50 rounded-md">
-      <div className="relative">
-        <div className="h-2/5">
+    <div className="md:px-8 rounded-md">
+      <div className="py-4 md:py-0">
+        {/* cover image  */}
+        <div className="h-2/5 relative">
           <img
             src="/dash_cover.jpg"
             alt=""
-            className="h-[200px] w-full object-cover rounded-md"
+            className="w-full object-top rounded-md"
           />
         </div>
-        <div className="flex gap-3 py-6 border-b bg-white px-6">
-          <img
-            src={user.image}
-            alt="user_img"
-            className="rounded-full w-[120px] h-[120px] object-cover object-center"
-          />
-          <div className="flex flex-col py-2 gap-1">
-            <h1 className="text-2xl font-bold text-title ">{user.name}</h1>
-            <span className="text-sub-title text-sm">{user.email}</span>
-            <span className="text-sub-title text-sm">
-              {user.billing_details?.phone || "01234 567889"}
-            </span>
-          </div>
-        </div>
+        <AccountProfile />
+
+        <AccountStatus orders={orders} />
         <div className="p-6 grid grid-cols-6 gap-6 bg-white rounded-b-md">
-          <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
-            <div className="flex items-center gap-3">
-              <span className="p-4 text-red-600 bg-red-200 rounded-full text-center">
-                <FiShoppingCart size={20} />
-              </span>
-              <h1 className="text-base flex flex-col font-semibold text-sub-title">
-                Total Order{" "}
-                <span className="text-2xl font-bold text-title">
-                  0{orders.length}
-                </span>
-              </h1>
-            </div>
+          <AccountAddress />
+          <div className="col-span-6 sm:col-span-3">
+            <Button
+              onClick={() => auth.signOut()}
+              icon={<FiSettings size={20} />}
+              title="Update Profile"
+              className={
+                "bg-primary opacity-90 hover:opacity-100 text-white w-full text-sm"
+              }
+            />
           </div>
-          <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
-            <div className="flex items-center gap-3">
-              <span className="p-4 text- text-orange-600 bg-orange-200 rounded-full text-center">
-                <MdOutlinePendingActions size={20} />
-              </span>
-              <h1 className="text-base flex flex-col font-semibold text-sub-title">
-                Pending Order{" "}
-                <span className="text-2xl font-bold text-title">
-                  0{orders.length}
-                </span>
-              </h1>
-            </div>
-          </div>
-          <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
-            <div className="flex items-center gap-3">
-              <span className="p-4 text-indigo-600 bg-indigo-200 rounded-full text-center">
-                <FiTruck size={20} />
-              </span>
-              <h1 className="text-base flex flex-col font-semibold text-sub-title">
-                Processing Order{" "}
-                <span className="text-2xl font-bold text-title">00</span>
-              </h1>
-            </div>
-          </div>
-          <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
-            <div className="flex items-center gap-3">
-              <span className="p-4 text-emerald-600 bg-emerald-200  rounded-full text-center">
-                <MdOutlineDownloadDone size={20} />
-              </span>
-              <h1 className="text-base flex flex-col font-semibold text-sub-title">
-                Complete Order{" "}
-                <span className="text-2xl font-bold text-title">00</span>
-              </h1>
-            </div>
+          <div className="col-span-6 sm:col-span-3">
+            <Button
+              onClick={() => auth.signOut()}
+              icon={<FiLogOut size={20} />}
+              title="Log Out"
+              className={
+                "bg-slate-800 opacity-90 hover:opacity-100 text-white w-full text-sm"
+              }
+            />
           </div>
         </div>
       </div>

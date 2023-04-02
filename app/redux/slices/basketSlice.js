@@ -40,7 +40,6 @@ export const basketSlice = createSlice({
     },
     itemPriceCalc: (state, action) => {
       state.items = state.items.map((item) => {
-        console.log(action.payload.id);
         if (item.id !== action.payload.id) return item;
         // if (item.quantity === 1) return false;
         return {

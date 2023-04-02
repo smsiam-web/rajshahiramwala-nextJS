@@ -7,7 +7,7 @@ import { selectUser } from "@/app/redux/slices/authSlice";
 import UpdateProfile from "@/app/components/update/UpdateProfile";
 import { db } from "@/app/utils/firebase";
 import { useRouter } from "next/router";
-import updateProfile from "@/app/redux/slices/updateProfile";
+import { LoadingOverlay } from "@mantine/core";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(25).required().label("Full name"),
@@ -18,10 +18,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const EditAccount = () => {
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isSpin, setIsSpin] = useState(true);
 
   // place order handler on submit
   const updateAccount = async (values) => {
@@ -49,30 +49,37 @@ const EditAccount = () => {
     );
   };
 
+  setTimeout(() => {
+    setIsSpin(false);
+  }, 400);
+
   return (
     <DashboardLayout>
-      <AppForm
-        initialValues={{
-          // image: [],
-          name: user?.name || "",
-          street_address: user?.billing_details?.street_address || "",
-          phone: user?.billing_details?.phone || "",
-          email: user?.email || "",
-        }}
-        onSubmit={updateAccount}
-        validationSchema={validationSchema}
-      >
-        <div className="md:px-8 md:py-4">
-          <div className="mb-4 md:mb-6">
-            <UpdateProfile />
+      <div className="relative">
+        <LoadingOverlay visible={isSpin} />
+        <AppForm
+          initialValues={{
+            // image: [],
+            name: user?.name || "",
+            street_address: user?.billing_details?.street_address || "",
+            phone: user?.billing_details?.phone || "",
+            email: user?.email || "",
+          }}
+          onSubmit={updateAccount}
+          validationSchema={validationSchema}
+        >
+          <div className="md:px-8 md:py-4">
+            <div className="mb-4 md:mb-6">
+              <UpdateProfile />
+            </div>
+            <FormBtn
+              title={"Update Profile"}
+              onClick={updateAccount}
+              loading={loading}
+            />
           </div>
-          <FormBtn
-            title={"Update Profile"}
-            onClick={updateAccount}
-            loading={loading}
-          />
-        </div>
-      </AppForm>
+        </AppForm>
+      </div>
     </DashboardLayout>
   );
 };

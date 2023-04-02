@@ -60,7 +60,7 @@ const Header = () => {
               </a>
             </Link>
             <Link href="/cart" legacyBehavior>
-              <a href="/cart" className="flex items-center gap-5">
+              <a href="/cart" className="flex items-center gap-5 mr-3 md:mr-0">
                 <div className="relative">
                   <AiOutlineShoppingCart className="text-3xl text-title hover-primary" />
                   <span className="bg-primary rounded text-center absolute px-2 text-sm -right-3 -top-2 font-semibold">
