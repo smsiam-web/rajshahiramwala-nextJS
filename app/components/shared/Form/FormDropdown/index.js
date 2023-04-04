@@ -3,6 +3,7 @@ import { useFormikContext } from "formik";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./FormDropdown.module.css";
+import { ScrollArea, Collapse } from "@mantine/core";
 
 function FormDropdown({
   items,
@@ -41,7 +42,7 @@ function FormDropdown({
   return (
     <>
       <div className={`${styles.formDropdown} mt-4 mb-4 `}>
-        <div className={styles.dropdown}>
+        <div className={`${styles.dropdown} relative`}>
           <div className={styles.dropdown_header} onClick={toggleDropdown}>
             {selectedItem
               ? items.find((item) => item.id === selectedItem)?.[label]
@@ -53,25 +54,32 @@ function FormDropdown({
               alt=""
             />
           </div>
-          <div className={`${styles.dropdown_body} ${isOpen && styles.open}`}>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className={styles.dropdown_item}
-                onClick={(e) => handleItemClick(item.id, item?.value)}
-                id={item[key]}
-              >
-                <span
-                  className={`${styles.dropdown_item_dot} ${
-                    item[key] === selectedItem && styles.selected
-                  }`}
-                >
-                  •{" "}
-                </span>
-                {item[label]}
+          <Collapse
+            in={isOpen}
+            className="absolute bg-white border z-50 w-full text-slate-500"
+          >
+            <ScrollArea h={220} type="scroll" offsetScrollbars>
+              <div>
+                {items.map((item) => (
+                  <div
+                    key={item.id}
+                    className="justify-between py-2 pl-4 transition-colors duration-150 hover:bg-gray-100 text-gray-500 hover:text-green-500 "
+                    onClick={(e) => handleItemClick(item.id, item?.value)}
+                    id={item[key]}
+                  >
+                    <span
+                      className={`${styles.dropdown_item_dot} ${
+                        item[key] === selectedItem && styles.selected
+                      }`}
+                    >
+                      •{" "}
+                    </span>
+                    {item[label]}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </ScrollArea>
+          </Collapse>
         </div>
       </div>
       {touched[name] && (

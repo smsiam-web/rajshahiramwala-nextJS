@@ -21,7 +21,7 @@ const AccountStatus = ({ orders }) => {
         </div>
         <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
           <div className="flex items-center gap-3">
-            <span className="p-4 text- text-orange-600 bg-orange-200 rounded-full text-center">
+            <span className="p-4 text-base text-orange-600 bg-orange-200 rounded-full text-center">
               <MdOutlinePendingActions size={20} />
             </span>
             <h1 className="text-base flex flex-col font-semibold text-sub-title">

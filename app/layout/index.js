@@ -53,6 +53,8 @@ const Layout = ({ children }) => {
     setPage(getPage());
   }, []);
 
+  console.log(router.asPath);
+
   if (page === null) return null;
 
   return (

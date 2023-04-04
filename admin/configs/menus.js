@@ -1,14 +1,16 @@
 import {
   FiUsers,
   FiUser,
-  FiCopy,
   FiCompass,
   FiGift,
   FiSettings,
+  FiLayers,
+  FiShoppingCart,
 } from "react-icons/fi";
 import { RxDashboard } from "react-icons/rx";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { AiOutlineBars } from "react-icons/ai";
+import { ImCreditCard } from "react-icons/im";
 
 export const menus = [
   {
@@ -59,10 +61,26 @@ export const menus = [
     title: "Setting",
     secure: true,
   },
+];
+
+//Dashboard Total Card
+export const priceOverview = [
   {
-    pathname: "/",
-    Icon: FiCopy,
-    title: "Outlet",
-    secure: true,
+    title: "today order",
+    Icon: FiLayers,
+    price: 100,
+    bg: "blue",
+  },
+  {
+    title: "this month",
+    Icon: FiShoppingCart,
+    price: 1000,
+    bg: "violet",
+  },
+  {
+    title: "total order",
+    Icon: ImCreditCard,
+    price: 43000,
+    bg: "green",
   },
 ];

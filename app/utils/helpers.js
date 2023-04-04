@@ -15,6 +15,14 @@ export const uuid = () => {
   });
 };
 
+//coma separated number
+export const numberWithCommas = (x) => {
+  x = x.toString() + ".00";
+  var pattern = /(-?\d+)(\d{3})/;
+  while (pattern.test(x)) x = x.replace(pattern, "$1,$2");
+  return x;
+};
+
 // Time ago
 export const timeAgo = (date) => {
   const seconds = Math.floor((new Date() - new Date(date)) / 1000);
