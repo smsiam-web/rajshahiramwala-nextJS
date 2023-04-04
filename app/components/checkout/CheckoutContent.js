@@ -25,6 +25,7 @@ const validationSchema = Yup.object().shape({
   phone: Yup.string().required().label("Phone"),
   email: Yup.string().email().required().label("Email"),
   notes: Yup.string().max(500).label("Order notes"),
+  payment: Yup.string().required().label("Payment Method"),
 });
 
 const CheckoutContent = () => {
@@ -62,7 +63,7 @@ const CheckoutContent = () => {
     const orderData = {
       order_id,
       user_details: { ...user },
-      payment_success: true,
+      // payment: true,
       billing_details: values,
       items: cartItems,
       total: cartTotal,
@@ -85,6 +86,7 @@ const CheckoutContent = () => {
             zip: user?.billing_details?.zip || "",
             phone: user?.billing_details?.phone || "",
             email: user?.billing_details?.email || "",
+            payment: "",
             notes: "",
           }}
           onSubmit={placeOrder}

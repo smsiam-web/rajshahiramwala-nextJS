@@ -25,7 +25,9 @@ const Header = () => {
         {/* Header Top Area */}
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Logo />
+          <Link href={"/"} legacyBehavior>
+            <Logo />
+          </Link>
 
           {/* {Search} */}
           <Search />

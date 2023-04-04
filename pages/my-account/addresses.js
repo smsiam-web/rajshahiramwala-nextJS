@@ -57,9 +57,10 @@ const Adresses = () => {
       .catch((error) => {
         notifications.show({
           title: "Somthing went Wrong",
-          message: "Address information update successfully",
+          message: { error },
           color: "red ",
         });
+        console.log(error);
       });
   };
 

@@ -5,7 +5,7 @@ import { MdOutlineDownloadDone, MdOutlinePendingActions } from "react-icons/md";
 const AccountStatus = ({ orders }) => {
   return (
     <main>
-      <div className="p-6 grid grid-cols-6 gap-6 bg-white rounded-b-md border-b">
+      <div className="p-6 grid grid-cols-6 gap-6 bg-white border-b">
         <div className="col-span-6 sm:col-span-3 p-6 border rounded-md hover:shadow-lg animate-duration">
           <div className="flex items-center gap-3">
             <span className="p-4 text-red-600 bg-red-200 rounded-full text-center">

@@ -9,13 +9,15 @@ const CartTableRow = ({
   name,
   items,
   total,
-  payment_success,
+  payment,
+  billing_details,
   created_at,
 }) => {
   const copy = async (text) => {
     await navigator.clipboard.writeText(text);
     alert("Text copied");
   };
+  console.log(billing_details.payment);
   return (
     <>
       <tr className="border-b md:border-r md:border-l table_row">
@@ -48,10 +50,12 @@ const CartTableRow = ({
         </td>
         <td className="py-5">{timeAgo(created_at)} ago</td>
         <td className="py-5">
-          {payment_success ? (
-            <span className="text-greens">Success</span>
+          {billing_details.payment === "cod" ? (
+            <span className="text-primary uppercase">
+              {billing_details.payment}
+            </span>
           ) : (
-            <span className="text-red-500">Failed</span>
+            <span className="text-green-500">Bkash</span>
           )}
         </td>
         <td className="py-5">

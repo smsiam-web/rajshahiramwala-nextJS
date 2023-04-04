@@ -37,7 +37,7 @@ const AccountAddress = () => {
   }, []);
 
   return (
-    <main className="col-span-6 p-3 px-4 border w-auto rounded-md hover:shadow-lg animate-duration">
+    <main className="col-span-6 p-6 border w-auto rounded-md hover:shadow-lg animate-duration">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold pb-2">Shipping Address</h1>
         <Link href={"/my-account/addresses"} legacyBehavior>
@@ -68,17 +68,17 @@ const AccountAddress = () => {
               </span>
             </div>
 
-            <div className=" bg-indigo-200 p-5 rounded-md text-title lg:tl-4  grid grid-cols-6 gap-3 lg:pl-6">
-              <span className="text-sm col-span-3">
-                ইউঃ<span className=""> {union}</span>
+            <div className=" bg-indigo-200 p-5 rounded-md text-title lg:tl-4 grid grid-cols-6 gap-3 lg:pl-6">
+              <span className="text-sm col-span-6 sm:col-span-3">
+                ইউঃ<span className=""> {union},</span>
               </span>
-              <span className="text-sm col-span-3">
-                উপজেলাঃ<span className=""> {upazila}</span>
+              <span className="text-sm col-span-6 sm:col-span-3">
+                উপজেলাঃ<span className=""> {upazila},</span>
               </span>
-              <span className="text-sm col-span-3">
-                জেলাঃ<span className=""> {city}</span>
+              <span className="text-sm col-span-6 sm:col-span-3">
+                জেলাঃ<span className=""> {city},</span>
               </span>
-              <span className="text-sm col-span-3">
+              <span className="text-sm col-span-6 sm:col-span-3">
                 বিভাগঃ<span className=""> {state}</span>
               </span>
             </div>

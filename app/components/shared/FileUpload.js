@@ -67,7 +67,6 @@ const FileUpload = (props) => {
           },
           { merge: true }
         );
-
         setUrl(url);
         setLoading(false);
       }

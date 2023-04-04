@@ -1,8 +1,8 @@
 import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { FormBtn } from "../shared/Form";
+import { FormBtn, FormInput, FormRadio } from "../shared/Form";
 import OrderItems from "./OrderItems";
 import PaymentMethod from "./PaymentMethod";
 
@@ -43,6 +43,8 @@ const YourOrder = ({ placeOrder, loading }) => {
   const orderItem = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalPrice);
 
+  // console.log(paymentMethod);
+
   return (
     <div>
       <h3 className="text-2xl mb-4 text-sub-title">Your order</h3>
@@ -82,6 +84,12 @@ const YourOrder = ({ placeOrder, loading }) => {
             {PAYMENT?.map((item) => (
               <PaymentMethod key={item.id} {...item} />
             ))}
+            <FormInput
+              editProfile={true}
+              edit_input="hidden"
+              name="payment"
+              placeholder="Payment"
+            />
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import UpdateProfile from "@/app/components/update/UpdateProfile";
 import { db } from "@/app/utils/firebase";
 import { useRouter } from "next/router";
 import { LoadingOverlay } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(25).required().label("Full name"),
@@ -36,17 +37,32 @@ const EditAccount = () => {
   // save billing details in user collection
   const saveUpdateDetails = async (values) => {
     const ref = db.collection("users").doc(user.uid);
-    return ref.set(
-      {
-        name: values.name,
-        billing_details: {
-          full_name: values.name,
-          street_address: values.street_address,
-          phone: values.phone,
+    return ref
+      .set(
+        {
+          name: values.name,
+          billing_details: {
+            full_name: values.name,
+            street_address: values.street_address,
+            phone: values.phone,
+          },
         },
-      },
-      { merge: true }
-    );
+        { merge: true }
+      )
+      .then(() => {
+        notifications.show({
+          title: "Update successfully",
+          message: "Profile update successfully",
+        });
+      })
+      .catch((error) => {
+        notifications.show({
+          title: "Somthing went Wrong",
+          message: { error },
+          color: "red ",
+        });
+        console.log(error);
+      });
   };
 
   setTimeout(() => {

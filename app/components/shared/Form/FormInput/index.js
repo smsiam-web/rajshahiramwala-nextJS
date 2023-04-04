@@ -5,11 +5,13 @@ import { BsFillInfoCircleFill } from "react-icons/bs";
 import { Tooltip } from "@mantine/core";
 
 function FormInput({
+  val,
   name,
   tooltip = false,
   hoverBoxContent,
   type = "text",
   editProfile = false,
+  edit_input,
   ...otherProps
 }) {
   const { setFieldTouched, handleChange, errors, touched, values } =
@@ -17,7 +19,7 @@ function FormInput({
   const [inputType, setInputType] = useState(type);
 
   return (
-    <div className={`${!editProfile ? "mb-4" : "mb-6"}`}>
+    <div className={`${!editProfile ? "mb-4" : ""}`}>
       <div className="relative flex items-center">
         <input
           name={name}
@@ -28,7 +30,7 @@ function FormInput({
           {...otherProps}
           className={`outline-none border-[1px] py-3 text-sm appearance-none opacity-75 text-title px-5 rounded-md w-full border-gray-200 focus:outline-none
         focus:border-primary transition duration-200
-        focus:ring-0 ease-in-out ${!editProfile ? "app_input" : "edit_input"}`}
+        focus:ring-0 ease-in-out ${!editProfile ? "app_input" : edit_input}`}
         />
         {!!tooltip && (
           <div className="ml-2">

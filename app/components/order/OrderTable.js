@@ -37,6 +37,7 @@ const OrderTable = () => {
       })
       .finally(() => setLoading(false));
   }, []);
+  console.log(orders);
 
   return (
     <div className="relative w-full">

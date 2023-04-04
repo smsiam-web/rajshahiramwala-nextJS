@@ -7,6 +7,7 @@ import AccountProfile from "./accountInfo/AccountProfile";
 import AccountStatus from "./accountInfo/AccountStatus";
 import AccountAddress from "./accountInfo/AccountAddress";
 import Button from "../shared/Button";
+import Link from "next/link";
 
 const Dashboard = () => {
   const user = useSelector(selectUser);
@@ -52,17 +53,20 @@ const Dashboard = () => {
         <AccountProfile />
 
         <AccountStatus orders={orders} />
-        <div className="p-6 grid grid-cols-6 gap-6 bg-white rounded-b-md">
+        <div className="py-6 md:p-6  grid grid-cols-6 gap-6 bg-white rounded-b-md">
           <AccountAddress />
           <div className="col-span-6 sm:col-span-3">
-            <Button
-              onClick={() => auth.signOut()}
-              icon={<FiSettings size={20} />}
-              title="Update Profile"
-              className={
-                "bg-primary opacity-90 hover:opacity-100 text-white w-full text-sm"
-              }
-            />
+            <Link href={"/my-account/edit-account"} legacyBehavior>
+              <a href="/my-account/edit-account">
+                <Button
+                  icon={<FiSettings size={20} />}
+                  title="Update Profile"
+                  className={
+                    "bg-primary opacity-90 hover:opacity-100 text-white w-full text-sm"
+                  }
+                />
+              </a>
+            </Link>
           </div>
           <div className="col-span-6 sm:col-span-3">
             <Button
