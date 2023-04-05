@@ -7,7 +7,7 @@ import Percentage from "./Percentage";
 
 const DashBoard = () => {
   return (
-    <main className="h-full overflow-y-auto">
+    <main className="h-full">
       <div>
         <h1 className="text-title text-2xl font-medium">Dashboard Overview</h1>
         <div>
@@ -20,7 +20,7 @@ const DashBoard = () => {
           <div className="py-6 w-full">
             <Percentage />
           </div>
-          <div className="py-6 w-64 md:w-full">
+          <div className="py-6 w-full">
             <RecentOrder />
           </div>
         </div>

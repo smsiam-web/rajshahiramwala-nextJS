@@ -1,9 +1,11 @@
+import React from "react";
+
 const RecentOrder = () => {
   return (
-    <div className="flex flex-col gap-4 w-full overflow-hidden">
+    <div className="grid gap-4 w-full overflow-hidden">
       <h1 className="text-title pb-4 text-2xl font-medium">Recent Order</h1>
       <div className="w-full overflow-x-scroll rounded-md">
-        <table className="w-full whitespace-no-wrap">
+        <table className="w-full whitespace-nowrap table-auto">
           <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-200  bg-gray-100">
             <tr>
               <td className="px-4 py-3 ">Order Time</td>
@@ -25,15 +27,13 @@ const RecentOrder = () => {
                 </span>
               </td>
               <td className="px-4 py-3">
-                {" "}
-                <span className="text-sm">3rfrdg</span>{" "}
+                <span className="text-sm">3rfrdg</span>
               </td>
               <td className="px-4 py-3">
                 <span className="text-sm font-semibold">COD</span>
               </td>
               <td className="px-4 py-3">
-                {" "}
-                <span className="text-sm font-semibold">$33.00</span>{" "}
+                <span className="text-sm font-semibold">$33.00</span>
               </td>
               <td className="px-4 py-3">
                 <span className="font-serif">
