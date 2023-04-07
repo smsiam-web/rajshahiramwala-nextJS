@@ -11,16 +11,20 @@ const DropDownload = () => {
               Drop CSV file
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Button
-              title="Upload"
-              className="bg-gray-300 font-normal w-full h-14"
-            />
-            <div className="w-full">
-              <Button
-                title="Download"
-                className="bg-blue-400 w-full text-white h-14"
-              />
+          <div className="col-span-2 gap-4 md:col-span-2 xl:col-span-1 min-w-full">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="md:col-span-1 col-span-2">
+                <Button
+                  title="Upload"
+                  className="bg-gray-300 font-normal w-full h-14"
+                />
+              </div>
+              <div className="md:col-span-1 col-span-2">
+                <Button
+                  title="Download"
+                  className="bg-blue-400 w-full text-white h-14"
+                />
+              </div>
             </div>
           </div>
         </div>

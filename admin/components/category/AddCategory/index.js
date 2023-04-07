@@ -1,32 +1,18 @@
 import React, { useState } from "react";
-import ProductDetailsFrom from "./ProductDetailsFrom";
 import * as Yup from "yup";
 import { AppForm } from "../../shared/Form";
 import { uuid } from "../../../utils/helpers";
 import FormFooter from "../../shared/FormFooter";
 import FormHeader from "../../shared/FormHeader";
+import CategoryForm from "./CategoryForm";
 
 const validationSchema = Yup.object().shape({
-  sku: Yup.string().label("Product SKU"),
-  product_name: Yup.string().max(100).required().label("Product Title"),
-  slug: Yup.string().required().label("Product slug"),
-  product_description: Yup.string()
-    .max(500)
-    .required()
-    .label("Product details"),
   parent_category: Yup.string().required().label("Select parent category"),
   child_category: Yup.string().required().label("Select child category"),
-  product_type: Yup.string().required().label("Select type"),
-  unit: Yup.number().required().label("Unit"),
-  quantity: Yup.number().required().label("Quantity"),
-  price: Yup.number().required().label("Price"),
-  sale_price: Yup.number().label("Sale price"),
-  product_tag: Yup.string()
-    .required()
-    .label("Product Tag (Write then press enter to add another new tag)"),
+  product_type: Yup.string().label("Select type"),
 });
 
-const AddProduts = ({ onClick }) => {
+const AddCategory = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
 
   // // place product handler on submit
@@ -57,18 +43,9 @@ const AddProduts = ({ onClick }) => {
       <div>
         <AppForm
           initialValues={{
-            sku: "",
-            product_name: "",
-            slug: "",
-            product_description: "",
             parent_category: "",
             child_category: "",
             product_type: "",
-            unit: "",
-            quantity: "",
-            price: "",
-            sale_price: "",
-            product_tag: "",
           }}
           // onSubmit={placeProduct}
           validationSchema={validationSchema}
@@ -77,17 +54,19 @@ const AddProduts = ({ onClick }) => {
             <div className="w-full">
               <FormHeader
                 onClick={onClick}
-                title={"Add Product"}
-                sub_title="Add your product and necessary information from here."
+                title="Add Category"
+                sub_title={
+                  "Add your category and necessary information from here"
+                }
               />
             </div>
 
             <div className="w-full h-[75%] md:h-[80%] overflow-y-scroll py-3 px-6 md:px-4 mb-4">
-              <ProductDetailsFrom />
+              <CategoryForm />
             </div>
 
             <div className="fixed bottom-0 right-0 w-full bg-gray-50">
-              <FormFooter onClick={onClick} acceptBtn="add product" />
+              <FormFooter onClick={onClick} acceptBtn={"Add Category"} />
             </div>
           </div>
         </AppForm>
@@ -96,4 +75,4 @@ const AddProduts = ({ onClick }) => {
   );
 };
 
-export default AddProduts;
+export default AddCategory;

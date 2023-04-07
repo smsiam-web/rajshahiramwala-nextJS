@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../shared/Button";
+import Button from "./Button";
 
-const FormFooter = ({ onClick }) => {
+const FormFooter = ({ onClick, acceptBtn }) => {
   return (
     <div className="py-5 px-6 md:px-4 max-h-full grid grid-cols-4 gap-4">
       <div className="col-span-2">
@@ -13,7 +13,7 @@ const FormFooter = ({ onClick }) => {
       </div>
       <div className="col-span-2">
         <Button
-          title="Add Product"
+          title={acceptBtn}
           className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg text-white transition-all duration-300 w-full"
         />
       </div>

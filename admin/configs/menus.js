@@ -26,7 +26,7 @@ export const menus = [
     secure: true,
   },
   {
-    pathname: "/admin/category",
+    pathname: "/admin/categorys",
     Icon: AiOutlineBars,
     title: "Category",
     secure: true,
