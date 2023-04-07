@@ -4,10 +4,9 @@ import { Modal } from "@mantine/core";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useDisclosure } from "@mantine/hooks";
-import FormFooter from "../shared/FormFooter";
 import Button from "../shared/Button";
 
-const CouponTable = ({ onClick }) => {
+const StaffTable = ({ onClick }) => {
   // modals toggle
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -53,13 +52,11 @@ const CouponTable = ({ onClick }) => {
             <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-200  bg-gray-100">
               <tr>
                 <td className="px-4 py-3 ">id</td>
-                <td className="px-4 py-3 ">Start Date</td>
-                <td className="px-4 py-3 ">End Date</td>
-                <td className="px-4 py-3 ">CAMPAIGNS NAME</td>
-                <td className="px-4 py-3 ">CODE</td>
-                <td className="px-4 py-3 ">PERCENTAGE</td>
-                <td className="px-4 py-3 ">PRODUCT TYPE</td>
-                <td className="px-4 py-3 ">STATUS</td>
+                <td className="px-4 py-3 ">Name</td>
+                <td className="px-4 py-3 ">Email</td>
+                <td className="px-4 py-3 ">Contact</td>
+                <td className="px-4 py-3 ">JOINING DATE</td>
+                <td className="px-4 py-3 ">ROLE</td>
                 <td className="px-4 py-3 ">ACTIONS</td>
               </tr>
             </thead>
@@ -69,36 +66,27 @@ const CouponTable = ({ onClick }) => {
                   <span className="text-sm">2243D</span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="text-sm ">Mar 07, 2023</span>
-                </td>
-                <td className="px-4 py-3">
-                  <span className="text-sm">Mar 10, 2023</span>
-                </td>
-                <td className="px-4 py-3">
                   <span className="text-sm font-semibold">
-                    March Gift Voucher
+                    Syed Siam Chowdhury
+                  </span>
+                </td>
+                <td className="px-4 py-3">
+                  <span className="text-sm ">email@gmail.com</span>
+                </td>
+                <td className="px-4 py-3">
+                  <span className="text-sm font-semibold uppercase">
+                    +880 1722 166051
                   </span>
                 </td>
                 <td className="px-4 py-3">
                   <span className="text-sm font-semibold uppercase">
-                    July26
+                    July 26, 2020
                   </span>
                 </td>
-                <td className="px-4 py-3">
-                  <span className="text-sm flex items-center justify-center font-semibold">
-                    10%
-                  </span>
-                </td>
+
                 <td className="px-4 py-3">
                   <span className="text-sm flex items-center justify-start ">
-                    Food
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <span className="font-serif">
-                    <span className="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-green-600 bg-green-100">
-                      Active
-                    </span>
+                    Admin
                   </span>
                 </td>
 
@@ -131,4 +119,4 @@ const CouponTable = ({ onClick }) => {
   );
 };
 
-export default CouponTable;
+export default StaffTable;

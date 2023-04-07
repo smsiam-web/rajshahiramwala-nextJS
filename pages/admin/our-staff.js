@@ -1,8 +1,13 @@
 import AdminLayout from "@/admin/AdminLayout";
+import OurStaff from "@/admin/components/ourStaff";
 import React from "react";
 
-const OurStaff = () => {
-  return <AdminLayout>OurStaff</AdminLayout>;
+const Ourstaff = () => {
+  return (
+    <AdminLayout>
+      <OurStaff />
+    </AdminLayout>
+  );
 };
 
-export default OurStaff;
+export default Ourstaff;
