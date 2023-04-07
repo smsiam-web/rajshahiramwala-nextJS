@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Button from "./Button";
-import { MdPublishedWithChanges } from "react-icons/md";
+import { MdDone, MdPublishedWithChanges } from "react-icons/md";
 import { db, storage } from "@/app/utils/firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/app/redux/slices/authSlice";
@@ -57,9 +57,11 @@ const FileUpload = (props) => {
         setLoading(false);
         setError(error.message);
       },
+      // get image url from firebase
       async () => {
         const url = await storageRef.getDownloadURL();
         setUrl(url);
+        // console.log(url);
         const ref = db.collection("users").doc(user.uid);
         ref.set(
           {
@@ -67,7 +69,6 @@ const FileUpload = (props) => {
           },
           { merge: true }
         );
-        setUrl(url);
         setLoading(false);
       }
     );
@@ -144,18 +145,21 @@ const FileUpload = (props) => {
                   alt=""
                   className="mt-2 text-center h-auto max-w-[260px]"
                 />
-                {fileName ? <label>{fileName}</label> : ""}
-                {fileSize ? (
+                {fileName && <label>{fileName}</label>}
+                {fileSize && (
                   <>
                     <label className="label label-info">
                       File Size:({fileSize})
                     </label>
-                    <label className="label label-info">
-                      Uploaded: <span>{progress}%</span>
+                    <label className="label label-info flex items-center gap-2">
+                      Uploaded: <span>{progress}%</span>{" "}
+                      {progress === 100 && (
+                        <span className="text-green-600 bg-green-200 p-1 rounded-full">
+                          <MdDone size={14} />
+                        </span>
+                      )}
                     </label>
                   </>
-                ) : (
-                  ""
                 )}
                 <Button
                   className="bg-primary text-white"

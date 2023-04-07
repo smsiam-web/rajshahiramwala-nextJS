@@ -49,6 +49,7 @@ export const timeAgo = (date) => {
   return Math.floor(seconds) + " seconds";
 };
 
+// get asPath
 export const getPage = () => {
   if (typeof window === "undefined") return null;
   const { host } = window.location;

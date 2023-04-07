@@ -25,7 +25,7 @@ const Header = () => {
         {/* Header Top Area */}
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href={"/"} legacyBehavior>
+          <Link href={"/"}>
             <Logo />
           </Link>
 
@@ -52,17 +52,15 @@ const Header = () => {
                 </span>
               </div>
             </a>
-            <Link href="/my-account" legacyBehavior>
-              <a href="/my-account" className="">
-                {!user ? (
-                  <FiUserMinus className="text-3xl text-title hover-primary" />
-                ) : (
-                  <FiUserCheck className="text-3xl text-title hover-primary" />
-                )}
-              </a>
+            <Link href="/my-account">
+              {!user ? (
+                <FiUserMinus className="text-3xl text-title hover-primary" />
+              ) : (
+                <FiUserCheck className="text-3xl text-title hover-primary" />
+              )}
             </Link>
-            <Link href="/cart" legacyBehavior>
-              <a href="/cart" className="flex items-center gap-5 mr-3 md:mr-0">
+            <Link href="/cart">
+              <div className="flex items-center gap-5 mr-3 md:mr-0">
                 <div className="relative">
                   <AiOutlineShoppingCart className="text-3xl text-title hover-primary" />
                   <span className="bg-primary rounded text-center absolute px-2 text-sm -right-3 -top-2 font-semibold">
@@ -78,7 +76,7 @@ const Header = () => {
                     </span>
                   </p>
                 </div>
-              </a>
+              </div>
             </Link>
           </div>
         </div>

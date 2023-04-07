@@ -75,7 +75,7 @@ export const priceOverview = [
     title: "this month",
     Icon: FiShoppingCart,
     price: 1000,
-    bg: "violet",
+    bg: "sky",
   },
   {
     title: "total order",
