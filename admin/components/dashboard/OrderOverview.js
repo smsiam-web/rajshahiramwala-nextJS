@@ -1,7 +1,7 @@
 import React from "react";
 import { FiShoppingCart, FiTruck } from "react-icons/fi";
 import { MdOutlineDownloadDone, MdOutlinePendingActions } from "react-icons/md";
-import Orders from "../orders";
+import Orders from "../order";
 
 const OrderOverview = () => {
   return (

@@ -27,7 +27,6 @@ function Sidebar({ setSidebarActive }) {
           {menus &&
             menus?.map(({ pathname, Icon, title }) => (
               <Link
-                onClick={() => setSidebarActive((old) => !old)}
                 href={pathname}
                 key={pathname}
                 className={

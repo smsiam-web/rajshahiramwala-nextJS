@@ -38,7 +38,7 @@ export const menus = [
     secure: true,
   },
   {
-    pathname: "/admin/admin-orders",
+    pathname: "/admin/orders",
     Icon: FiCompass,
     title: "Orders",
     secure: true,
