@@ -92,7 +92,7 @@ const SearchBy = () => {
               <Button
                 onClick={open}
                 title="Add Product"
-                className="bg-blue-400 text-white w-full h-14"
+                className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg transition-all duration-300 text-white w-full h-14"
                 icon=<AiOutlineAppstoreAdd size={24} />
               />
             </div>

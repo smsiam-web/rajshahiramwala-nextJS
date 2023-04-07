@@ -16,13 +16,13 @@ const DropDownload = () => {
               <div className="md:col-span-1 col-span-2">
                 <Button
                   title="Upload"
-                  className="bg-gray-300 font-normal w-full h-14"
+                  className="bg-gray-200 hover:bg-gray-300 hover:shadow-lg transition-all duration-300 font-medium text-title w-full h-14"
                 />
               </div>
               <div className="md:col-span-1 col-span-2">
                 <Button
                   title="Download"
-                  className="bg-blue-400 w-full text-white h-14"
+                  className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg transition-all duration-300 text-white w-full h-14"
                 />
               </div>
             </div>

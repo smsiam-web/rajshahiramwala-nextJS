@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FileUpload from "@/app/components/shared/FileUpload";
 import { FormDropdown, FormInput } from "../../shared/Form";
 
-const CategoryForm = () => {
+const CouponForm = () => {
   const formInitial = {
     thumbImage: "",
   };
@@ -25,23 +25,42 @@ const CategoryForm = () => {
         recommended="Recommenden size: Square / 🔳"
       />
       <div>
-        <span>Parent Category</span>
-        <FormDropdown
-          name="product_description"
-          placeholder="Select parent category"
-          items={null}
+        <span>Campaign Name</span>
+        <FormInput name="coupon_name" placeholder="Campaign Title" />
+      </div>
+      <div>
+        <span>Campaign Code</span>
+        <FormInput name="coupon_code" placeholder="Campaign code" />
+      </div>
+      <div>
+        <span>Coupon Validity Time</span>
+        <FormInput
+          name="coupon_validity"
+          type="date"
+          placeholder="Coupon Validity Time"
         />
       </div>
       <div>
-        <span>Child Category</span>
-        <FormInput name="child_category" placeholder="Select child category" />
+        <span>Discount Percentage</span>
+        <FormInput
+          name="discount_percentage"
+          placeholder="Discount percentage"
+        />
+      </div>
+      <div>
+        <span>Minimum Amount</span>
+        <FormInput name="minimum_amount" placeholder="Minimum Amount" />
       </div>
       <div>
         <span>Product Type</span>
-        <FormInput name="product_type" placeholder="Select type" />
+        <FormDropdown
+          name="product_type"
+          placeholder="Select type"
+          items={null}
+        />
       </div>
     </div>
   );
 };
 
-export default CategoryForm;
+export default CouponForm;

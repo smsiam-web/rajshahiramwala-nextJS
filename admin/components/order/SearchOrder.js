@@ -41,7 +41,7 @@ const SearchOrder = () => {
           <div className="w-full md:w-56 lg:w-56 xl:w-56">
             <Button
               title="Download all orders"
-              className="bg-blue-400 !py-1 !font-medium text-white w-full h-14"
+              className="bg-blue-400 hover:bg-blue-500 outline-none hover:shadow-xl transition-all duration-300 !py-1 !font-medium text-white w-full h-14"
               icon=<BsCloudDownload size={24} />
             />
           </div>
