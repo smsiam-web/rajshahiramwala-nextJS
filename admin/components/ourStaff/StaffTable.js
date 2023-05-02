@@ -91,7 +91,7 @@ const StaffTable = ({ onClick }) => {
                 </td>
 
                 <td className="px-4 py-3">
-                  <div className="text-sm font-semibold flex justify-between text-sub-title items-center">
+                  <div className="text-sm font-semibold flex justify-start gap-5 text-sub-title items-center">
                     <Tooltip label="Edit" color="blue" withArrow>
                       <span
                         onClick={onClick}

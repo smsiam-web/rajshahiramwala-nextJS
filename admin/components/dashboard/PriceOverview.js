@@ -1,5 +1,5 @@
 import React from "react";
-import { priceOverview } from "../../../admin/configs/menus";
+import { priceOverview } from "../../configs";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { numberWithCommas } from "@/app/utils/helpers";
 

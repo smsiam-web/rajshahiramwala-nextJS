@@ -1,12 +1,11 @@
 import Button from "@/app/components/shared/Button";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { useDisclosure } from "@mantine/hooks";
-import { Drawer } from "@mantine/core";
+
 import React from "react";
 import AddProduts from "./add_products";
 
-const SearchBy = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+const SearchBy = ({ onClick }) => {
   // const [opened, setOpened] = useState(false);
 
   // const open = () => {
@@ -17,21 +16,6 @@ const SearchBy = () => {
 
   return (
     <>
-      <div>
-        <Drawer
-          opened={opened}
-          onClose={close}
-          zIndex={9999999}
-          withCloseButton={false}
-          position="right"
-          size="xl"
-          padding={0}
-        >
-          <div className="">
-            <AddProduts onClick={close} />
-          </div>
-        </Drawer>
-      </div>
       <div className="min-w-0 rounded-lg overflow-hidden bg-gray-50  shadow-xs  mb-5">
         <div className="p-4">
           <div className="py-3 grid gap-4 lg:gap-6 xl:gap-6 md:flex xl:flex">
@@ -90,7 +74,7 @@ const SearchBy = () => {
             </div>
             <div className="w-full md:w-56 lg:w-56 xl:w-56">
               <Button
-                onClick={open}
+                onClick={onClick}
                 title="Add Product"
                 className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg transition-all duration-300 text-white w-full h-14"
                 icon=<AiOutlineAppstoreAdd size={24} />

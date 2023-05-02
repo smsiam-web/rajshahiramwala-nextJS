@@ -56,7 +56,10 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <Link href={`/products`} className="product-card h-[400px] w-[250px]">
+    <Link
+      href={`/products/akldfjadf`}
+      className="product-card h-[400px] w-[250px]"
+    >
       {/* stock out  */}
       {!stock && (
         <span className="absolute top-8 left-0 bg-red-500 px-3 mb-2 py-1 text-base font-bold text-slate-100 rounded-md -rotate-45">

@@ -1,8 +1,13 @@
 import React from "react";
 import AdminLayout from "@/admin/AdminLayout";
+import Setting from "@/admin/components/setting";
 
-const Setting = () => {
-  return <AdminLayout>Setting</AdminLayout>;
+const Settings = () => {
+  return (
+    <AdminLayout>
+      <Setting />
+    </AdminLayout>
+  );
 };
 
-export default Setting;
+export default Settings;

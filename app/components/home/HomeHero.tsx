@@ -18,7 +18,7 @@ const HomeHero = () => {
             // })}
           >
             <div className="flex flex-col justify-between h-full">
-              <div>
+              <div className="">
                 <h2 className="capitalize text-shadow leading-10 text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold pb-6 md:pb-8 lg:pb-10 text-white">
                   রসালো আমের সাথে <br /> সতেজ গ্রীষ্মকাল
                 </h2>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import FileUpload from "@/app/components/shared/FileUpload";
+import FileUpload from "../../shared/FileUP";
 import { AppTextArea, FormDropdown, FormInput } from "../../shared/Form";
+import { PCATEGORY } from "@/admin/configs";
 
 const ProductDetailsFrom = () => {
   const formInitial = {
@@ -24,6 +25,7 @@ const ProductDetailsFrom = () => {
         required
         allowed_extensions={["jpg", "jpeg", "png", "gif"]}
         recommended="Recommenden size: Square / 🔳"
+        fileLocation="products"
       />
       <div>
         <span>Product SKU</span>
@@ -44,9 +46,9 @@ const ProductDetailsFrom = () => {
       <div>
         <span>Parent Category</span>
         <FormDropdown
-          name="product_description"
+          name="parent_category"
           placeholder="Select parent category"
-          items={null}
+          items={PCATEGORY}
         />
       </div>
       <div>
@@ -54,7 +56,7 @@ const ProductDetailsFrom = () => {
         <FormDropdown
           name="child_category"
           placeholder="Select child category"
-          items={null}
+          items={PCATEGORY}
         />
       </div>
       <div>
@@ -62,7 +64,7 @@ const ProductDetailsFrom = () => {
         <FormDropdown
           name="product_type"
           placeholder="Select type"
-          items={null}
+          items={PCATEGORY}
         />
       </div>
       <div>
@@ -79,7 +81,7 @@ const ProductDetailsFrom = () => {
       </div>
       <div>
         <span>Sale Price</span>
-        <FormInput name="price" placeholder="Sale price" />
+        <FormInput name="sale_price" placeholder="Sale price" />
       </div>
       <div className="">
         <span>Product Tag</span>

@@ -11,17 +11,21 @@ const FileUpload = (props) => {
     clearFileUpload();
   }, []);
 
+  console.log(props.fileLocation);
+
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
   const [fileSizeKB, setFileSizeKB] = useState("");
   const [fileType, setFileType] = useState("");
   const [src, setSrc] = useState("");
+  const [fileLocation, setFileLocation] = useState("");
 
   const clearFileUpload = () => {
     setFileName("");
     setFileSize("");
     setFileType("");
     setSrc("");
+    setFileLocation("");
     props.dataChanger("");
   };
 

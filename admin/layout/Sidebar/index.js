@@ -1,6 +1,6 @@
 import styles from "./Sidebar.module.css";
 import { useRouter } from "next/router";
-import { menus } from "../../configs/menus";
+import { menus } from "../../configs";
 import Link from "next/link";
 import Logo from "@/app/components/shared/Logo";
 import { RxCross1 } from "react-icons/rx";

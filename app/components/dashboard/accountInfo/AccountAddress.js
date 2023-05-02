@@ -7,10 +7,13 @@ import Division from "../../../data/Divisions/divisions.json";
 import State from "../../../data/State/districts.json";
 import Upazilas from "../../../data/Upazilas/upazilas.json";
 import Unions from "../../../data/Unions/unions.json";
+import { useRouter } from "next/router";
 
 const AccountAddress = () => {
   // get User from Redux
   const user = useSelector(selectUser);
+  const route = useRouter();
+  console.log(route.asPath);
   //set Hooks
   const [state, setState] = useState("");
   const [city, setCity] = useState("");

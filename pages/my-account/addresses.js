@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { notifications } from "@mantine/notifications";
 import { LoadingOverlay } from "@mantine/core";
+import Button from "@/admin/components/shared/Button";
 
 const validationSchema = Yup.object().shape({
   state: Yup.string().label("Division"),
@@ -70,10 +71,10 @@ const Adresses = () => {
         <LoadingOverlay visible={isSpin} />
         <AppForm
           initialValues={{
-            state: user?.billing_details?.state || "",
-            city: user?.billing_details?.city || "",
-            upazila: user?.billing_details?.upazila || "",
-            union: user?.billing_details?.union || "",
+            state: "",
+            city: "",
+            upazila: "",
+            union: "",
             street_address: user?.billing_details?.street_address || "",
             zip: user?.billing_details?.zip || "",
             phone: user?.billing_details?.phone || "",
@@ -86,11 +87,22 @@ const Adresses = () => {
             <div className="mb-4 md:mb-6">
               <UpdateAddress />
             </div>
-            <FormBtn
-              title={"Update Address"}
-              onClick={updateAddress}
-              loading={loading}
-            />
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <Button
+                  title={"Cancel"}
+                  onClick={() => router.push("/my-account")}
+                  className="bg-blue-500 hover:bg-blue-600 text-white w-full"
+                />
+              </div>
+              <div>
+                <FormBtn
+                  title={"Update Address"}
+                  onClick={updateAddress}
+                  loading={loading}
+                />
+              </div>
+            </div>
           </div>
         </AppForm>
       </div>

@@ -86,7 +86,7 @@ const CategoryItem = () => {
                 </span>
               </td>
               <td className="px-4 py-3">
-                <div className="text-sm font-semibold flex justify-between text-sub-title items-center">
+                <div className="text-sm font-semibold flex justify-start gap-5 text-sub-title items-center">
                   <Tooltip label="Edit" color="blue" withArrow>
                     <span className="cursor-pointer hover:text-blue-400">
                       <FiEdit size={16} />
@@ -158,7 +158,7 @@ const CategoryItem = () => {
                 </span>
               </td>
               <td className="px-4 py-3">
-                <div className="text-sm font-semibold flex justify-between text-sub-title items-center">
+                <div className="text-sm font-semibold flex justify-start gap-5 text-sub-title items-center">
                   <Tooltip label="Edit" color="blue" withArrow>
                     <span className="cursor-pointer hover:text-blue-400">
                       <FiEdit size={16} />

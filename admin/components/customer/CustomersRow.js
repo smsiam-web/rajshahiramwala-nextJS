@@ -51,7 +51,7 @@ const CustomersRow = () => {
                 </span>
               </td>
               <td className="px-4 py-3">
-                <div className="text-sm font-semibold flex gap-4 justify-start text-sub-title items-center">
+                <div className="text-sm font-semibold flex gap-5 justify-start text-sub-title items-center">
                   <Tooltip label="Views Order" color="blue" withArrow>
                     <Link href={"/admin/customers/order-id?=sdfjkhd"}>
                       <span className="cursor-pointer hover:text-blue-400">

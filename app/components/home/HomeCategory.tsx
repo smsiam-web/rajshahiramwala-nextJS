@@ -41,7 +41,11 @@ const HomeCategory = () => {
   return (
     <section className="bg-white">
       <div className="container py-14">
-        <SectionHeading title="Browse by Category" link="All Categories" />
+        <SectionHeading
+          title="Browse by Category"
+          link="All Categories"
+          sliderBtn={true}
+        />
         {/* Category slider */}
         <div className="flex pt-8 items-center gap-7 overflow-x-auto mt-5 pb-14 pl-2 -ml-2 no-scrollbar">
           {CATEGORY.map((item, index) => (

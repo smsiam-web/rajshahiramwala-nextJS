@@ -10,7 +10,11 @@ const TodaysDeals = () => {
   return (
     <section className="bg-white">
       <div className="container">
-        <SectionHeading title="Top Saver Today" link="All Offers" />
+        <SectionHeading
+          title="Top Saver Today"
+          link="All Offers"
+          sliderBtn={true}
+        />
         {/* Category slider */}
         <div className="flex pt-8 items-center justify-items-stretch gap-7 overflow-x-auto mt-5 pb-14 pl-2 -ml-2 no-scrollbar">
           {Products.map((product) => (

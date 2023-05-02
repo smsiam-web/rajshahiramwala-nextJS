@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ProductDetailsFrom from "./ProductDetailsFrom";
 import * as Yup from "yup";
-import { AppForm } from "../../shared/Form";
+import { AppForm, FormBtn } from "../../shared/Form";
 import { uuid } from "../../../utils/helpers";
-import FormFooter from "../../shared/FormFooter";
 import FormHeader from "../../shared/FormHeader";
+import { db, timestamp } from "@/app/utils/firebase";
+import Button from "../../shared/Button";
+import { useRouter } from "next/router";
 
 const validationSchema = Yup.object().shape({
   sku: Yup.string().label("Product SKU"),
@@ -15,9 +17,8 @@ const validationSchema = Yup.object().shape({
     .required()
     .label("Product details"),
   parent_category: Yup.string().required().label("Select parent category"),
-  child_category: Yup.string().required().label("Select child category"),
   product_type: Yup.string().required().label("Select type"),
-  unit: Yup.number().required().label("Unit"),
+  unit: Yup.string().required().label("Unit"),
   quantity: Yup.number().required().label("Quantity"),
   price: Yup.number().required().label("Price"),
   sale_price: Yup.number().label("Sale price"),
@@ -28,30 +29,36 @@ const validationSchema = Yup.object().shape({
 
 const AddProduts = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  // // place product handler on submit
-  // const placeProduct = async (values) => {
-  //   setLoading(true);
-  //   await saveProductDetails(values);
-  //   const product_id = uuid();
-  //   router.push("/sucess?product_id=" + product_id);
-  //   await placeOrderHandler(values, product_id);
-  //   dispatch(updateBasket([]));
-  //   setLoading(false);
+  // place product handler on submit
+  const placeProduct = async (values) => {
+    setLoading(true);
+    const product_id = uuid();
+    // await saveProductDetails(values, product_id);
+    await placeProductHandler(values, product_id);
+    router.push("/admin/products/id=?" + product_id);
+    setLoading(false);
+  };
+
+  // save billing details in user collection
+  // const saveProductDetails = async (values, product_id) => {
+  //   const ref = db.collection("products").doc(product_id);
+  //   return ref.set(
+  //     {
+  //       product_details: values,
+  //     },
+  //     { merge: true }
+  //   );
   // };
-  // // save order details on firebase database
-  // const placeOrderHandler = async (values, product_id) => {
-  //   const productData = {
-  //     order_id,
-  //     user_details: { ...user },
-  //     // payment: true,
-  //     billing_details: values,
-  //     items: cartItems,
-  //     total: cartTotal,
-  //     created_at: timestamp,
-  //   };
-  //   await db.collection("products").doc(product_id).set(productData);
-  // };
+  // save order details on firebase database
+  const placeProductHandler = async (values, product_id) => {
+    await db.collection("products").doc(product_id).set({
+      product_details: values,
+      isPublished: false,
+      timestamp,
+    });
+  };
   return (
     <main>
       <div>
@@ -62,7 +69,6 @@ const AddProduts = ({ onClick }) => {
             slug: "",
             product_description: "",
             parent_category: "",
-            child_category: "",
             product_type: "",
             unit: "",
             quantity: "",
@@ -70,7 +76,7 @@ const AddProduts = ({ onClick }) => {
             sale_price: "",
             product_tag: "",
           }}
-          // onSubmit={placeProduct}
+          onSubmit={placeProduct}
           validationSchema={validationSchema}
         >
           <div className="h-screen relative">
@@ -87,7 +93,23 @@ const AddProduts = ({ onClick }) => {
             </div>
 
             <div className="fixed bottom-0 right-0 w-full bg-gray-50">
-              <FormFooter onClick={onClick} acceptBtn="add product" />
+              <div className="py-5 px-6 md:px-4 max-h-full grid grid-cols-4 gap-4">
+                <div className="col-span-2">
+                  <Button
+                    onClick={onClick}
+                    title="Cancel"
+                    className="bg-red-100 hover:bg-red-200 hover:shadow-lg text-red-600 transition-all duration-300 w-full"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <FormBtn
+                    loading={loading}
+                    onClick={placeProduct}
+                    title="Add Product"
+                    className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg text-white transition-all duration-300 w-full"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </AppForm>
