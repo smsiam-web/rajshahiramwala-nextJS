@@ -3,7 +3,7 @@ import SectionHeading from "../../shared/SectionHeading";
 import Card from "./Card";
 import { setBackgroundImage } from "@/app/utils/helpers";
 
-const Shops = () => {
+const Products = () => {
   return (
     <section
       className="bg-white"
@@ -14,7 +14,7 @@ const Shops = () => {
           <SectionHeading
             title="Shop"
             link="All Products"
-            path="products"
+            path="shop"
             bg="white"
           />
         </div>
@@ -37,4 +37,4 @@ const Shops = () => {
   );
 };
 
-export default Shops;
+export default Products;

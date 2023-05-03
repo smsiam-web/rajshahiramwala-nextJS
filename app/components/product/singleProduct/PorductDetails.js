@@ -1,14 +1,14 @@
-import FooterCard from "../FooterCard";
+import FooterCard from "../../FooterCard";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FaAngleDoubleRight, FaMinus } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 import Link from "next/link";
-import ProductMoreInfo from "./ProductMoreInfo";
-import Button from "../shared/Button";
-import Breadcrumb from "../shared/Breadcrumb";
+import ProductMoreInfo from "../ProductMoreInfo";
+import Button from "../../shared/Button";
+import Breadcrumb from "../../shared/Breadcrumb";
 import * as Yup from "yup";
-import { AppForm, FormBtn } from "../shared/Form";
-import QuantityFrom from "./QuantityFrom";
+import { AppForm, FormBtn } from "../../shared/Form";
+import QuantityFrom from "../QuantityFrom";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First name"),
@@ -22,7 +22,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
   };
 
   return (
-    <div className="py-6 sm:py-12 bg-[#F5F5F5]">
+    <div className="py-6 sm:py-12 ">
       <div className="container">
         <div className="px-6 sm:px-10 py-8 sm:py-14 bg-white rounded-2xl">
           <div className="flex flex-wrap lg:flex-row flex-col lg:gap-0 gap-7">

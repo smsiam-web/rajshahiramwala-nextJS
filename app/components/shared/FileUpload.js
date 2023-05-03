@@ -11,8 +11,6 @@ const FileUpload = (props) => {
     clearFileUpload();
   }, []);
 
-  console.log(props.fileLocation);
-
   const [fileName, setFileName] = useState("");
   const [fileSize, setFileSize] = useState("");
   const [fileSizeKB, setFileSizeKB] = useState("");

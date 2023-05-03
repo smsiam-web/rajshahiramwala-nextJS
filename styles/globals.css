@@ -136,3 +136,25 @@ p {
     @apply flex flex-col justify-between items-start cursor-pointer p-2 sm:p-3 md:p-4 xl:p-5 rounded hover:card-shadow transition-all duration-500 relative border border-gray-100 hover:border-gray-200;
   }
 }
+
+/* date input mantain  */
+.mantine-13qt2rl {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.mantine-DateInput-input {
+  outline: 2px solid transparent !important;
+  border-width: 1px;
+  outline-offset: 2px !important;
+  padding: 22px 20px;
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.75;
+  appearance: none;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}

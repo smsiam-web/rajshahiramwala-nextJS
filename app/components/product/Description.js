@@ -196,7 +196,7 @@ const BODY = {
     },
   ],
   entityMap: {
-    "0": {
+    0: {
       type: "LINK",
       mutability: "MUTABLE",
       data: {
@@ -204,19 +204,19 @@ const BODY = {
         targetOption: "_self",
       },
     },
-    "1": {
+    1: {
       type: "LINK",
       mutability: "MUTABLE",
       data: {
-        url: "http://localhost:3000/checkout",
+        url: "/checkout",
         targetOption: "_self",
       },
     },
-    "2": {
+    2: {
       type: "LINK",
       mutability: "MUTABLE",
       data: {
-        url: "http://localhost:3000/checkout",
+        url: "/checkout",
         targetOption: "_self",
       },
     },

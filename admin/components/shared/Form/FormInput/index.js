@@ -19,7 +19,7 @@ function FormInput({
   const [inputType, setInputType] = useState(type);
 
   return (
-    <div className={`${!editProfile ? "mt-2 mb-5" : "mb-4"}`}>
+    <div className={`${!editProfile ? "mb-4" : ""}`}>
       <div className="relative flex items-center">
         <input
           name={name}

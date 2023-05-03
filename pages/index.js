@@ -4,7 +4,7 @@ import React from "react";
 import HomeCategory from "../app/components/home/HomeCategory";
 import HomeHero from "../app/components/home/HomeHero";
 import { getPage, getPageServer } from "../app/utils/helpers";
-import Shop from "@/app/components/home/shop";
+import Products from "@/app/components/home/products";
 // import AdmainMain from "@/admin";
 
 const Home = ({ page }) => {
@@ -15,7 +15,7 @@ const Home = ({ page }) => {
       <HomeHero />
       <HomeCategory />
       <TodaysDeals />
-      <Shop />
+      <Products />
       <HomePosters />
     </>
   );

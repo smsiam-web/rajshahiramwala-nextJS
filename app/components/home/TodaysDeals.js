@@ -7,6 +7,8 @@ import { selectProduct } from "@/app/redux/slices/productSlice";
 const TodaysDeals = () => {
   const Products = useSelector(selectProduct);
 
+  console.log(Products[0]);
+
   return (
     <section className="bg-white">
       <div className="container">
@@ -17,9 +19,13 @@ const TodaysDeals = () => {
         />
         {/* Category slider */}
         <div className="flex pt-8 items-center justify-items-stretch gap-7 overflow-x-auto mt-5 pb-14 pl-2 -ml-2 no-scrollbar">
-          {Products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {Products &&
+            Products?.map(
+              (product) =>
+                product?.isPublished && (
+                  <ProductCard key={product.id} product={product} />
+                )
+            )}
         </div>
       </div>
     </section>

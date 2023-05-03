@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductDetailsFrom from "./ProductDetailsFrom";
 import * as Yup from "yup";
 import { AppForm, FormBtn } from "../../shared/Form";
@@ -7,17 +7,22 @@ import FormHeader from "../../shared/FormHeader";
 import { db, timestamp } from "@/app/utils/firebase";
 import Button from "../../shared/Button";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectProductImg } from "@/app/redux/slices/updateProductImg";
+import { filterProps } from "framer-motion";
+import { selectUpdateProductId } from "@/app/redux/slices/updateProductId";
 
 const validationSchema = Yup.object().shape({
   sku: Yup.string().label("Product SKU"),
-  product_name: Yup.string().max(100).required().label("Product Title"),
-  slug: Yup.string().required().label("Product slug"),
+  product_name: Yup.string().max(200).required().label("Product Title"),
+  slug: Yup.string().required().label("২০০-৩০০"),
   product_description: Yup.string()
     .max(500)
     .required()
     .label("Product details"),
   parent_category: Yup.string().required().label("Select parent category"),
   product_type: Yup.string().required().label("Select type"),
+  available_from: Yup.date().required().label("Select Date"),
   unit: Yup.string().required().label("Unit"),
   quantity: Yup.number().required().label("Quantity"),
   price: Yup.number().required().label("Price"),
@@ -29,16 +34,44 @@ const validationSchema = Yup.object().shape({
 
 const AddProduts = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState(null);
   const router = useRouter();
+
+  const product_details = product && product[0]?.product_details;
+
+  console.log(product);
+
+  const productImg = useSelector(selectProductImg);
+  const ProductID = useSelector(selectUpdateProductId);
+  const ID = "b99ffeca77b2532e";
 
   // place product handler on submit
   const placeProduct = async (values) => {
     setLoading(true);
+
+    // offer calC
+    const price = parseInt(values.price);
+    const sale_price = parseInt(values.sale_price);
+    const off = ((price - sale_price) / price) * 100;
+    const off_price = Math.round(off);
+
     const product_id = uuid();
+
     // await saveProductDetails(values, product_id);
-    await placeProductHandler(values, product_id);
+    await placeProductHandler(values, product_id, off_price);
     router.push("/admin/products/id=?" + product_id);
     setLoading(false);
+  };
+
+  // save order details on firebase database
+  const placeProductHandler = async (values, product_id, off_price) => {
+    await db.collection("products").doc(product_id).set({
+      productImg,
+      product_details: values,
+      isPublished: false,
+      off_price,
+      timestamp,
+    });
   };
 
   // save billing details in user collection
@@ -51,30 +84,24 @@ const AddProduts = ({ onClick }) => {
   //     { merge: true }
   //   );
   // };
-  // save order details on firebase database
-  const placeProductHandler = async (values, product_id) => {
-    await db.collection("products").doc(product_id).set({
-      product_details: values,
-      isPublished: false,
-      timestamp,
-    });
-  };
+
   return (
     <main>
       <div>
         <AppForm
           initialValues={{
-            sku: "",
-            product_name: "",
-            slug: "",
-            product_description: "",
-            parent_category: "",
-            product_type: "",
-            unit: "",
-            quantity: "",
-            price: "",
-            sale_price: "",
-            product_tag: "",
+            sku: product_details?.sku || "",
+            product_name: product_details?.product_name || "",
+            slug: product_details?.slug || "",
+            product_description: product_details?.product_description || "",
+            parent_category: product_details?.parent_category || "",
+            product_type: product_details?.product_type || "",
+            unit: product_details?.unit || "",
+            quantity: product_details?.quantity || "",
+            price: product_details?.price || "",
+            sale_price: product_details?.sale_price || "",
+            available_from: product_details?.available_from || "",
+            product_tag: product_details?.product_tag || "",
           }}
           onSubmit={placeProduct}
           validationSchema={validationSchema}
@@ -105,7 +132,7 @@ const AddProduts = ({ onClick }) => {
                   <FormBtn
                     loading={loading}
                     onClick={placeProduct}
-                    title="Add Product"
+                    title={ID ? "Update Product" : "Add Product"}
                     className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg text-white transition-all duration-300 w-full"
                   />
                 </div>

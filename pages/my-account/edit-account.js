@@ -75,7 +75,6 @@ const EditAccount = () => {
         <LoadingOverlay visible={isSpin} />
         <AppForm
           initialValues={{
-            // image: [],
             name: user?.name || "",
             street_address: user?.billing_details?.street_address || "",
             phone: user?.billing_details?.phone || "",

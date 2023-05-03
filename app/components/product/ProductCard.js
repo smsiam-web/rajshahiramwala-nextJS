@@ -13,8 +13,7 @@ import {
 import { notifications } from "@mantine/notifications";
 
 const ProductCard = ({ product }) => {
-  const { id, name, image, price, oldPrice, rating, category, stock, weight } =
-    product;
+  const { id, off_price, productImg, product_details } = product;
 
   // redux setup
   const cartItems = useSelector(selectItems);
@@ -36,7 +35,7 @@ const ProductCard = ({ product }) => {
     );
     notifications.show({
       title: "Add to cart successfully",
-      message: `${name}, Weight: ${weight}kg`,
+      message: `${product_details.product_name}, Weight: 12kg`,
     });
   };
 
@@ -45,49 +44,37 @@ const ProductCard = ({ product }) => {
     dispatch(removeItem(id));
     notifications.show({
       title: "Removed successfully!",
-      message: `${name}, Weight: ${weight}kg`,
+      message: `${product_details.product_name}, Weight: 12kg`,
       color: "red",
     });
   };
 
-  const offcalc = () => {
-    const off = ((oldPrice - price) / oldPrice) * 100;
-    return Math.round(off);
-  };
-
   return (
-    <Link
-      href={`/products/akldfjadf`}
-      className="product-card h-[400px] w-[250px]"
-    >
+    <Link href={`/shop/${id}`} className="product-card h-[400px] w-[250px]">
       {/* stock out  */}
-      {!stock && (
+      {false && (
         <span className="absolute top-8 left-0 bg-red-500 px-3 mb-2 py-1 text-base font-bold text-slate-100 rounded-md -rotate-45">
           Stock Out.!
         </span>
       )}
 
       {/* disscunt %  */}
-      {oldPrice && !!stock && (
+      {product_details.price && (
         <span className="absolute top-2 left-2 bg-orange px-2 mb-2 py-1 text-sm font-bold text-slate-100 rounded-md bg-primary">
-          {offcalc()}% Off
+          {off_price}% Off
         </span>
       )}
       <div className="rounded-md flex flex-col justify-center overflow-hidden">
         {/* card image  */}
-        <Image
-          alt="mango"
-          src={`/images/products/${image}`}
-          width={270}
-          height={270}
-          // objectFit="contain"
-        />
+        <img alt="mango" src={productImg?.urls} />
       </div>
       {/* card text  */}
       <div className="flex flex-col gap-1 w-full mt-2">
-        <h3 className="text-sm font-semibold text-mid">{category}</h3>
+        <h3 className="text-sm font-semibold text-mid">
+          {product_details.product_type}
+        </h3>
         <h1 className="text-xl font-semibold text-title truncate w-[300px]">
-          {name}
+          {product_details.product_name}
         </h1>
         <div className="flex items-center gap-1">
           <span className="flex px-1 gap-1 text-primary text-sm">
@@ -97,7 +84,7 @@ const ProductCard = ({ product }) => {
             <BsStarFill />
             <BsStarHalf />
           </span>
-          <span className="text-sub-mid text-sm">{rating}/5</span>
+          <span className="text-sub-mid text-sm">{1}/5</span>
           <span className="text-sub-title text-sm">(169)</span>
         </div>
         <div className="flex items-center justify-between">
@@ -108,16 +95,16 @@ const ProductCard = ({ product }) => {
             <div className="flex items-center gap-1">
               <span
                 className={`flex tracking-tighter items-center ${
-                  oldPrice ? "text-orange" : "text-greens"
+                  product_details.price ? "text-orange" : "text-greens"
                 } font-bold text-lg`}
               >
                 <TbCurrencyTaka size={20} />
-                {price}
+                {product_details.sale_price}
               </span>
-              {oldPrice && (
+              {product_details.price && (
                 <span className="flex tracking-tighter items-center text-gray-400 font-bold text-base line-through">
                   <TbCurrencyTaka size={18} />
-                  {oldPrice}
+                  {product_details.price}
                 </span>
               )}
             </div>

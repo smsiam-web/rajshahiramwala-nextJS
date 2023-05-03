@@ -1,32 +1,17 @@
 import React, { useState } from "react";
-import FileUpload from "../../shared/FileUP";
 import { AppTextArea, FormDropdown, FormInput } from "../../shared/Form";
-import { PCATEGORY } from "@/admin/configs";
+import { PCATEGORY, CCATEGORY, TCATEGORY } from "@/admin/configs";
+import FileUpload from "../../shared/FileUP";
 
 const ProductDetailsFrom = () => {
-  const formInitial = {
-    thumbImage: "",
-  };
-  const [formData, setFormData] = useState(formInitial);
-  const dataChangerThumbnail = (value) => {
-    setFormData({ ...formData, thumbImage: value });
-  };
-
   return (
     <div className="max-h-full">
-      <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
-        Photo
-      </label>
-      <FileUpload
-        name="thumbImage"
-        dataChanger={(value) => dataChangerThumbnail(value)}
-        type="image"
-        prev_src={"localhost:8001/" + formData?.thumbImage}
-        required
-        allowed_extensions={["jpg", "jpeg", "png", "gif"]}
-        recommended="Recommenden size: Square / 🔳"
-        fileLocation="products"
-      />
+      <div>
+        <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
+          Photo
+        </label>
+        <FileUpload fileLocation={"products"} passUrl />
+      </div>
       <div>
         <span>Product SKU</span>
         <FormInput name="sku" placeholder="Product SKU" />
@@ -37,7 +22,7 @@ const ProductDetailsFrom = () => {
       </div>
       <div>
         <span>Product Slug</span>
-        <FormInput name="slug" placeholder="Product slug" />
+        <FormInput name="slug" placeholder="(২০০-৩০০) গ্রাম" />
       </div>
       <div>
         <span>Product Description</span>
@@ -56,7 +41,7 @@ const ProductDetailsFrom = () => {
         <FormDropdown
           name="child_category"
           placeholder="Select child category"
-          items={PCATEGORY}
+          items={CCATEGORY}
         />
       </div>
       <div>
@@ -64,7 +49,15 @@ const ProductDetailsFrom = () => {
         <FormDropdown
           name="product_type"
           placeholder="Select type"
-          items={PCATEGORY}
+          items={TCATEGORY}
+        />
+      </div>
+      <div>
+        <span>Delivery Date</span>
+        <FormInput
+          type="date"
+          name="available_from"
+          placeholder="Available From"
         />
       </div>
       <div>

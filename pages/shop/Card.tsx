@@ -7,7 +7,7 @@ import { Rating } from "@mantine/core";
 const ProductCard = () => {
   return (
     <div className="product-card group box-border overflow-hidden flex rounded-md shadow-sm p flex-col items-center relative">
-      <Link href={`/products/id=?fjakldfl`} className="">
+      <Link href={`/shop/id=?fjakldfl`} className="">
         {/* stock out  */}
         {false && (
           <span className="absolute top-8 left-0 bg-red-500 px-3 mb-2 py-1 text-xs sm:text-sm font-bold text-slate-100 rounded-md -rotate-45">

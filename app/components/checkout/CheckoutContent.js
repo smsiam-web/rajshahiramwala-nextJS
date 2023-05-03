@@ -86,7 +86,7 @@ const CheckoutContent = () => {
             zip: user?.billing_details?.zip || "",
             phone: user?.billing_details?.phone || "",
             email: user?.billing_details?.email || "",
-            payment: "",
+            payment: true,
             notes: "",
           }}
           onSubmit={placeOrder}

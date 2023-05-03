@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import Breadcrumb from "@/app/components/shared/Breadcrumb";
 
-const Products = () => {
+const Shop = () => {
   return (
     <>
       <main>
@@ -41,4 +41,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Shop;

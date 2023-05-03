@@ -11,11 +11,19 @@ import {
 } from "@/app/redux/slices/basketSlice";
 import { notifications } from "@mantine/notifications";
 
-const CartTableMobile = ({ id, name, image, price, quantity, weight }) => {
+const CartTableMobile = ({
+  id,
+  quantity,
+  weight = 12,
+  productImg,
+  product_details,
+}) => {
   const [checked, setChecked] = useState(true);
 
+  const { product_name, sale_price } = product_details;
+
   //priceCalc
-  const priceCalc = weight * price;
+  const priceCalc = weight * sale_price;
 
   // redux setup
   const dispatch = useDispatch();
@@ -39,7 +47,7 @@ const CartTableMobile = ({ id, name, image, price, quantity, weight }) => {
     dispatch(removeItem(id));
     notifications.show({
       title: "Removed successfully!",
-      message: `${name}, Weight: ${weight}kg`,
+      message: `${product_name}, Weight: ${weight}kg`,
       color: "red",
     });
   };
@@ -55,14 +63,14 @@ const CartTableMobile = ({ id, name, image, price, quantity, weight }) => {
     <div className="md:hidden flex gap-3 mb-5 border-b pb-5">
       <div>
         <img
-          src={`/images/products/${image}`}
+          src={productImg.urls}
           loading="lazy"
           alt=""
           className="w-20 h-20 object-cover rounded-md"
         />
       </div>
       <div className="flex-grow">
-        <h1 className="text-lg font-bold text-title">{name}</h1>
+        <h1 className="text-lg font-bold text-title">{product_name}</h1>
         <div className="text-sm text-gray-500 flex flex-col gap-[2px] px-2">
           <span className="text-base">Weight:</span>
           <div className="flex items-center gap-1">
@@ -92,10 +100,17 @@ const CartTableMobile = ({ id, name, image, price, quantity, weight }) => {
             <p className="text-sm text-gray-500 flex items-center">
               Price:
               <span className="text-sub-title font-semibold">
-                <span className="flex items-center text-center">
-                  <TbCurrencyTaka size={18} />
-                  {priceCalc}
-                </span>
+                <div className="flex items-center gap-1">
+                  <span className="flex items-center text-center">
+                    <TbCurrencyTaka size={18} />
+                    {priceCalc}
+                  </span>
+                  <span className="flex items-center text-center font-normal">
+                    <span>/ Per kg</span>
+                    <TbCurrencyTaka size={18} />
+                    {sale_price}
+                  </span>
+                </div>
               </span>
             </p>
           </div>

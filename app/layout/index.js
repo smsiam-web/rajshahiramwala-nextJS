@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, removeUser } from "../redux/slices/authSlice";
 import { selectItems, updateBasket } from "../redux/slices/basketSlice";
+import { updateProduct } from "../redux/slices/productSlice";
 import { auth, db } from "../utils/firebase";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -10,6 +11,8 @@ import { getPage } from "../utils/helpers";
 import AdminLayout from "@/admin/layout";
 
 const Layout = ({ children }) => {
+  const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItems);
@@ -32,6 +35,28 @@ const Layout = ({ children }) => {
       }
     });
 
+    // Get orders from firebase
+
+    setLoading(true);
+    const unSub = db
+      .collection("products")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snap) => {
+        const product = [];
+        snap.docs.map((doc) => {
+          product.push({
+            id: doc.id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp.toDate().getTime(),
+          });
+        });
+        dispatch(updateProduct(product));
+      });
+    setLoading(false);
+    return () => {
+      unSub();
+    };
+
     // get cart items from local storage
     const local_items = localStorage.getItem("@CART_ITEMS")
       ? JSON.parse(localStorage.getItem("@CART_ITEMS"))
@@ -52,8 +77,6 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setPage(getPage());
   }, []);
-
-  console.log(router.asPath);
 
   if (page === null) return null;
 

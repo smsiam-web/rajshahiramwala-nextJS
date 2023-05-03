@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 const CartTable = () => {
   const cartItems = useSelector(selectItems);
 
+  console.log(cartItems);
+
   return (
     <div className="my-5">
       <table className="w-full md:table hidden">

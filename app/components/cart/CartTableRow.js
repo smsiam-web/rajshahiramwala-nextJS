@@ -11,11 +11,19 @@ import {
 } from "@/app/redux/slices/basketSlice";
 import { notifications } from "@mantine/notifications";
 
-const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
+const CartTableRow = ({
+  id,
+  quantity,
+  weight = 12,
+  productImg,
+  product_details,
+}) => {
+  const { product_name, sale_price } = product_details;
+
   const [checked, setChecked] = useState(true);
 
   //priceCalc
-  const priceCalc = weight * price;
+  const priceCalc = weight * sale_price;
 
   // redux setup
   const dispatch = useDispatch();
@@ -39,7 +47,7 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
     dispatch(removeItem(id));
     notifications.show({
       title: "Removed successfully!",
-      message: `${name}, Weight: ${weight}kg`,
+      message: `${product_name}, Weight: ${weight}kg`,
       color: "red",
     });
   };
@@ -56,7 +64,7 @@ const CartTableRow = ({ id, name, image, price, quantity, weight }) => {
       <tr className="border-b md:border-r md:border-l table_row">
         <td className="py-5 pl-3">
           <img
-            src={`/images/products/${image}`}
+            src={productImg?.urls}
             loading="lazy"
             alt=""
             className="w-20 h-20 object-cover rounded-md"

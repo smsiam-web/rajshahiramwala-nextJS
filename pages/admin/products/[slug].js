@@ -1,3 +1,4 @@
+import ProductDetails from "@/app/components/product/singleProduct/PorductDetails";
 import Link from "next/link";
 import React from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -11,7 +12,7 @@ const SingleProduct = () => {
           <span>Back</span>
         </div>
       </Link>
-      <h1>SingleProduct</h1>
+      <ProductDetails />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const AdminWrapper = ({ children }) => {
       <div className={styles.content_wrapper}>
         {sidebarActive && <Sidebar setSidebarActive={setSidebarActive} />}
         <div className={styles.body_content}>
-          <div className="w-full mx-auto p-5">{children}</div>
+          <div className="w-full mx-auto md:p-5">{children}</div>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 import CartActions from "@/app/components/cart/CartActions";
 import CartTable from "@/app/components/cart/CartTable";
 import Breadcrumb from "@/app/components/shared/Breadcrumb";
+import Button from "@/app/components/shared/Button";
 import { selectTotalCartItems } from "@/app/redux/slices/basketSlice";
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -24,6 +26,15 @@ const Cart = () => {
             <div className=" flex items-center justify-center">
               <img src="/gif/empty_cart.gif" alt="Empty_gif" />
             </div>
+            <Link
+              href={"/shop"}
+              className="flex items-center justify-center py-4 sm:py-8"
+            >
+              <Button
+                title="Shop Now"
+                className="text-white bg-primary hover:card-shadow animate-duration"
+              />
+            </Link>
           </div>
         </div>
       ) : (

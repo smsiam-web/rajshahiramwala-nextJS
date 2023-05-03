@@ -1,5 +1,6 @@
 import React from "react";
 import { setBackgroundImage } from "../../utils/helpers";
+import Link from "next/link";
 
 const HomeHero = () => {
   return (
@@ -27,12 +28,12 @@ const HomeHero = () => {
                   আপনার সন্তান ও পরিবারকে সুরক্ষিত রাখুন
                 </p>
               </div>
-              <a
+              <Link
                 href="/"
                 className="text-title capitalize bg-white text-sm sm:text-md py-3 px-6 rounded-sm w-fit block font-bold mt-10 md:mt-12 lg:mt-16 hover:shadow-md shadow-sm"
               >
                 shop now
-              </a>
+              </Link>
             </div>
           </div>
           {/* Hero Right Banner  */}

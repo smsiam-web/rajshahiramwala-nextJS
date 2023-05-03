@@ -27,7 +27,7 @@
     "app/components/home/ProductCard.tsx",
     "app/components/shared/Logo.js",
     "app/components/shared/Button.js",
-    "app/components/product/PorductDetails.js",
+    "app/components/product/singleProduct/PorductDetails.js",
     "app/components/shared/Slider.js",
     "app/components/product/Reviews.js"
   ],
