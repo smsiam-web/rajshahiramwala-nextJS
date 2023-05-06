@@ -6,6 +6,7 @@ import idReducer from "./slices/filterId";
 import updateProfile from "./slices/updateProfile";
 import updateProductImgReducer from "./slices/updateProductImg";
 import updateProductId from "./slices/updateProductId";
+import singleProduct from "./slices/singleProduct";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     profile: updateProfile,
     productImg: updateProductImgReducer,
     productId: updateProductId,
+    singleProduct,
   },
 });

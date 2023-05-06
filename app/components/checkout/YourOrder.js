@@ -60,22 +60,33 @@ const YourOrder = ({ placeOrder, loading }) => {
         </div>
         <div className="flex justify-between py-5 border-b">
           <h2 className="text-base font-bold">Subtotal</h2>
-          <h2 className="text-lg font-bold flex items-center w-3/12">
+          <h2 className="text-lg font-bold flex items-center">
             <TbCurrencyTaka size={20} />
             <span>{totalPrice}</span>
           </h2>
         </div>
         <div className="py-5 border-b space-y-3">
           <span className="text-title">Shipping</span>
-          <ul className="">
+          <ul className="flex justify-between items-center">
             <li className="">- Flat rate</li>
+            <li className="flex gap-1 items-center">
+              <TbCurrencyTaka size={20} />
+              <span className="font-medium text-lg">00.0</span>
+            </li>
+          </ul>
+          <ul className="flex justify-between items-center">
+            <li className="">- COD Fee</li>
+            <li className="flex gap-1 items-center">
+              <TbCurrencyTaka size={20} />
+              <span className="font-medium text-lg">00.0</span>
+            </li>
           </ul>
         </div>
         <div className="flex justify-between py-5 border-b">
-          <h2 className="text-lg font-bold">Total</h2>
-          <h2 className="text-lg font-bold text-green flex items-center w-3/12">
-            <TbCurrencyTaka size={20} />
-            <span className="text-greens">{totalPrice}</span>
+          <h2 className="text-lg font-bold">Total Payment</h2>
+          <h2 className="text-lg font-bold text-green flex items-center text-greens">
+            <TbCurrencyTaka size={24} />
+            <span className="">{totalPrice}</span>
           </h2>
         </div>
         <div className="pt-5">

@@ -29,7 +29,7 @@ const HomeHero = () => {
                 </p>
               </div>
               <Link
-                href="/"
+                href="/shop"
                 className="text-title capitalize bg-white text-sm sm:text-md py-3 px-6 rounded-sm w-fit block font-bold mt-10 md:mt-12 lg:mt-16 hover:shadow-md shadow-sm"
               >
                 shop now
@@ -53,12 +53,12 @@ const HomeHero = () => {
                   প্রি-অর্ডার করলেই পেয়ে যাবেন ২০% মূল্য ছাড়
                 </p>
               </div>
-              <a
-                href="/"
+              <Link
+                href="/shop"
                 className="text-title capitalize bg-primary text-sm sm:text-md py-3 px-6 rounded-sm w-fit block font-bold mt-10 md:mt-12 lg:mt-16 hover:shadow-md"
               >
                 shop now
-              </a>
+              </Link>
             </div>
           </div>
         </div>

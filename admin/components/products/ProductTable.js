@@ -1,8 +1,8 @@
-import { Tooltip } from "@mantine/core";
+import { Tooltip, LoadingOverlay } from "@mantine/core";
 import React, { useEffect } from "react";
 import { TbListDetails } from "react-icons/tb";
 import { useState } from "react";
-import { Switch, Group, useMantineTheme } from "@mantine/core";
+import { Switch, Group, useMantineTheme, Modal } from "@mantine/core";
 import { RxCross2 } from "react-icons/rx";
 import { CgCheck } from "react-icons/cg";
 import { FiEdit } from "react-icons/fi";
@@ -12,13 +12,22 @@ import { db } from "@/app/utils/firebase";
 import { notifications } from "@mantine/notifications";
 import { useDispatch } from "react-redux";
 import { updateProductId } from "../../../app/redux/slices/updateProductId";
+import FormHeader from "../shared/FormHeader";
+import Button from "../shared/Button";
 
 const ProductTable = ({ onClick }) => {
   const theme = useMantineTheme();
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState(null);
+  const [filterProduct, setFilterProduct] = useState(null);
   const dispatch = useDispatch();
+
+  const [opened, setOpened] = useState(false);
+
+  const toggleOpen = () => {
+    opened ? setOpened(false) : setOpened(true);
+  };
 
   const toggleChecked = (id, name) => {
     products.map((item) => {
@@ -63,6 +72,32 @@ const ProductTable = ({ onClick }) => {
       });
   };
 
+  // Confirmation product from firebase
+  const ConfirmationDelete = async (item) => {
+    toggleOpen();
+    setFilterProduct(item);
+  };
+
+  //after confirmaiton Delete porduct from firebase
+  const DeleteProduct = async (item) => {
+    await db
+      .collection("products")
+      .doc(item.id)
+      .delete()
+      .then(() => {
+        notifications.show({
+          title: "Delete successfully",
+          message: `${item.product_details.product_name}, ID: ${item.id}`,
+          color: "orange",
+        });
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+    toggleOpen();
+    setFilterProduct(null);
+  };
+
   // Get orders from firebase
   useEffect(() => {
     setLoading(true);
@@ -78,14 +113,6 @@ const ProductTable = ({ onClick }) => {
             timestamp: doc.data().timestamp.toDate().getTime(),
           });
         });
-        // filter
-        // const filterOrder = product.filter((item) => {
-        //   const filterItem = [];
-        //   if (item.user_details.uid !== user.uid) return;
-        //   //
-        //   filterItem.push(item);
-        //   return filterItem;
-        // });
         setProducts(product);
         setChecked(product.isPublished);
       });
@@ -96,135 +123,201 @@ const ProductTable = ({ onClick }) => {
   }, []);
 
   return (
-    <div className="grid gap-4 w-full overflow-hidden">
-      <div className="w-full overflow-x-scroll rounded-md">
-        <table className="w-full whitespace-nowrap table-auto">
-          <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-200  bg-gray-100">
-            <tr>
-              <td className="px-4 py-3 ">Product id</td>
-              <td className="px-4 py-3 ">PRODUCT NAME</td>
-              <td className="px-4 py-3 ">CATEGORY</td>
-              <td className="px-4 py-3 ">PRICE</td>
-              <td className="px-4 py-3 ">SALE PRICE</td>
-              <td className="px-4 py-3 ">STOCK</td>
-              <td className="px-4 py-3 ">DISCOUNT</td>
-              <td className="px-4 py-3 ">DETAILS</td>
-              <td className="px-4 py-3 ">PUBLISHED</td>
-              <td className="px-4 py-3 ">ACTIONS</td>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-100 ">
-            {!!products &&
-              products?.map((item) => (
-                <tr className="" key={item.id}>
-                  <td className="px-4 py-3">
-                    <span className="text-sm">{item.id}</span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm ">
-                      {item.product_details.product_name}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm">
-                      {item.product_details.parent_category}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm font-semibold">
-                      {item.product_details.price}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm font-semibold bg-green-100 text-green-600 px-3 py-1 rounded-full">
-                      {item.product_details.sale_price}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm font-semibold">
-                      <span className="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-blue-600 bg-blue-100">
-                        Available from {item.product_details.available_from}
-                      </span>
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm flex items-center justify-center font-semibold">
-                      {item.off_price}% Off
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <Link href={`/admin/products/${item.id}`}>
-                      <Tooltip label="Details" color="blue" withArrow>
-                        <span className="text-sub-title flex items-center justify-center font-semibold cursor-pointer hover:text-blue-400">
-                          <TbListDetails size={18} />
-                        </span>
-                      </Tooltip>
-                    </Link>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-sm font-semibold">
-                      <Group position="center">
-                        <Switch
-                          className="cursor-pointer"
-                          checked={item.isPublished}
-                          onChange={() =>
-                            toggleChecked(
-                              item.id,
-                              item.product_details.product_name
-                            )
-                          }
-                          color="teal"
-                          size="sm"
-                          thumbIcon={
-                            item.isPublished ? (
-                              <CgCheck
-                                size="0.8rem"
-                                color={
-                                  theme.colors.teal[theme.fn.primaryShade()]
+    <main>
+      <Modal
+        opened={opened}
+        withCloseButton={false}
+        onClose={() => toggleOpen()}
+        // title="Confirmation"
+        centered
+      >
+        <div className="p-2 rounded-lg">
+          <FormHeader
+            onClick={() => toggleOpen()}
+            title={"Confirmation"}
+            sub_title="Are you sure you want to Delete this item...!!!"
+          />
+          {filterProduct && (
+            <div className="bg-gray-50 py-10">
+              <div className="flex flex-col items-center gap-3">
+                <div className="rounded-md flex justify-center overflow-hidden">
+                  <img
+                    src={filterProduct?.productImg.urls}
+                    alt="product_img"
+                    className="object-cover h-40 w-64 rounded-md overflow-hidden "
+                  />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-2xl font-semibold text-title">
+                    {filterProduct?.product_details.product_name}
+                  </h1>
+                  <h1 className="text-base font-semibold text-sub-title">
+                    {filterProduct?.id}
+                  </h1>
+                </div>
+                <div className="grid grid-cols-2 gap-6 mt-4">
+                  <Button
+                    onClick={() => toggleOpen()}
+                    title="Cancel"
+                    className="text-md bg-indigo-400 hover:bg-indigo-500 text-white px-8"
+                  />
+                  <Button
+                    onClick={() => DeleteProduct(filterProduct)}
+                    title="Delete"
+                    className="text-md bg-red-500 hover:bg-red-600 text-white px-8"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </Modal>
+      <div className="grid gap-4 w-full overflow-hidden ">
+        <div className="w-full overflow-x-scroll rounded-md relative">
+          <table className="w-full whitespace-nowrap table-auto">
+            <thead className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b border-gray-200  bg-gray-100">
+              <tr>
+                <td className="px-4 py-3 ">Product id</td>
+                <td className="px-4 py-3 ">PRODUCT NAME</td>
+                <td className="px-4 py-3 ">CATEGORY</td>
+                <td className="px-4 py-3 ">PRICE</td>
+                <td className="px-4 py-3 ">SALE PRICE</td>
+                <td className="px-4 py-3 ">STOCK</td>
+                <td className="px-4 py-3 ">DISCOUNT</td>
+                <td className="px-4 py-3 ">DETAILS</td>
+                <td className="px-4 py-3 ">PUBLISHED</td>
+                <td className="px-4 py-3 ">ACTIONS</td>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-100 ">
+              {loading ? (
+                <div className="h-40">
+                  <LoadingOverlay visible={loading} overlayBlur={0.5} />
+                </div>
+              ) : (
+                <>
+                  {!!products &&
+                    products?.map((item) => (
+                      <tr className="" key={item.id}>
+                        <td className="px-4 py-3">
+                          <span className="text-sm">{item.id}</span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm ">
+                            {item.product_details.product_name}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm">
+                            {item.product_details.parent_category}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm font-semibold">
+                            {item.product_details.price}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm font-semibold bg-green-100 text-green-600 px-3 py-1 rounded-full">
+                            {item.product_details.sale_price}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm font-semibold">
+                            <span className="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-blue-600 bg-blue-100">
+                              Available from{" "}
+                              {item.product_details.available_from}
+                            </span>
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm flex items-center justify-center font-semibold">
+                            {item.off_price}% Off
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <Link href={`/admin/products/${item.id}`}>
+                            <Tooltip label="Details" color="blue" withArrow>
+                              <span className="text-sub-title flex items-center justify-center font-semibold cursor-pointer hover:text-blue-400">
+                                <TbListDetails size={18} />
+                              </span>
+                            </Tooltip>
+                          </Link>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="text-sm font-semibold">
+                            <Group position="center">
+                              <Switch
+                                className="cursor-pointer"
+                                checked={item.isPublished}
+                                onChange={() =>
+                                  toggleChecked(
+                                    item.id,
+                                    item.product_details.product_name
+                                  )
                                 }
-                                stroke={3}
-                              />
-                            ) : (
-                              <RxCross2
-                                size="0.8rem"
-                                color={
-                                  theme.colors.red[theme.fn.primaryShade()]
+                                color="teal"
+                                size="sm"
+                                thumbIcon={
+                                  item.isPublished ? (
+                                    <CgCheck
+                                      size="0.8rem"
+                                      color={
+                                        theme.colors.teal[
+                                          theme.fn.primaryShade()
+                                        ]
+                                      }
+                                      stroke={3}
+                                    />
+                                  ) : (
+                                    <RxCross2
+                                      size="0.8rem"
+                                      color={
+                                        theme.colors.red[
+                                          theme.fn.primaryShade()
+                                        ]
+                                      }
+                                      stroke={3}
+                                    />
+                                  )
                                 }
-                                stroke={3}
                               />
-                            )
-                          }
-                        />
-                      </Group>
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="text-sm font-semibold flex justify-start gap-5 text-sub-title items-center">
-                      <Tooltip
-                        label="Edit"
-                        color="blue"
-                        withArrow
-                        onClick={() =>
-                          dispatch(updateProductId({ id: item.id }))
-                        }
-                      >
-                        <span className="cursor-pointer hover:text-blue-400">
-                          <FiEdit size={16} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip label="Delete" color="red" withArrow>
-                        <span className="cursor-pointer hover:text-red-400">
-                          <RiDeleteBinLine size={16} />
-                        </span>
-                      </Tooltip>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                            </Group>
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="text-sm font-semibold flex justify-start gap-5 text-sub-title items-center">
+                            <Tooltip
+                              label="Edit"
+                              color="blue"
+                              withArrow
+                              onClick={() =>
+                                dispatch(updateProductId({ id: item.id }))
+                              }
+                            >
+                              <span className="cursor-pointer hover:text-blue-400">
+                                <FiEdit size={16} />
+                              </span>
+                            </Tooltip>
+                            <Tooltip label="Delete" color="red" withArrow>
+                              <span
+                                onClick={() => ConfirmationDelete(item)}
+                                className="cursor-pointer hover:text-red-400"
+                              >
+                                <RiDeleteBinLine size={16} />
+                              </span>
+                            </Tooltip>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                </>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

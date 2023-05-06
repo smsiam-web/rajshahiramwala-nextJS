@@ -61,11 +61,19 @@ export const {
 } = basketSlice.actions;
 
 export const selectItems = (state) => state.basket.items;
+
 export const selectTotalPrice = (state) =>
   state.basket.items
     .map((x) => x.weight * x.product_details.sale_price * x.quantity)
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
+
+export const selectTotalDeliveryCost = (state) =>
+  state.basket.items
+    .map((x) => x.weight * 15 * x.quantity)
+    .reduce((a, b) => a + b, 0)
+    .toFixed(2);
+
 export const selectTotalCartItems = (state) =>
   state.basket.items.map((x) => x.quantity).reduce((a, b) => a + b, 0);
 

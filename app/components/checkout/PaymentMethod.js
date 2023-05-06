@@ -3,7 +3,7 @@ import { CgUnavailable } from "react-icons/cg";
 
 const PaymentMethod = ({ id, title, image, available }) => {
   return (
-    <>
+    <div onClick={() => console.log(id)}>
       {available ? (
         <div className="flex flex-col items-center cursor-pointer max-w-[160px] bg-gray-300  hover:bg-gray-200 px-4 py-2 rounded-md">
           <div className="max-w-[50px] md:max-w-[60px]">
@@ -29,7 +29,7 @@ const PaymentMethod = ({ id, title, image, available }) => {
           </span>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

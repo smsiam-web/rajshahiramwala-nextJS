@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { BsStarFill, BsStarHalf, BsFillCartCheckFill } from "react-icons/bs";
@@ -11,6 +10,7 @@ import {
   selectItems,
 } from "@/app/redux/slices/basketSlice";
 import { notifications } from "@mantine/notifications";
+import { Rating } from "@mantine/core";
 
 const ProductCard = ({ product }) => {
   const { id, off_price, productImg, product_details } = product;
@@ -78,19 +78,21 @@ const ProductCard = ({ product }) => {
         </h1>
         <div className="flex items-center gap-1">
           <span className="flex px-1 gap-1 text-primary text-sm">
-            <BsStarFill />
-            <BsStarFill />
-            <BsStarFill />
-            <BsStarFill />
-            <BsStarHalf />
+            <Rating value={4.4} fractions={5} readOnly size="sm" />
           </span>
           <span className="text-sub-mid text-sm">{1}/5</span>
           <span className="text-sub-title text-sm">(169)</span>
         </div>
+        <div className="flex items-center gap-1  w-fit my-1">
+          <span className="text-xs bg-green-100 px-3 py-1 rounded-full text-green-600">
+            Available from:
+          </span>
+          <span className="text-xs">{product_details.available_from}.</span>
+        </div>
         <div className="flex items-center justify-between">
           <div>
             <span className="text-sm tracking-tighter  text-mid">
-              প্রতি কেজি
+              {product_details.unit}
             </span>
             <div className="flex items-center gap-1">
               <span

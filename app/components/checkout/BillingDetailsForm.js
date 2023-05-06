@@ -44,7 +44,7 @@ const BillingDetailsForm = () => {
         });
         break;
       default:
-        console.log("Sorry, we are out of .");
+      // console.log("");
     }
   }, [filterID.id]);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProductDetailsFrom from "./ProductDetailsFrom";
 import * as Yup from "yup";
 import { AppForm, FormBtn } from "../../shared/Form";
@@ -9,7 +9,6 @@ import Button from "../../shared/Button";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectProductImg } from "@/app/redux/slices/updateProductImg";
-import { filterProps } from "framer-motion";
 import { selectUpdateProductId } from "@/app/redux/slices/updateProductId";
 
 const validationSchema = Yup.object().shape({
@@ -34,12 +33,10 @@ const validationSchema = Yup.object().shape({
 
 const AddProduts = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
-  const [product, setProduct] = useState(null);
+  // const [product, setProduct] = useState(null);
   const router = useRouter();
 
   const product_details = product && product[0]?.product_details;
-
-  console.log(product);
 
   const productImg = useSelector(selectProductImg);
   const ProductID = useSelector(selectUpdateProductId);
@@ -69,21 +66,11 @@ const AddProduts = ({ onClick }) => {
       productImg,
       product_details: values,
       isPublished: false,
+      weight: 12,
       off_price,
       timestamp,
     });
   };
-
-  // save billing details in user collection
-  // const saveProductDetails = async (values, product_id) => {
-  //   const ref = db.collection("products").doc(product_id);
-  //   return ref.set(
-  //     {
-  //       product_details: values,
-  //     },
-  //     { merge: true }
-  //   );
-  // };
 
   return (
     <main>

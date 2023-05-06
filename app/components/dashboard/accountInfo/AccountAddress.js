@@ -13,7 +13,7 @@ const AccountAddress = () => {
   // get User from Redux
   const user = useSelector(selectUser);
   const route = useRouter();
-  console.log(route.asPath);
+  // console.log(route.asPath);
   //set Hooks
   const [state, setState] = useState("");
   const [city, setCity] = useState("");

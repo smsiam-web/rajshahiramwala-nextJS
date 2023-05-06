@@ -19,24 +19,47 @@ const Layout = ({ children }) => {
   const [page, setPage] = useState(null);
 
   useEffect(() => {
+    if (!cartItems.length) return;
+    // save cart items to local storage
+
+    const items = JSON.stringify(cartItems || []);
+    localStorage.setItem("@CART_ITEMS", items);
+  }, [cartItems]);
+
+  useEffect(() => {
     // firebase user listeners
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         db.collection("users")
           .doc(user.uid)
-          .get()
-          .then((doc) => {
-            if (doc.exists) {
-              dispatch(updateUser(doc.data()));
+          .onSnapshot((snap) => {
+            if (snap.exists) {
+              dispatch(updateUser(snap.data()));
             }
           });
+        // .get()
+        // .then((doc) => {
+        //   if (doc.exists) {
+        //     dispatch(updateUser(doc.data()));
+        //   }
+        // });
       } else {
         dispatch(removeUser());
       }
     });
 
-    // Get orders from firebase
+    // get cart items from local storage
+    const local_items = localStorage.getItem("@CART_ITEMS")
+      ? JSON.parse(localStorage.getItem("@CART_ITEMS"))
+      : [];
 
+    dispatch(updateBasket(local_items));
+
+    return unsubscribe;
+  }, [router.asPath]);
+
+  // Get products from firebase and update Redux
+  useEffect(() => {
     setLoading(true);
     const unSub = db
       .collection("products")
@@ -56,23 +79,7 @@ const Layout = ({ children }) => {
     return () => {
       unSub();
     };
-
-    // get cart items from local storage
-    const local_items = localStorage.getItem("@CART_ITEMS")
-      ? JSON.parse(localStorage.getItem("@CART_ITEMS"))
-      : [];
-
-    dispatch(updateBasket(local_items));
-
-    return unsubscribe;
-  }, [router.asPath]);
-
-  useEffect(() => {
-    if (!cartItems.length) return;
-    // save cart items to local storage
-    const items = JSON.stringify(cartItems || []);
-    localStorage.setItem("@CART_ITEMS", items);
-  }, [cartItems]);
+  }, []);
 
   useEffect(() => {
     setPage(getPage());

@@ -9,14 +9,77 @@ import Breadcrumb from "../../shared/Breadcrumb";
 import * as Yup from "yup";
 import { AppForm, FormBtn } from "../../shared/Form";
 import QuantityFrom from "../QuantityFrom";
+import { Tooltip, Rating } from "@mantine/core";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectProduct } from "@/app/redux/slices/productSlice";
+import { useEffect, useState } from "react";
+import { db } from "@/app/utils/firebase";
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().max(25).required().label("First name"),
-
   quantity: Yup.string().required().label("পরিমান নির্বাচন করুন"),
 });
 
-const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
+const ProductDetails = ({ disabled }) => {
+  const Products = useSelector(selectProduct);
+  const [product, setProduct] = useState(null);
+  const [path, setPath] = useState(null);
+  const router = useRouter();
+  const aspath = router.query.slug;
+
+  const { id, off_price, productImg, product_details, weight } =
+    product?.i || "";
+
+  const {
+    product_description,
+    available_from,
+    parent_category,
+    child_category,
+    product_name,
+    product_type,
+    price,
+    sale_price,
+    unit,
+    slug,
+    product_tag,
+    sku,
+  } = product_details || "";
+
+  useEffect(() => {
+    if (id === aspath) return;
+    setPath(id);
+    setPath(aspath);
+  }, [id]);
+
+  console.log(path, id);
+  useEffect(() => {
+    Products?.map((i) => {
+      console.log(path);
+      if (i.id !== path) return;
+      else {
+        console.log(path);
+        return db.collection("singleProduct").doc("singleProductHardId").set({
+          i,
+        });
+      }
+    });
+  }, [path]);
+
+  // Get products from firebase and update Redux
+  useEffect(() => {
+    const unSub = db.collection("singleProduct").onSnapshot((snap) => {
+      snap.docs.map((doc) => {
+        setProduct({
+          ...doc.data(),
+        });
+      });
+    });
+    return () => {
+      unSub();
+    };
+  }, []);
+
   const placeOrder = (values) => {
     // console.log(values);
   };
@@ -28,7 +91,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
           <div className="flex flex-wrap lg:flex-row flex-col lg:gap-0 gap-7">
             <div className="lg:w-2/5 w-full lg:border-r p-2">
               <img
-                src="/images/products/gopalvhog_1.jpeg"
+                src={productImg?.urls}
                 alt=""
                 loading="lazy"
                 className="rounded-lg"
@@ -38,38 +101,41 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
               {/* <Breadcrumb /> */}
               <Breadcrumb />
               <h4 className="md:text-xl text-base font-bold mb-2 mt-5 text-orange">
-                আম
+                {product_type}
               </h4>
               <h1 className="text-title md:text-3xl text-xl font-semibold mb-2 sm:mb-3 xl:mb-5">
-                গোপালভোগ আম
+                {product_name}
               </h1>
-              <span className="text-sub-title text-xs">
-                ⭐⭐⭐⭐⭐ (1 customer review)
+              <span className="text-sub-title text-xs flex items-center gap-2">
+                <Rating value={4.5} fractions={2} readOnly />{" "}
+                <span>(1 customer review)</span>
               </span>
               <div className="my-3">
                 <span className="text-sm text-sub-title mb-2 block">
-                  প্রতি কেজি
+                  {unit}
                 </span>
                 <div className="flex items-center gap-1">
                   <span
                     className={`text-xl flex items-center font-bold ${
-                      oldPrice ? "text-orange" : "text-green"
+                      price ? "text-orange" : "text-green"
                     }`}
                   >
                     <TbCurrencyTaka className="text-2xl font-bold" />
-                    {price}
+                    {sale_price}
                   </span>
-                  {oldPrice && (
+                  {price && (
                     <span className="text-lg flex items-center line-through text-gray-400">
                       <TbCurrencyTaka className="text-xl font-bold" />
-                      {oldPrice}
+                      {price}
                     </span>
                   )}
                 </div>
               </div>
               <div className="my-5 bg-[#EBFAE9] w-fit px-3 py-2 border border-[#82d45e] rounded-md">
                 Availability:
-                <span className="text-green ml-1 font-bold">In stock</span>
+                <span className="text-green ml-1 font-bold">
+                  {available_from}
+                </span>
               </div>
               <div className="border-t"></div>
               <AppForm
@@ -111,14 +177,46 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                   {/* product button  */}
                   <div className="flex gap-3">
                     <div>
-                      <FormBtn title="Add to Cart" onClick={placeOrder} />
+                      {!disabled ? (
+                        <FormBtn title="Add to Cart" onClick={placeOrder} />
+                      ) : (
+                        <Tooltip
+                          label="This Button/Action is Disable for Demo version"
+                          withArrow
+                          color="gray"
+                          arrowSize={6}
+                        >
+                          <div>
+                            <Button
+                              title="Add to Cart"
+                              className="bg-primary text-white"
+                            />
+                          </div>
+                        </Tooltip>
+                      )}
                     </div>
-                    <Link href={"/checkout"}>
-                      <Button
-                        title={"Order Now"}
-                        className={"bg-black text-white"}
-                      />
-                    </Link>
+                    {!disabled ? (
+                      <Link href={"/checkout"}>
+                        <Button
+                          title={"Order Now"}
+                          className={"bg-black text-white"}
+                        />
+                      </Link>
+                    ) : (
+                      <Tooltip
+                        label="This Button/Action is Disable for Demo version"
+                        withArrow
+                        color="gray"
+                        arrowSize={6}
+                      >
+                        <div>
+                          <Button
+                            title={"Order Now"}
+                            className={"bg-black text-white"}
+                          />
+                        </div>
+                      </Tooltip>
+                    )}
                   </div>
                 </div>
               </AppForm>
@@ -127,13 +225,15 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                 <div className="flex items-center gap-1">
                   <FaAngleDoubleRight className="text-greens text-xl" />
                   <p className="text-gray-900">
-                    <span className="text-sub-title">কোয়ালিটিঃ</span> Best
+                    <span className="text-sub-title">কোয়ালিটিঃ</span>{" "}
+                    {product_tag}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
                   <FaAngleDoubleRight className="text-greens text-xl" />
                   <p className="text-gray-900">
-                    <span className="text-sub-title">জাতঃ</span> গোপালভোগ
+                    <span className="text-sub-title">জাতঃ</span>{" "}
+                    {child_category}
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
@@ -148,7 +248,7 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                   <FaAngleDoubleRight className="text-greens text-xl" />
                   <p className="text-gray-900">
                     <span className="text-sub-title">
-                      প্রতিটি আমের সাইজ প্রায় ২০০-২৫০ গ্রাম
+                      প্রতিটি আমের সাইজ প্রায় {slug} গ্রাম
                     </span>
                   </p>
                 </div>
@@ -156,14 +256,16 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                   <FaAngleDoubleRight className="text-greens text-xl" />
                   <p className="text-gray-900">
                     <span className="text-sub-title">
-                      প্রতি কেজিতে ৫-৬ টি আম
+                      প্রতি কেজিতে ৪-৬ টি আম
                     </span>
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
                   <FaAngleDoubleRight className="text-greens text-xl" />
                   <p className="text-gray-900">
-                    <span className="text-sub-title">অনেক বেশি রসালো</span>
+                    <span className="text-sub-title">
+                      {product_description}
+                    </span>
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
@@ -184,11 +286,12 @@ const ProductDetails = ({ price = 90, oldPrice = "100" }) => {
                 </div>
 
                 <p className="text-gray-900">
-                  <span className="text-greens">Categories:</span> আম, রাজশাহীর
-                  আম, ফল, গোপালভোগ আম।
+                  <span className="text-greens">Categories:</span>{" "}
+                  {product_type}, {parent_category}, {product_name},{" "}
+                  {product_tag}
                 </p>
                 <p className="text-gray-900">
-                  <span className="text-sub-title">Tag:</span> Best Seller
+                  <span className="text-sub-title">Tag:</span> {sku}
                 </p>
               </div>
             </div>

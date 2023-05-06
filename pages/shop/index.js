@@ -1,8 +1,16 @@
-import React from "react";
-import Card from "./Card";
+import React, { useState } from "react";
+import Card from "../../app/components/home/products/Card";
 import Breadcrumb from "@/app/components/shared/Breadcrumb";
+import { useSelector } from "react-redux";
+import { selectProduct } from "@/app/redux/slices/productSlice";
 
 const Shop = () => {
+  const Products = useSelector(selectProduct);
+  const [loading, setLoading] = useState(false);
+
+  setTimeout(() => {
+    setLoading(true);
+  }, 1500);
   return (
     <>
       <main>
@@ -22,15 +30,8 @@ const Shop = () => {
               {/* Category slider */}
               <div className="w-full">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                  {Products &&
+                    Products?.map((i) => <Card item={i} key={i.id} />)}
                 </div>
               </div>
             </div>

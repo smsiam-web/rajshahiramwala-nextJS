@@ -5,7 +5,7 @@ import { BiDetail, BiInfoCircle, BiStar } from "react-icons/bi";
 import AdditionalInfo from "./AdditionalInfo";
 import Reviews from "./Reviews";
 
-const ProductMoreInfo = () => {
+const ProductMoreInfo = ({ product = null }) => {
   return (
     <div className="flex gap-6">
       <div className=" mt-6 w-full px-4 bg-white rounded-lg p-8">
@@ -85,7 +85,7 @@ const ProductMoreInfo = () => {
           </Tabs.Panel>
 
           <Tabs.Panel value="additionalinfo" pl="xs">
-            <AdditionalInfo />
+            <AdditionalInfo product={product} />
           </Tabs.Panel>
 
           <Tabs.Panel value="reviews" pl="xs">

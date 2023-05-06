@@ -3,10 +3,14 @@ import Button from "../shared/Button";
 import Link from "next/link";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useSelector } from "react-redux";
-import { selectItems, selectTotalPrice } from "@/app/redux/slices/basketSlice";
+import {
+  selectTotalDeliveryCost,
+  selectTotalPrice,
+} from "@/app/redux/slices/basketSlice";
 
 const CartActions = () => {
   const cartTotalPrice = useSelector(selectTotalPrice);
+  const TotalDeliveryCost = useSelector(selectTotalDeliveryCost);
 
   return (
     <div className="ms:py-8 py-4 md:border-t">
@@ -41,21 +45,34 @@ const CartActions = () => {
             <span className="text-title font-semibold">Shipping</span>
             <div className="flex items-center justify-between space-y-3">
               <span className="text-sub-title">Courier Service point</span>
-              <span className="flex items-center text-center">
+              <span className="flex items-center text-center text-gray-400">
                 <TbCurrencyTaka size={20} />
-                {100.0}
+                {"00"}
               </span>
             </div>
-            <div className="flex items-center justify-between space-y-3">
-              <span className="text-sub-title">Home Delivary</span>
-              <span className="flex items-center text-center">
+            <div className="flex items-center justify-between space-y-3 ">
+              <span className="text-sub-title">Home Delivery</span>
+              <span className="flex items-center text-center ">
                 <TbCurrencyTaka size={20} />
-                {100.0}
+                {TotalDeliveryCost}
+              </span>
+            </div>
+            <div className="flex items-center justify-between space-y-3 ">
+              <span className="text-sub-title">Offer</span>
+              <span className="flex items-center text-center text-primary">
+                <TbCurrencyTaka size={20} />-{TotalDeliveryCost}
+              </span>
+            </div>
+            <div className="flex items-center justify-between space-y-3 border-t-2">
+              <span className="text-sub-title">Delivery Fee</span>
+              <span className="flex items-center text-center text-indigo-500">
+                <TbCurrencyTaka size={20} />
+                {"00.0"}
               </span>
             </div>
           </div>
           <div className="flex justify-between py-5">
-            <h2 className="text-xl font-bold">Subtotal</h2>
+            <h2 className="text-xl font-bold">Total Payment</h2>
             <h2 className="text-xl font-bold text-green">
               <span className="flex items-center text-center text-primary">
                 <TbCurrencyTaka />

@@ -36,14 +36,22 @@ const CheckoutContent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  console.log(!!user.order_id);
+
   // place order handler on submit
   const placeOrder = async (values) => {
     setLoading(true);
-    await saveBillingDetails(values);
+
     const order_id = uuid();
+
+    await saveBillingDetails(values);
+
     router.push("/sucess?order_id=" + order_id);
-    await placeOrderHandler(values, order_id);
+
+    await placeOrderHandler(order_id);
+
     dispatch(updateBasket([]));
+
     setLoading(false);
   };
 
@@ -59,12 +67,11 @@ const CheckoutContent = () => {
   };
 
   // save order details on firebase database
-  const placeOrderHandler = async (values, order_id) => {
+  const placeOrderHandler = async (order_id) => {
     const orderData = {
       order_id,
       user_details: { ...user },
-      // payment: true,
-      billing_details: values,
+      // billing_details: values,
       items: cartItems,
       total: cartTotal,
       created_at: timestamp,

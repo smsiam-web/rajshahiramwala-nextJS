@@ -17,7 +17,7 @@ const CartTableRow = ({
     await navigator.clipboard.writeText(text);
     alert("Text copied");
   };
-  console.log(billing_details.payment);
+
   return (
     <>
       <tr className="border-b md:border-r md:border-l table_row">
@@ -35,7 +35,7 @@ const CartTableRow = ({
             {items.map((item, i) => (
               <Link key={i} href={`/products/${item.id}`}>
                 <h3 className="cursor-pointer hover:text-primary text-sm font-bold text-title">
-                  {item?.name}{" "}
+                  {item?.product_details.product_name}{" "}
                   <span className="text-sm text-gray-500">
                     ({item?.quantity}x)
                   </span>
@@ -50,13 +50,13 @@ const CartTableRow = ({
         </td>
         <td className="py-5">{timeAgo(created_at)} ago</td>
         <td className="py-5">
-          {billing_details.payment === "cod" ? (
+          {/* {billing_details.payment === "cod" ? (
             <span className="text-primary uppercase">
               {billing_details.payment}
             </span>
           ) : (
             <span className="text-green-500">Bkash</span>
-          )}
+          )} */}
         </td>
         <td className="py-5">
           {/* Order status */}

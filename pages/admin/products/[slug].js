@@ -12,7 +12,7 @@ const SingleProduct = () => {
           <span>Back</span>
         </div>
       </Link>
-      <ProductDetails />
+      <ProductDetails disabled={true} />
     </div>
   );
 };

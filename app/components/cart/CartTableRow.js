@@ -72,7 +72,9 @@ const CartTableRow = ({
         </td>
         <td className="py-5 max-w-[250px]">
           <div className="">
-            <h1 className="text-lg font-bold text-title">{name}</h1>
+            <h1 className="text-lg font-bold text-title">
+              {product_details.product_name}
+            </h1>
             <div className="flex items-start gap-2 text-sm text-gray-500">
               <span>Weight:</span>
               <div className="flex flex-col items-center gap-1">
