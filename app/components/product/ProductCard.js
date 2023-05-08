@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { TbCurrencyTaka } from "react-icons/tb";
-import { BsStarFill, BsStarHalf, BsFillCartCheckFill } from "react-icons/bs";
+import { BsFillCartCheckFill } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
       )}
 
       {/* disscunt %  */}
-      {product_details.price && (
+      {off_price && (
         <span className="absolute top-2 left-2 bg-orange px-2 mb-2 py-1 text-sm font-bold text-slate-100 rounded-md bg-primary">
           {off_price}% Off
         </span>
@@ -101,7 +101,7 @@ const ProductCard = ({ product }) => {
                 } font-bold text-lg`}
               >
                 <TbCurrencyTaka size={20} />
-                {product_details.sale_price}
+                {product_details?.sale_price}
               </span>
               {product_details.price && (
                 <span className="flex tracking-tighter items-center text-gray-400 font-bold text-base line-through">

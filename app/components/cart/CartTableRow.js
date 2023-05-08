@@ -18,7 +18,8 @@ const CartTableRow = ({
   productImg,
   product_details,
 }) => {
-  const { product_name, sale_price } = product_details;
+  const { product_name } = product_details || "";
+  const sale_price = parseInt(product_details?.sale_price);
 
   const [checked, setChecked] = useState(true);
 

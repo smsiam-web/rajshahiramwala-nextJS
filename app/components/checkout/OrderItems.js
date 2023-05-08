@@ -2,7 +2,9 @@ import React from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 const OrderItems = ({ product_details, weight, quantity }) => {
-  const priceCalc = weight * product_details.sale_price;
+  const sale_price = parseInt(product_details?.sale_price);
+
+  const priceCalc = weight * sale_price;
   return (
     <div className="flex justify-between py-5 px-5 border-b">
       <h2 className="text-base font-medium">

@@ -15,7 +15,7 @@ import { notifications } from "@mantine/notifications";
 import { updateSingleProduct } from "@/app/redux/slices/singleProduct";
 
 const ProductCard = ({ item = "" }) => {
-  const { id, productImg, product_details } = item;
+  const { id, productImg, product_details } = item || "";
 
   const {
     available_from,
@@ -24,7 +24,7 @@ const ProductCard = ({ item = "" }) => {
     price,
     sale_price,
     unit,
-  } = product_details;
+  } = product_details || "";
 
   // redux setup
   const cartItems = useSelector(selectItems);

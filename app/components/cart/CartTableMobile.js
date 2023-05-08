@@ -20,7 +20,9 @@ const CartTableMobile = ({
 }) => {
   const [checked, setChecked] = useState(true);
 
-  const { product_name, sale_price } = product_details;
+  const { product_name } = product_details || "";
+
+  const sale_price = parseInt(product_details?.sale_price);
 
   //priceCalc
   const priceCalc = weight * sale_price;
@@ -97,7 +99,7 @@ const CartTableMobile = ({
             <label htmlFor="23kg">23kg</label>
           </div>
           <div>
-            <p className="text-sm text-gray-500 flex items-center">
+            <div className="text-sm text-gray-500 flex items-center">
               Price:
               <span className="text-sub-title font-semibold">
                 <div className="flex items-center gap-1">
@@ -112,7 +114,7 @@ const CartTableMobile = ({
                   </span>
                 </div>
               </span>
-            </p>
+            </div>
           </div>
         </div>
         <div className="py-2">
@@ -122,7 +124,7 @@ const CartTableMobile = ({
             decreaseQuantity={decreaseQuantity}
           />
         </div>
-        <p className="text-sm text-gray-500 flex items-center">
+        <div className="text-sm text-gray-500 flex items-center">
           Total Price:
           <div className="text-green font-semibold">
             <span className="flex text-primary items-center text-center">
@@ -133,7 +135,7 @@ const CartTableMobile = ({
           <span className="text-sub-title pl-2 text-xs">
             ({quantity * weight}kg)
           </span>
-        </p>
+        </div>
       </div>
       <div className="mt-2">
         <MdDelete
