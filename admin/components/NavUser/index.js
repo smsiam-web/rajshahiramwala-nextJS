@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSetting } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import { IoIosLogOut } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const NavUser = () => {
   const [isActive, setActive] = useState(false);
+  const router = useRouter();
   const toggle = () => {
     {
       isActive === false ? setActive(true) : setActive(false);
     }
   };
+
+  useEffect(() => {
+    if (isActive === false) return;
+    toggle();
+  }, [router?.asPath]);
+
+  console.log(window);
   return (
     <div className="relative">
       <Image
@@ -42,12 +51,12 @@ const NavUser = () => {
             </Link>
           </li>
           <li className="justify-between font-serif font-medium py-2 pl-4 transition-colors duration-150 hover:bg-gray-100 text-gray-500 hover:text-green-500 ">
-            <a href="/dashboard">
+            <Link href={"/admin"}>
               <span className="flex items-center gap-3 text-sm">
                 <IoIosLogOut size={18} />
                 <span>Log Out</span>
               </span>
-            </a>
+            </Link>
           </li>
         </ul>
       )}

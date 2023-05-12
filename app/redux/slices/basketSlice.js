@@ -64,7 +64,7 @@ export const selectItems = (state) => state.basket.items;
 
 export const selectTotalPrice = (state) =>
   state.basket.items
-    .map((x) => x.weight * x.product_details.sale_price * x.quantity)
+    .map((x) => x?.weight * x?.product_details?.sale_price * x?.quantity)
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 

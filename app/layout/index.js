@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser, removeUser } from "../redux/slices/authSlice";
+import { updateUser, removeUser, selectUser } from "../redux/slices/authSlice";
 import { selectItems, updateBasket } from "../redux/slices/basketSlice";
 import { updateProduct } from "../redux/slices/productSlice";
 import { auth, db } from "../utils/firebase";
@@ -14,6 +14,7 @@ const Layout = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState(null);
   const router = useRouter();
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectItems);
   const [page, setPage] = useState(null);
@@ -26,8 +27,8 @@ const Layout = ({ children }) => {
     localStorage.setItem("@CART_ITEMS", items);
   }, [cartItems]);
 
+  // firebase user listeners
   useEffect(() => {
-    // firebase user listeners
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         db.collection("users")
@@ -89,7 +90,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {page === "admin" ? (
+      {user?.email === "admin@amwala.com" ? (
         <AdminLayout>{children}</AdminLayout>
       ) : (
         <>

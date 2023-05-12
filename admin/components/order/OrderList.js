@@ -65,8 +65,8 @@ const OrderList = () => {
                   </span>
                 </span>
               </td>
-              <td class="px-4 py-3  text-center">
-                <select class="block w-28 px-2 py-1 text-sm dark:text-gray-300 focus:outline-none rounded-md form-select focus:border-gray-200 border-gray-200 focus:shadow-none leading-5 border bg-gray-50 h-8 ">
+              <td className="px-4 py-3  text-center">
+                <select className="block w-28 px-2 py-1 text-sm dark:text-gray-300 focus:outline-none rounded-md form-select focus:border-gray-200 border-gray-200 focus:shadow-none leading-5 border bg-gray-50 h-8 ">
                   <option value="status" hidden>
                     Pending
                   </option>

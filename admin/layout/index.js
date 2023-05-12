@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import styles from "./styles/Body.module.css";
+import { useRouter } from "next/router";
 
 const AdminWrapper = ({ children }) => {
+  const router = useRouter();
   const [sidebarActive, setSidebarActive] = useState(true);
+
+  useEffect(() => {
+    router.push("/admin");
+  }, []);
 
   return (
     <div className={styles.body + " " + styles.light}>

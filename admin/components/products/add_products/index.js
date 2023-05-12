@@ -33,7 +33,7 @@ const validationSchema = Yup.object().shape({
 
 const AddProduts = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
-  // const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState(null);
   const router = useRouter();
 
   const product_details = product && product[0]?.product_details;

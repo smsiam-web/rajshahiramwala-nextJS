@@ -58,7 +58,6 @@ const ProductDetails = ({ disabled }) => {
       console.log(path);
       if (i.id !== path) return;
       else {
-        console.log(path);
         return db.collection("singleProduct").doc("singleProductHardId").set({
           i,
         });
