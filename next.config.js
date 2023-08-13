@@ -9,6 +9,7 @@ const nextConfig = {
     FIREBASE_MESSAGING_SENDER_ID: "38548299757",
     FIREBASE_APP_ID: "1:38548299757:web:ea6e60638def1036a511e4",
     FIREBASE_MEASUREMENT_ID: "G-2BZJP3PX28",
+    ADMIN_AUTH_MAIL: "admin@amwala.com",
   },
 };
 

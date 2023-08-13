@@ -12,7 +12,7 @@ function AppTextArea({ name, editProfile, ...otherProps }) {
         onChange={handleChange(name)}
         value={values[name]}
         {...otherProps}
-        className={`outline-none border-[1px] py-3 px-5 rounded w-full ${
+        className={`outline-none border-[1px] py-3 px-5 rounded w-full text-sm font-normal ${
           !editProfile ? "app_input" : "edit_input"
         } min-h-[100px]`}
       />

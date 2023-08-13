@@ -38,12 +38,6 @@ const Layout = ({ children }) => {
               dispatch(updateUser(snap.data()));
             }
           });
-        // .get()
-        // .then((doc) => {
-        //   if (doc.exists) {
-        //     dispatch(updateUser(doc.data()));
-        //   }
-        // });
       } else {
         dispatch(removeUser());
       }
@@ -90,7 +84,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {user?.email === "admin@amwala.com" ? (
+      {user?.email === process.env.ADMIN_AUTH_MAIL ? (
         <AdminLayout>{children}</AdminLayout>
       ) : (
         <>

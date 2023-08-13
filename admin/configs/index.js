@@ -11,6 +11,7 @@ import { RxDashboard } from "react-icons/rx";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { AiOutlineBars } from "react-icons/ai";
 import { ImCreditCard } from "react-icons/im";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 
 export const menus = [
   {
@@ -23,6 +24,18 @@ export const menus = [
     pathname: "/admin/products",
     Icon: RiShoppingBag3Line,
     title: "Products",
+    secure: true,
+  },
+  {
+    pathname: "/admin/place-order",
+    Icon: AiOutlineAppstoreAdd,
+    title: "Place Order",
+    secure: true,
+  },
+  {
+    pathname: "/admin/schedule",
+    Icon: RiShoppingBag3Line,
+    title: "Schedule Post",
     secure: true,
   },
   {
@@ -94,6 +107,11 @@ export const PCATEGORY = [
     path: "/rajshahiraam",
   },
   {
+    name: "খেজুরের গুড়",
+    id: "খেজুরের গুড়",
+    path: "/khejurergru",
+  },
+  {
     name: "লিচু",
     id: "লিচু",
     path: "/lichu",
@@ -127,6 +145,27 @@ export const PCATEGORY = [
 
 export const CCATEGORY = [
   {
+    name: "খেজুরের পাটালি গুড় (গোল)",
+    id: "খেজুরের পাটালি গুড় (গোল)",
+  },
+  {
+    name: "খেজুরের পাটালি গুড় (পাটা)",
+    id: "খেজুরের পাটালি গুড় (পাটা)",
+  },
+  {
+    name: "খেজুরের পাটালি গুড় (ফয়েল)",
+    id: "খেজুরের পাটালি গুড় (ফয়েল)",
+  },
+  {
+    name: "খেজুরের লিকুইড / লালি গুড়",
+    id: "খেজুরের লিকুইড / লালি গুড়",
+  },
+  {
+    name: "খেজুরের ঝোলা / দানা গুড়",
+    id: "খেজুরের ঝোলা / দানা গুড়",
+  },
+
+  {
     name: "গোপালভোগ",
     id: "গোপালভোগ",
   },
@@ -141,6 +180,10 @@ export const CCATEGORY = [
   {
     name: "আম্রপালি",
     id: "আম্রপালি",
+  },
+  {
+    name: "হাড়িভাঙ্গা",
+    id: "হাড়িভাঙ্গা",
   },
   {
     name: "বোম্বাই লিচু",
@@ -192,6 +235,10 @@ export const TCATEGORY = [
   {
     name: "আম",
     id: "আম",
+  },
+  {
+    name: "খেজুরের গুড়",
+    id: "খেজুরের গুড়",
   },
   {
     name: "লিচু",

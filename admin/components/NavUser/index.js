@@ -5,6 +5,7 @@ import { IoIosLogOut } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { auth, db } from "@/app/utils/firebase";
 
 const NavUser = () => {
   const [isActive, setActive] = useState(false);
@@ -15,12 +16,16 @@ const NavUser = () => {
     }
   };
 
+  const singOutAction = () => {
+    auth.signOut();
+    router.push("/");
+  };
+
   useEffect(() => {
     if (isActive === false) return;
     toggle();
   }, [router?.asPath]);
 
-  console.log(window);
   return (
     <div className="relative">
       <Image
@@ -51,7 +56,7 @@ const NavUser = () => {
             </Link>
           </li>
           <li className="justify-between font-serif font-medium py-2 pl-4 transition-colors duration-150 hover:bg-gray-100 text-gray-500 hover:text-green-500 ">
-            <Link href={"/admin"}>
+            <Link href={"/admin"} onClick={() => singOutAction()}>
               <span className="flex items-center gap-3 text-sm">
                 <IoIosLogOut size={18} />
                 <span>Log Out</span>

@@ -98,7 +98,7 @@ const ProductTable = ({ onClick }) => {
     setFilterProduct(null);
   };
 
-  // Get orders from firebase
+  // Get products from firebase
   useEffect(() => {
     setLoading(true);
     const unSub = db

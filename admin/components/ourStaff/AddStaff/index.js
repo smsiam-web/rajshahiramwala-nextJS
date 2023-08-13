@@ -18,29 +18,25 @@ const validationSchema = Yup.object().shape({
 const AddStaff = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
 
-  // // place product handler on submit
-  // const placeProduct = async (values) => {
-  //   setLoading(true);
-  //   await saveProductDetails(values);
-  //   const product_id = uuid();
-  //   router.push("/sucess?product_id=" + product_id);
-  //   await placeOrderHandler(values, product_id);
-  //   dispatch(updateBasket([]));
-  //   setLoading(false);
-  // };
-  // // save order details on firebase database
-  // const placeOrderHandler = async (values, product_id) => {
-  //   const productData = {
-  //     order_id,
-  //     user_details: { ...user },
-  //     // payment: true,
-  //     billing_details: values,
-  //     items: cartItems,
-  //     total: cartTotal,
-  //     created_at: timestamp,
-  //   };
-  //   await db.collection("products").doc(product_id).set(productData);
-  // };
+  // place product handler on submit
+  const addStaff = async (values) => {
+    setLoading(true);
+    await saveProductDetails(values);
+    const staffId = uuid();
+    router.push("/sucess?staffId=" + staffId);
+    await placeStaff(values, staffId);
+    // dispatch(updateBasket([]));
+    setLoading(false);
+  };
+  // save order details on firebase database
+  const placeStaff = async (values, staffId) => {
+    const staffData = {
+      staffId,
+      staff_details: values,
+      created_at: timestamp,
+    };
+    await db.collection("staff").doc(staffId).set(staffData);
+  };
   return (
     <main>
       <div>
@@ -53,17 +49,15 @@ const AddStaff = ({ onClick }) => {
             joining_date: "",
             staff_role: "",
           }}
-          // onSubmit={placeProduct}
+          onSubmit={addStaff}
           validationSchema={validationSchema}
         >
           <div className="h-screen relative">
             <div className="w-full">
               <FormHeader
                 onClick={onClick}
-                title="Add Category"
-                sub_title={
-                  "Add your category and necessary information from here"
-                }
+                title="Add Staff"
+                sub_title={"Submit your necessary information carefully"}
               />
             </div>
 
@@ -72,7 +66,7 @@ const AddStaff = ({ onClick }) => {
             </div>
 
             <div className="fixed bottom-0 right-0 w-full bg-gray-50">
-              <FormFooter onClick={onClick} acceptBtn={"Add Staff"} />
+              <FormFooter onClick={onclick} acceptBtn={"Add Staff"} />
             </div>
           </div>
         </AppForm>
