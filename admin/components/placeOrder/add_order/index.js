@@ -37,7 +37,6 @@ const AddOrder = ({ onClick }) => {
   const placeOrder = async (values) => {
     setLoading(true);
     const order_id = `${order_uid}`;
-    console.log(order_id);
 
     // await saveProductDetails(values, order_id);
     await placeOrderHandler(values, order_id);

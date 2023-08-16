@@ -12,6 +12,7 @@ import { RiShoppingBag3Line } from "react-icons/ri";
 import { AiOutlineBars } from "react-icons/ai";
 import { ImCreditCard } from "react-icons/im";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import exp from "constants";
 
 export const menus = [
   {
@@ -247,5 +248,24 @@ export const TCATEGORY = [
   {
     name: "আখের গুড়",
     id: "আখের গুড়",
+  },
+];
+
+export const ROLE = [
+  {
+    name: "Admin",
+    id: "Admin",
+  },
+  {
+    name: "Manager",
+    id: "Manager",
+  },
+  {
+    name: "Entry Oficer",
+    id: "Entry Oficer",
+  },
+  {
+    name: "Accounted",
+    id: "Accounted",
   },
 ];

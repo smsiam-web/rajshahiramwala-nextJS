@@ -8,6 +8,7 @@ import updateProfile from "./slices/updateProfile";
 import updateProductImgReducer from "./slices/updateProductImg";
 import updateProductId from "./slices/updateProductId";
 import singleProduct from "./slices/singleProduct";
+import staffReducer from "./slices/staffSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     basket: basketReducer,
     product: productReducer,
     orders: orderReducer,
+    staff: staffReducer,
     id: idReducer,
     profile: updateProfile,
     productImg: updateProductImgReducer,

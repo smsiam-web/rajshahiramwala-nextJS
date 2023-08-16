@@ -14,8 +14,8 @@ const FormFooter = ({ onClick, acceptBtn, addStaff }) => {
       </div>
       <div className="col-span-2">
         <FormBtn
-          onClick={addStaff}
-          title={"Add Product"}
+          onClick={acceptBtn}
+          title={"Add Staff"}
           className="bg-blue-400 hover:bg-blue-500 hover:shadow-lg text-white transition-all duration-300 w-full"
         />
       </div>

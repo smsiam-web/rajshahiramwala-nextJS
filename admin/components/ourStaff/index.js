@@ -24,7 +24,7 @@ const OurStaff = () => {
         >
           <AddStaff onClick={close} />
         </Drawer>
-        <h1 className="text-2xl pb-5 font-bold text-gray-700">Coupons</h1>
+        <h1 className="text-2xl pb-5 font-bold text-gray-700">Our Staff</h1>
         <div>
           <SearchStaff onClick={open} />
           <StaffTable onClick={open} />

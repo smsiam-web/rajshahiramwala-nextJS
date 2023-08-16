@@ -13,14 +13,6 @@ import { updateProductId } from "@/app/redux/slices/updateProductId";
 import { selectOrder } from "@/app/redux/slices/orderSlice";
 import FormHeader from "../shared/FormHeader";
 import Button from "../shared/Button";
-const STATUS = [
-  { name: "Pending" },
-  { name: "Processing" },
-  { name: "OnTheWay" },
-  { name: "ReadyToDeliver" },
-  { name: "Deliverd" },
-  { name: "Cancel" },
-];
 
 const OrderTable = ({ onClick }) => {
   const [loading, setLoading] = useState(false);
@@ -29,10 +21,32 @@ const OrderTable = ({ onClick }) => {
   const [orders, setOrders] = useState(useSelector(selectOrder));
   const [searchValue, onSearchChange] = useState("");
   const [opened, setOpened] = useState(false);
-
   const toggleOpen = () => {
     opened ? setOpened(false) : setOpened(true);
   };
+
+  // Get products from firebase
+  useEffect(() => {
+    setLoading(true);
+    const unSub = db
+      .collection("placeOrder")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snap) => {
+        const orders = [];
+        snap.docs.map((doc) => {
+          orders.push({
+            id: doc.id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp?.toDate()?.getTime(),
+          });
+        });
+        setOrders(orders);
+      });
+    setLoading(false);
+    return () => {
+      unSub();
+    };
+  }, []);
 
   // update published state
   const UpdateOrderStatus = async (id, name) => {
@@ -80,6 +94,7 @@ const OrderTable = ({ onClick }) => {
       .doc(item.id)
       .delete()
       .then(() => {
+        toggleOpen();
         notifications.show({
           title: "Delete successfully",
           message: `Customer Name ${item.order_details.customer_name}, Order ID: #${item.id}`,
@@ -89,7 +104,7 @@ const OrderTable = ({ onClick }) => {
       .catch((error) => {
         console.error("Error removing document: ", error);
       });
-    toggleOpen();
+
     setFilterOrder(null);
   };
 

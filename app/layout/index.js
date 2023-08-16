@@ -9,6 +9,7 @@ import Header from "./Header";
 import { useRouter } from "next/router";
 import { getPage } from "../utils/helpers";
 import AdminLayout from "@/admin/layout";
+import { updateStaff } from "@/app/redux/slices/staffSlice";
 
 const Layout = ({ children }) => {
   const [loading, setLoading] = useState(false);
@@ -71,6 +72,28 @@ const Layout = ({ children }) => {
         dispatch(updateProduct(product));
       });
     setLoading(false);
+    return () => {
+      unSub();
+    };
+  }, []);
+
+  // Get Staff details from firebase and update on REDUX
+  useEffect(() => {
+    const unSub = db
+      .collection("ourStaff")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snap) => {
+        const ourStaff = [];
+        snap.docs.map((doc) => {
+          ourStaff.push({
+            id: doc.id,
+            ...doc.data(),
+            timestamp: doc.data().timestamp?.toDate()?.getTime(),
+          });
+        });
+        dispatch(updateStaff(ourStaff));
+      });
+
     return () => {
       unSub();
     };
