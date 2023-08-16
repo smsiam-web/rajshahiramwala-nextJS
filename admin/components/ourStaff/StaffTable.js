@@ -83,7 +83,12 @@ const StaffTable = ({ onClick }) => {
             <tbody className="bg-white divide-y divide-gray-100 ">
               {!!staff &&
                 staff?.map((item) => (
-                  <tr className="" key={item.id}>
+                  <tr
+                    className={`${
+                      item.isFilter && "bg-blue-200 text-blue-600"
+                    }`}
+                    key={item.id}
+                  >
                     <td className="px-4 py-3">
                       <Link
                         href={`/admin/our-staff/id=${item.id}`}

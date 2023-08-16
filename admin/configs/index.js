@@ -253,6 +253,10 @@ export const TCATEGORY = [
 
 export const ROLE = [
   {
+    name: "Search by Role",
+    id: "",
+  },
+  {
     name: "Admin",
     id: "Admin",
   },

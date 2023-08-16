@@ -4,13 +4,22 @@ import { BiPlus } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { selectStaff, updateStaff } from "@/app/redux/slices/staffSlice";
 import { db } from "@/app/utils/firebase";
+import { ROLE } from "@/admin/configs";
+import { usePathname } from "next/navigation";
 
 const SearchStaff = ({ onClick }) => {
   const [currentValue, setCurrentValue] = useState(null);
   const [ourStaffs, setOurStaffs] = useState([]);
   const [staff, setStaff] = useState([]);
   const dispatch = useDispatch();
+  const path = usePathname();
+  console.log(path);
 
+  const handleChange = (e) => {
+    setCurrentValue(e.currentTarget.value);
+  };
+
+  // search config
   useEffect(() => {
     let ss = [];
     if (!currentValue) {
@@ -25,47 +34,37 @@ const SearchStaff = ({ onClick }) => {
           .split(" ")
           .includes(currentValue?.toLowerCase())
       ) {
-        ss.push(i);
+        ss.push({ ...i, isFilter: true });
       } else if (i.staff_details.staff_contact === currentValue) {
-        ss.push(i);
+        ss.push({ ...i, isFilter: true });
       } else if (i.id === currentValue) {
-        ss.push(i);
+        ss.push({ ...i, isFilter: true });
       } else if (i.staff_details.staff_email === currentValue) {
-        ss.push(i);
+        ss.push({ ...i, isFilter: true });
       } else if (
         i.staff_details.staff_name.toLowerCase() === currentValue.toLowerCase()
       ) {
-        ss.push(i);
+        ss.push({ ...i, isFilter: true });
       }
     });
-    console.log(ss.length);
+
     ss.length ? dispatch(updateStaff(ss)) : dispatch(updateStaff(ourStaffs));
   }, [currentValue]);
 
-  // useEffect(() => {
-  //   setStaff(ourStaffs);
+  const onRoleItemChanged = (e) => {
+    e.preventDefault();
+    let role = [];
 
-  //   if (!currentValue) {
-  //     dispatch(updateStaff(ourStaffs));
-  //   }
+    const res = ourStaffs.map((i) => {
+      if (i.staff_details.staff_role === e.target.value) {
+        role.push({ ...i, isFilter: true });
+      }
+    });
 
-  //   const result = ourStaffs?.map((item) => {
-  //     if (
-  //       item.staff_details?.staff_name
-  //         ?.toLowerCase()
-  //         .split(" ")
-  //         .includes(currentValue?.toLowerCase())
-  //     ) {
-  //       dispatch(updateStaff([item]));
-  //     } else if (item.staff_details?.staff_contact === currentValue) {
-  //       dispatch(updateStaff([item]));
-  //     }
-  //   });
-  // }, [currentValue]);
-
-  function handleChange(e) {
-    setCurrentValue(e.currentTarget.value);
-  }
+    role.length
+      ? dispatch(updateStaff(role))
+      : dispatch(updateStaff(ourStaffs));
+  };
 
   // Get Staff details from firebase and update on REDUX
   useEffect(() => {
@@ -87,7 +86,7 @@ const SearchStaff = ({ onClick }) => {
     return () => {
       unSub();
     };
-  }, [currentValue]);
+  }, []);
 
   return (
     <>
@@ -100,22 +99,23 @@ const SearchStaff = ({ onClick }) => {
                 className="block w-full px-3 py-1 text-sm focus:outline-neutral-200 leading-5 rounded-md  border-gray-200 h-14 bg-gray-100 border-transparent focus:bg-white"
                 type="text"
                 onChange={(e) => handleChange(e)}
-                // name="search"
-                placeholder="Search by coupon code / name"
+                placeholder="Search by #ID / Name / Email / Contact"
               />
             </div>
 
             <div className="flex-grow-0 md:flex-grow lg:flex-grow xl:flex-grow">
-              <select className="block w-full px-2 py-1 text-sm  focus:outline-none rounded-md form-select focus:border-gray-200 border-gray-200  focus:shadow-none leading-5 border h-14 bg-gray-100 border-transparent focus:bg-white">
-                <option value="All" hidden="Staff Role">
-                  Staff Role
-                </option>
-                <option value="admin">Admin</option>
-                <option value="CEO">CEO</option>
-                <option value="manager">Manager</option>
-                <option value="accountant">Accountant</option>
-                <option value="driver">Driver</option>
-                <option value="delivery_person">Delivery Person</option>
+              <select
+                className="block w-full px-2 py-1 text-sm  focus:outline-none rounded-md form-select focus:border-gray-200 border-gray-200  focus:shadow-none leading-5 border h-14 bg-gray-100 border-transparent focus:bg-gray-50"
+                id="roleItem"
+                name="roleItem"
+                // defaultValue={selectedSubNav}
+                onChange={(e) => onRoleItemChanged(e)}
+              >
+                {ROLE.map((roleItem) => (
+                  <option className="" value={roleItem.id} key={roleItem.name}>
+                    {roleItem.name}
+                  </option>
+                ))}
               </select>
             </div>
 

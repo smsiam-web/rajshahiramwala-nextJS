@@ -7,6 +7,7 @@ import AddStaffForm from "./AddStaffForm";
 import Button from "../../shared/Button";
 import { db, timestamp } from "@/app/utils/firebase";
 import { useRouter } from "next/router";
+import { notifications } from "@mantine/notifications";
 
 const validationSchema = Yup.object().shape({
   staff_name: Yup.string().required().label("Staff name"),
@@ -27,6 +28,10 @@ const AddStaff = ({ onClick }) => {
     await placeStaffHandler(values, staff_id);
     router.push("/admin/our-staff/id=?" + staff_id);
     setLoading(false);
+    notifications.show({
+      title: "Staff Added Sucessfully",
+      message: `${name}, ID: ${id}`,
+    });
   };
 
   // save order details on firebase database

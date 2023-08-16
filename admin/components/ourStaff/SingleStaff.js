@@ -8,7 +8,6 @@ const SingleStaff = () => {
   const [id, setId] = useState(usePathname().split("=")[1]);
   const staffs = useSelector(selectStaff);
 
-  console.log(staff);
   useEffect(() => {
     staffs &&
       staffs?.map((item) => {
@@ -16,9 +15,7 @@ const SingleStaff = () => {
         setStaff(item);
       });
   }, [id]);
-  console.log(staff);
 
-  console.log(id);
   return (
     <>
       {staff && (

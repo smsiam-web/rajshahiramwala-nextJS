@@ -35,8 +35,6 @@ const SingleStaff = () => {
       });
   }, [id]);
 
-  console.log(staff);
-
   // place product handler on submit
   const updateStaff = async (values) => {
     setLoading(true);
@@ -55,7 +53,6 @@ const SingleStaff = () => {
     });
   };
 
-  console.log(id);
   return (
     <>
       <div className="bg-gray-50 p-5 rounded-xl">
